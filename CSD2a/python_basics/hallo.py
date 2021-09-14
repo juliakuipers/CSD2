@@ -1,4 +1,4 @@
-print("wat is je naam")
+print("wat is jouw naam")
 
 username = input("")
 print("hello",username)
