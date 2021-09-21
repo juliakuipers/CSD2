@@ -10,28 +10,23 @@ print("noem %d duraties van elke kick"% numPlaybackTimes)
 dur = []
     
 for i in range(numPlaybackTimes): 
-    durar = float(input(""))
-    dur.append(durar)
+    durarray = float(input(""))
+    dur.append(durarray)
+    #zorgt ervoor dat je het aantal numplaybacktimes in een float stopt die het in een array stopt; dur 
 
 
 
 bpm = int(input("wat is het BPM?"))
-#sec = dur * bpm
-#wait = sec/bpm 
-#print(wait)
 
 async def duration():
+#
     for i in range(numPlaybackTimes):
-        await asyncio.sleep(dur)
+        for i in range(dur[i]):
+            await asyncio.sleep(bpm / i)
+            wave_obj.play()
+            
+        
 # while loop met def dan de for loop +1 totdat de while loop niet meer geld 
 
-
-
-for i in range(numPlaybackTimes):  
-    play_obj = wave_obj.play()
-    play_obj.wait_done()
-    asyncio.run(duration())
-
-    #i+ 1
- 
+asyncio.run(duration())
 
