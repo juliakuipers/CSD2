@@ -1,5 +1,6 @@
 import simpleaudio as sa 
-import asyncio
+# as in als: sa om te verwijzen na simpleaudio als sa 
+import asyncio as ac
 
 Kick = "Kick.wav"
 wave_obj = sa.WaveObject.from_wave_file(Kick)
@@ -7,26 +8,29 @@ wave_obj = sa.WaveObject.from_wave_file(Kick)
 numPlaybackTimes = int(input("hoe vaak wil je de kick afspelen?"))
 # %d roept de integer van numPlaybackTimes als ik dat specificeer aan het einde van de regel met % 
 print("noem %d duraties van elke kick"% numPlaybackTimes)
-dur = []
-    
+#kan ook met list() 
+
+dur = []    
 for i in range(numPlaybackTimes): 
-    durarray = float(input(""))
-    dur.append(durarray)
+    duration_array = float(input(""))
+    dur.append(duration_array)
     #zorgt ervoor dat je het aantal numplaybacktimes in een float stopt die het in een array stopt; dur 
-
-
 
 bpm = int(input("wat is het BPM?"))
 
 async def duration():
-#
     for i in range(numPlaybackTimes):
-        for i in range(dur[i]):
-            await asyncio.sleep(bpm / i)
-            wave_obj.play()
-            
-        
-# while loop met def dan de for loop +1 totdat de while loop niet meer geld 
+    #de for loop runt het aantal keren numPlaybackTimes 
+        #for i in range(dur[i]):
+        #andere loop 
+        wave_obj.play()
+        await ac.sleep(bpm / dur[i])
 
-asyncio.run(duration())
+ac.run(duration())
+#roept de def aan met de sequencer 
 
+#FIXME
+#TODO 
+#list toepassingen 
+#time.sleep(dur)
+#sample.play() = 
