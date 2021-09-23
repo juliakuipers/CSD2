@@ -22,7 +22,7 @@ async def duration():
         Kick = "Kick.wav"
         wave_obj = sa.WaveObject.from_wave_file(Kick)
         wave_obj.play()
-        await ac.sleep(dur[i])
+        await ac.sleep((dur[i]*60)/bpm)
         i +1
 ac.run(duration())
 #roept de def aan met de sequencer 
