@@ -2,7 +2,7 @@ import simpleaudio as sa
 # as in als: sa om te verwijzen na simpleaudio als sa 
 import asyncio as ac
 
-numPlaybackTimes = int(input("hoe vaak wil je de kick afspelen?"))
+numPlaybackTimes = int(input("hoe vaak wil je de kick afspelen?\n"))
 # %d roept de integer van numPlaybackTimes als ik dat specificeer aan het einde van de regel met % 
 print("noem %d duraties van elke kick"% numPlaybackTimes)
 #kan ook met list() 
@@ -13,7 +13,7 @@ for i in range(numPlaybackTimes):
     dur.append(duration_array)
     #zorgt ervoor dat je het aantal numplaybacktimes in een float stopt die het in een array stopt; dur 
 
-bpm = int(input("wat is het BPM?"))
+bpm = int(input("wat is het BPM?\n"))
 
 async def duration():
     i = 0
