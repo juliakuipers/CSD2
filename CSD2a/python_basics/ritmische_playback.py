@@ -16,11 +16,6 @@ for i in range(numPlaybackTimes):
 
 bpm = int(input("wat is het BPM?\n"))
 
-#counter = tm.time() - tm.time()
-#for i in range(numPlaybackTimes):
-    #print("counter=",counter)
-    #tm.sleep(notedur[i])
-
 notedur = []
 for i in range(numPlaybackTimes):
     notedur.append((dur[i]* 60) / bpm)
@@ -29,18 +24,32 @@ for i in range(numPlaybackTimes):
 print("notedur:",notedur)
 #for i in range (numPlaybackTimes):
 
-counter = []  
+counter = []
+currentcount = 0.0
+#counter = tm.time() - tm.time()
+for i in range(numPlaybackTimes):
+    print(currentcount)
+    currentcount += 1
+    print("currrentcount=",currentcount)
+    print("counter=",counter)
+    tm.sleep(notedur[i])
+    print("currentcount=",currentcount,"notedur[i]=",notedur[i])
+    #currentcount =+ notedur[i]
+    #print("cur=",cur)
+
+  
 async def duration():
-    i = 0
+    i = 0   
     for i in range(numPlaybackTimes):
     #de for loop runt het aantal keren numPlaybackTimes 
-        count = notedur[i]
         #geen for loop gebruiken, de loop moet de hele tijd afwachtend zijn op wanneer de volgende noot gespeeld moet worden
         Kick = "Kick.wav"
         wave_obj = sa.WaveObject.from_wave_file(Kick)
         wave_obj.play()
         await ac.sleep(notedur[i])
-        i +1
+
+        #deze moet dus in een grid van 16e passen 
+        
 
 #als iets gelijk is aan de counter speel dan af, dit kan met tijd die telt vanaf 0 en een array die de timestamps heeftr 
 ac.run(duration())
