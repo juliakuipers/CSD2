@@ -32,9 +32,9 @@ for i in range(numPlaybackTimes):
     currentcount += 1
     print("currrentcount=",currentcount)
     print("counter=",counter)
-    tm.sleep(notedur[i])
+    #tm.sleep(notedur[i])
     print("currentcount=",currentcount,"notedur[i]=",notedur[i])
-    #currentcount =+ notedur[i]
+    currentcount =+ notedur[i]
     #print("cur=",cur)
 
   
@@ -53,7 +53,7 @@ async def duration():
 
 #als iets gelijk is aan de counter speel dan af, dit kan met tijd die telt vanaf 0 en een array die de timestamps heeftr 
 ac.run(duration())
-#roept de def aan met de sequencer 
+#roept de def aan met de sequencer x
 
 #FIXME
 #TODO 
