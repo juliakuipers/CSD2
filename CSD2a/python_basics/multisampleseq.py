@@ -4,7 +4,7 @@ import time
 playkick = sa.WaveObject.from_wave_file("Kick.wav")
 playsnare = sa.WaveObject.from_wave_file("Snare.wav")
 
-per_snare = int(input("NUMER OF SNARES"))
+per_snare = int(input("NUMER OF SNARES\n"))
 snare_durations = []
 snare_sum = []
 for i in range(per_snare):
@@ -48,22 +48,13 @@ hihat_event = {
 
 count = []
 def counter():
-    timezero = 0
-    for i in range (16):
-        count_1 = time.time()
-        time.sleep(1)
-        count_2 = time.time()
-        dif = count_2 - count_1
-        count.append(dif)
-        count_sum = timezero + dif
-        print("count_1=",count_1,"count_2=",count_2)
-        print("dif=",dif,"timezero=",timezero)
-        print("count(list)=",count)
-        print("timezero=",timezero)
-        print("count_sum",count_sum)
+    tijd = time.time()
+    interval = 1
+    if tijd + interval == time.time():
+        counter +1 
+        tijd = time.time()
 
 
-counter()
 
 def equal_to(gelijk):
     while True:
