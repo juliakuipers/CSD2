@@ -1,49 +1,64 @@
-import time 
+import time
+import wave 
 import simpleaudio as sa 
 from random import random, randrange
 import requests, json
 import math 
 
-api_key = "022a5abf0f1cbd43ab0366d03b13e346" #sleutel 
-base_url = "http://api.openweathermap.org/data/2.5/weather?" 
-city_name = input("Enter city name : ")
-complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=metric" #link voor info over weer
+playkick = sa.WaveObject.from_wave_file("Kick.wav")
+playsnare = sa.WaveObject.from_wave_file("Snare.wav")
+playhihat = sa.WaveObject.from_wave_file("Hihat.wav")
 
-response = requests.get(complete_url)#krijgt weer door 
-x = response.json() #stopt de info in x 
-if x["cod"] != "404": #als cod in x niet gelijk is aan 404 (404 is een foutmelding dus een foutmelding)
+def weatherdef():
+    while True:
+        api_key = "068525cf5cc1307c8e027bfc4f19de7d" #sleutel 
+        base_url = "http://api.openweathermap.org/data/2.5/weather?" 
+        city_name = input("Enter city name : ")
+        complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=metric" #link voor info over weer
+
+        response = requests.get(complete_url)#krijgt weer door 
+        x = response.json() #stopt de info in x 
+#print("x =",x)
+        if x["cod"] != "404": #als cod in x niet gelijk is aan 404 (404 is een foutmelding)
  
-    y = x["main"] #dit specificeerd verdere info die je uit x wil halen 
- 
-    temp_min = y["temp_min"] #tempratuur 
- 
-    temp_max = y["temp_max"] #pressure 
+            y = x["main"] #dit specificeerd verdere info die je uit x wil halen 
+            temp_min = y["temp_min"] #tempratuur 
+            temp_max = y["temp_max"] #pressure 
+            temp_cur = round(y["temp"]) 
+            temp_feel = round(y["feels_like"])
 
-    temp_cur = round(y["temp"]) 
+            z = x["sys"] 
+            sunrise = z["sunrise"]
+            sunset = z["sunset"]
+            time_zone = x["timezone"]
 
-    temp_feel = y["feels_like"]
+            a = x["wind"] 
+            wind_speed = a["speed"]
 
-    z = x["sys"] 
+            
 
-    sunrise = z["sunrise"]
+            return temp_min, temp_max, temp_cur, temp_feel, sunrise, sunset, time_zone, wind_speed
 
-    sunset = z["sunset"]
+        else:
+            print("city not found")
+            pass
 
-    a = x["wind"] 
-
-    wind_speed = a["speed"]
-
-else:
-    print("city not found")
+weather = weatherdef()
+temp_min = weather[0]
+temp_max = weather[1]
+temp_cur = weather[2]
+temp_feel = weather[3]
+sunrise = weather[4]
+sunset = weather[5]
+time_zone = weather[6]
+wind_speed = weather[7]
 
 daylight = round((((sunset - sunrise)/60)/60)+0.5)
 print("sunset",sunset,"sunrise =",sunrise,"daylight =",daylight)
-
+print("timezone =",time_zone)
 print("wind_speed =",wind_speed)
 #hoe langer de zon heeft geschenen hoe langer de beat is 
 print("temp_min cel=",temp_min,"temp_max cel=",temp_max,"temp_cur cel=",temp_cur,"temp_feel cel=",temp_feel)
-
-
 
 def createEvent(instrument, duration,active,timestamp):
     return {
@@ -62,11 +77,10 @@ print("m =",m)
 #mijn laagste bpm is 60 en 60 tot de macht van 1 = 60
 #daarom doe ik 1.4 - 0.4 en deel ik 0.4 door 12 
 #het resultaat is 0.033 dit kan ik nu keer de winspeed doen en dan krijg ik een macht
-log_scale = 1 + (0.033*wind_speed)
+bpm_scale = 1 + (0.033*wind_speed)
 #als ik dat + 1 de 1 doe die ik eerder had afgetrokken krijg ik een logaritmische schaal 
 #dit doe ik dan tot de macht van 60 en dit genereerd een bpm dat bij de wind past 
-bpm = round((60**log_scale)+0.5)
-print("culcu =",log_scale,"bpm =",bpm)
+bpm = round((60**bpm_scale)+0.5)
 light_scale = 36/24
 bars =  round((light_scale * daylight)+0.5) 
 print("bars =",bars)
@@ -76,9 +90,9 @@ else:
     upper_timesig = randrange(1,16,2)
 print("upper_timesig =",upper_timesig)
  #int(input("HOW MANY BEATS IN EACH BAR?\n"))
-sum_temp_feel=sum(temp_feel)
-print("sum_temp_feel =",sum_temp_feel)
-lower_timesig = 2**4#deze kan ik wortel trekken, een berekening die 1,2,3 of 4 als resultaat heeft via temp (kan ook andere parameter gebruiken) 
+lower_timesig = 2**randrange(1,4)#deze kan ik wortel trekken, een berekening die 1,2,3 of 4 als wortel heeft via temp (kan ook andere parameter gebruiken) 
+
+print("lower_timesig =",lower_timesig)
 
 time_per_beat = upper_timesig/lower_timesig #krijg ik de duratie van een noot dus bij 4/4=1 4/8=0.5
 
@@ -90,30 +104,39 @@ single_note_dur = (drum_loop_dur / lower_timesig) / upper_timesig
 print("drum_loop_dur=",drum_loop_dur)
 print("single_note_dur=",single_note_dur)
 
+#gebasseerd op de temratuur instrumenten, dus hoe hoger hoe meer hoge elementen en minder laag hoe lager hoe meer lage elementen en minder hoog
+
 def step_ativated():
-    for i in range(total_beats): 
+    for i in range(total_beats):
         r = randrange(0,100)
-        chance = 50 #int(input("CHANCE\n"))
-        print("r=",r) 
+        chance = 50 
+        #int(input("CHANCE\n"))
+        #print("r=",r) 
         if chance > r:
             x = 1
         else:
             x = 0
     return x 
 
+count = 0 
+def timestamp():   
+    count = count + 1 
+    if count >= upper_timesig:
+        count = 0
+    x = count
+    print("ts =",count)
+    return x
+
 event_list = []
-while True:     
-    select_instrument = input("SELECT INSTRUMENT KICK/SNARE/HIHAT\n")
+select_instrument = ["kick","hihat","snare"]
+for inst in range(len(select_instrument)):
+    i = 0   
     for i in range(total_beats): 
-        events = createEvent(select_instrument,single_note_dur,step_ativated(),i+1)
+        events = createEvent(select_instrument[inst],single_note_dur,step_ativated(),())
         event_list.append(events)
-    print("event_list =", event_list) 
+        print("event = ",events)
+ 
     #de event list reset als ik hem door laat lopen, ik moet dus een manier vinden om 2 event lists bij elkaar op te tellen of achter elkaar te zetten
-    another_inst = input("DO YOU WANT TO SELECT ANOTHER INSTRUMENT Y/N\n")
-    if another_inst == "Y" or another_inst == "y" or another_inst == "yes":
-        pass
-    else:
-        break
         
 #enumerate 
 
@@ -133,13 +156,17 @@ def counter():
             count_array.append(count)
             for event in event_list:
                 if event['active'] == 1 and event['instrument'] == "kick" and event['timestamp'] == count:
-                    print("kickplayed") 
+                    print("kickplayed")
+                    playkick.play() 
                 if event['active'] == 1 and event['instrument'] == "snare" and event['timestamp'] == count:
                     print("snareplayed")
+                    playsnare.play()
                 if event['active'] == 1 and event['instrument'] == "hihat" and event['timestamp'] == count:
                     print("hihatplayed")
+                    playhihat.play()
             if count >= upper_timesig:
-                #count = 0
+                #de count weer resetten dan kan ik een duidelijk begin van de maat aangeven 
+                count = 0
                 bar = + bar + 1
             if bar > bars:
                 break
