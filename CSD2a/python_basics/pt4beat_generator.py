@@ -108,7 +108,7 @@ print("timestamp_a =",timestamp_a)
 
 power = math.log(95,5)
 point_in_time = time.time()
-input("what's the time right now?\n")
+input("favorite food?\n")
 count = time.time() - point_in_time
 powerp = 0.18*count
 chance = 5**(2.8-powerp)
@@ -138,7 +138,7 @@ print("event_list = ",event_list)
 def pop():  
     ts = timestamp_a.pop(0)
     print("timestamp_a =",timestamp_a)
-    print("tss =",ts)
+    print("ts =",ts)
     return ts
 
 def counter():
@@ -148,10 +148,12 @@ def counter():
         count = time.time() - point_in_time
         for event in event_list:
             if count >= tspop and timestamp_a and event['active']==1 and event['instrument'] == "playhihat": 
+                print("count =",count)
                 #print("times[i] =",times[i])     
                 playhihat.play() 
-                tspop = pop()              
-            if count >= bars:
+                tspop = pop()
+                print("sampleplayed")              
+            if not timestamp_a:
                 break
-  
+
 counter()
