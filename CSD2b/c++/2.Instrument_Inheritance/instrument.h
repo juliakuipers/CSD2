@@ -5,8 +5,9 @@ public:
     Sound();
     ~Sound();
     void play();
-    void pitchrange();
-    void velocity();
+    int pitch();
+    int velocity();
+    //void phrasing();
     //void swing();
     int roll();
 

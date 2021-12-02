@@ -6,8 +6,8 @@ public:
     ~Synth();
     void play();
     void fm();
-    void envelope();
-    void lfo();
+    //void envelope();
+    //void lfo();
 
 };
 
