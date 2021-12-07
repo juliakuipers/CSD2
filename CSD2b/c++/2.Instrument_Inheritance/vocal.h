@@ -1,6 +1,6 @@
 #include "instrument.h"
 
-class Vocal : public Sound {
+class Vocal{
 public: 
     Vocal();
     ~Vocal();

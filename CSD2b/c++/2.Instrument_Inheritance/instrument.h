@@ -1,3 +1,5 @@
+#ifndef _INSTRUMENT_H_
+#define _INSTRUMENT_H_
 #include <iostream>
 
 class Sound {
@@ -7,10 +9,8 @@ public:
     void play();
     int pitch();
     int velocity();
-    //void phrasing();
-    //void swing();
     int roll();
 
 };
 
-//TODO: build.sh moet anders staat in aantekingen van ciska 
+#endif

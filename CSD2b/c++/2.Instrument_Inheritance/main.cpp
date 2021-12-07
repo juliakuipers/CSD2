@@ -1,8 +1,9 @@
 #include "instrument.h"
 #include "synth.h"
-#include "vocal.h"
 
 int main(){
-    Sound make_sound;     
+    Sound make_sound;
+    Synth synth_sound;     
     make_sound.play();
+    synth_sound.play();
 }

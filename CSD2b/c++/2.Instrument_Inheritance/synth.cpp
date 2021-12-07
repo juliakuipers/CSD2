@@ -5,10 +5,10 @@ Synth::Synth(){
 }
 
 Synth::~Synth(){
-    std::out<<"Synth Destructor\n";
+    std::cout<<"Synth Destructor\n";
 }
 
-void Synth::play(){
+void Synth::play() : instrument(velocity) : instrument(pitch){
     std::cout 
     << "Synth is playing at velocity :" 
     << velocity 

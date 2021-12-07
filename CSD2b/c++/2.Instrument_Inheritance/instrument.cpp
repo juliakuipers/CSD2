@@ -24,9 +24,9 @@ int Sound::roll(){
 }
 
 void Sound::play(){
-    int x;
-    std::cout << "What type of instrument? (Vocal/Synth)\n";
-    std::cin >> x;
+    //int x;
+    //std::cout << "What type of instrument? (Vocal/Synth)\n";
+    //std::cin >> x;
     int y = roll();
     for (int i = 0 ; i < y ; i++){ 
         std::cout << "Beep\n";
