@@ -1,6 +1,6 @@
 #include "synth.h"
 
-Synth::Synth(){
+Synth::Synth(int velocity, std::string pitch){
     std::cout<<"Synth Constructor\n";
 }
 
@@ -8,7 +8,7 @@ Synth::~Synth(){
     std::cout<<"Synth Destructor\n";
 }
 
-void Synth::play() : instrument(velocity) : instrument(pitch){
+void Synth::play(){
     std::cout 
     << "Synth is playing at velocity :" 
     << velocity 

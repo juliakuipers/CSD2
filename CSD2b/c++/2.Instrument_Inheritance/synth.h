@@ -2,7 +2,7 @@
 
 class Synth : public Sound {
 public: 
-    Synth();
+    Synth(int velocity, std::string pitch);
     ~Synth();
     void play();
     void fm();
