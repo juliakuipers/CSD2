@@ -3,7 +3,7 @@
 
 int main(){
     Sound make_sound;
-    Synth synth_sound(120,"f3");     
+    Synth synth_sound;     
     make_sound.play();
     synth_sound.play();
 }

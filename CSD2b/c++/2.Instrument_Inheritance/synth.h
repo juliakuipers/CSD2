@@ -1,13 +1,16 @@
+#ifndef _SYNTH_H_
+#define _SYNTH_H_
 #include "instrument.h"
 
-class Synth : public Sound {
+class Synth : public Sound { //public Sound anders is het private 
 public: 
-    Synth(int velocity, std::string pitch);
+    Synth();
     ~Synth();
     void play();
+    int velocity();
+    void pitch(); 
     void fm();
-    //void envelope();
-    //void lfo();
-
+p
 };
 
+#endif
