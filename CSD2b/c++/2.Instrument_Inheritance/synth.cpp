@@ -5,9 +5,11 @@ Synth::Synth() : Synth(120,"f3"){
     <<"Synth Constructor\n";
 }
 
-Synth::Synth(int velocity,std::string pitch) : vel(velocity),pi(pitch){
+Synth::Synth(int velocity,std::string pitch) : vel(velocity){
     std::cout 
-    <<"Synth Constructor (velocity, pitch)\n";
+    <<"Synth Constructor (velocity, pitch " 
+    << pitch
+    << ")\n";
 }
 
 Synth::~Synth(){
@@ -19,9 +21,6 @@ int Synth::getVel(){
     return vel;
 }
 
-int Synth::getPitch(){
-    return pitch;
-}
 // int Synth::velocity(){
     // return 4;
 // }

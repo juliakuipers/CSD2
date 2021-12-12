@@ -15,8 +15,9 @@ public:
 
 private:
     int vel;
-    void pi; 
     void fm();
+protected:
+    std::string pitch;
 };
 
 #endif

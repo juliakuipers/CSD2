@@ -1,6 +1,6 @@
 #include "vocal.h"
 
-Vocal::Vocal(std::string name) : Sound(name){
+Vocal::Vocal(std::string name){
     std::cout << "Constructor Vocal\n";
 }
 

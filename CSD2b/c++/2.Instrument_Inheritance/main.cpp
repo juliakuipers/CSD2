@@ -8,9 +8,6 @@ int main(){
     std::cout
     << "velocity "
     << synth_sound.getVel()
-    << "\n"
-    << "pitch "
-    << synth_sound.getPitch()
     << "\n";
     // make_sound.play();
     
