@@ -2,7 +2,7 @@
 #define _SQUARE_H_
 #include <iostream>
 
-class Square
+class Square : public Oscillator
 {
 public:
   //Constructor and destructor

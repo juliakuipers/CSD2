@@ -14,7 +14,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 1
+#define WRITE_TO_FILE 1 //writes plot.py
 
 
 int main(int argc,char **argv)
@@ -26,6 +26,7 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   Sine sine(220, samplerate);
+  //hier moet denk ik de oscillator in komen 
   Square square(660,samplerate);
 
   #if WRITE_TO_FILE
@@ -33,14 +34,13 @@ int main(int argc,char **argv)
 
     for(int i = 0; i < 500; i++) {
       fileWriter.write(std::to_string(square.getSample()) + "\n");
-      square.tick();
+      square.tick(); // writes the square 
   }
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&square, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&square, &amplitude ](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
-
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = square.getSample() * amplitude;
       square.tick();
