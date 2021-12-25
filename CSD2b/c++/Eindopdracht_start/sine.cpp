@@ -1,38 +1,22 @@
 #include "sine.h"
+//#include "oscillator.h"
 #include "math.h"
 
-Sine::Sine(float frequency, double samplerate) : frequency(frequency),
-  amplitude(1.0), phase(0), sample(0), samplerate(samplerate)
-{
+Sine::Sine() : phase(0){
+//            phase is something "personal" to the waveform (i think) that's why i choose to set it here
+//            also something goes wrong with initializing here 
   std::cout << "Sine - constructor\n";
 }
-
-
 
 Sine::~Sine() {
   std::cout << "Sine - destructor\n";
 }
 
-
-float Sine::getSample() {
-  return sample;
-}
-
 void Sine::tick() {
   // NOTE 1. - frequency / SAMPLERATE can be implemented in a more efficient way
   // NOTE 2. - still need todo 'something' with the phase, see 04_sin_function
-  phase += frequency / samplerate;
-  sample = sin(M_PI * 2 * phase) * amplitude;
+  // all these exept for phase are set in oscillator.h, the caculation is personal to the waveform
+  phase += freq / samplerate;
+  sample = sin(M_PI * 2 * phase) * amp;
 }
 
-//getters and setters
-void Sine::setFrequency(float frequency)
-{
-  // TODO add check to see if parameter is valid
-  this->frequency = frequency;
-}
-
-float Sine::getFrequency()
-{
-  return frequency;
-}

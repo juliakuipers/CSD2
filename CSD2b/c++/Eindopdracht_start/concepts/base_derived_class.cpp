@@ -59,9 +59,9 @@ Sine::~Sine(){
 }
 void Sine::tick(){
     std::cout
-    << "Frequency ="
+    << "Frequency = "
     << freq
-    << "\namplitude ="
+    << "\namplitude = "
     << amp
     << std::endl;
 }

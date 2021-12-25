@@ -2,11 +2,11 @@
 #define _SQUARE_H_
 #include <iostream>
 
-class Square : public Oscillator
+class Square
 {
 public:
   //Constructor and destructor
-  Square(double frequency, double samplerate);
+  Square();
   ~Square();
 
   //return the current sample
@@ -19,8 +19,6 @@ public:
   double getFrequency();
 
 private:
-  double frequency;
-  double amplitude;
   double phase;
   // sample contains the current sample
   double sample;
