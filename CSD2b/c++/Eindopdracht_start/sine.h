@@ -1,7 +1,4 @@
-#ifndef _SINE_H_
-#define _SINE_H_
 #include "oscillator.h"
-#include <iostream>
 
 class Sine : public Oscillator{
   public:
@@ -15,4 +12,4 @@ class Sine : public Oscillator{
     double phase;
 };
 
-#endif
+

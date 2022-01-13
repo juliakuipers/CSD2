@@ -1,8 +1,4 @@
-#ifndef _OSCILLATOR_H_
-#define _OSCILLATOR_H_
-//#include "sine.h"
-//#include "square.h"
-#include <iostream>
+#pragma once 
 //something going wrong probably with the hashtags 
 
 
@@ -20,7 +16,6 @@ class Oscillator {
     
         double freq;
         double amp;
-        double samplerate; 
         double sample; 
+        double samplerate; 
 };
-#endif

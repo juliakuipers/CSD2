@@ -4,7 +4,6 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "sine.h"
-#include "square.h"
 
 /*
  * NOTE: jack2 needs to be installed
@@ -29,7 +28,6 @@ int main(int argc,char **argv)
   Sine sine;
   sine.setFreq(220.0);
   sine.setAmp(0.5);
-  //hier moet denk ik de oscillator in komen 
   //Square square(660,samplerate);
 
   #if WRITE_TO_FILE

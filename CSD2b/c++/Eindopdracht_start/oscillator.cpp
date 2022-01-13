@@ -1,7 +1,7 @@
 #include "oscillator.h"
-#include "sine.h"
+#include <iostream>
  //                     initialize this in main
-Oscillator::Oscillator(double freq, double samplerate) : freq(freq), amp(amp), samplerate(samplerate),sample(0){
+Oscillator::Oscillator(double freq, double samplerate) : freq(freq), amp(amp),sample(0),samplerate(samplerate){
 //                                                      should probably find out what happens here exactly 
     std::cout 
     << "Oscillator Constructor"
