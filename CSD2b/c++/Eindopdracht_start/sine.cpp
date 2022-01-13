@@ -1,10 +1,10 @@
 #include "sine.h"
-//#include "oscillator.h"
+#include "oscillator.h"
 #include "math.h"
 
-Sine::Sine() : phase(0){
-//            phase is something "personal" to the waveform (i think) that's why i choose to set it here
-//            also something goes wrong with initializing here 
+Sine::Sine() : phase(0.0) {
+//            phase is something "personal" to the waveform (i think) that's why i chose to set it here
+//            also something goes wrong with initializing here (could also work with a setter for phase for now)
   std::cout << "Sine - constructor\n";
 }
 

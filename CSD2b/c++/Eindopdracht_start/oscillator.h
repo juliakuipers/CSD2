@@ -1,7 +1,7 @@
 #ifndef _OSCILLATOR_H_
 #define _OSCILLATOR_H_
-#include "sine.h"
-#include "square.h"
+//#include "sine.h"
+//#include "square.h"
 #include <iostream>
 //something going wrong probably with the hashtags 
 

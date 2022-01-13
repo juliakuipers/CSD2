@@ -1,4 +1,5 @@
 #include "oscillator.h"
+#include "sine.h"
  //                     initialize this in main
 Oscillator::Oscillator(double freq, double samplerate) : freq(freq), amp(amp), samplerate(samplerate),sample(0){
 //                                                      should probably find out what happens here exactly 

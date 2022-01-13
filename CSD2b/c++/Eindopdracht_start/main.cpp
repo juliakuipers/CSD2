@@ -25,9 +25,9 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  Oscillator osc(220,samplerate);
+  Oscillator osc(220.0,samplerate);
   Sine sine;
-  sine.setFreq(220);
+  sine.setFreq(220.0);
   sine.setAmp(0.5);
   //hier moet denk ik de oscillator in komen 
   //Square square(660,samplerate);

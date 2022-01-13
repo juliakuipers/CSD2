@@ -3,7 +3,7 @@
 //Base class
 class Oscillator{
     public:
-        Oscillator();
+        Oscillator(int freq, int amp);
         ~Oscillator();
 
         void setFreq(int freq);
@@ -25,7 +25,7 @@ class Sine : public Oscillator{
         void tick();
 };
 
-Oscillator::Oscillator(){
+Oscillator::Oscillator(int freq, int amp){
     std::cout 
     << "Oscillator Constructor"
     << std::endl;
