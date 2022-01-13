@@ -25,9 +25,10 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   Oscillator osc(220.0,samplerate);
-  Sine sine;
+  Sine sine(220.0,samplerate);
   sine.setFreq(220.0);
   sine.setAmp(0.5);
+  //it works but i have to put in the freq and samplerate in both the oscillator and sine. also it sounds weird
   //Square square(660,samplerate);
 
   #if WRITE_TO_FILE
