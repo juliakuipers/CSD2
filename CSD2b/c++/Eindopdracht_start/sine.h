@@ -1,9 +1,9 @@
 #include "oscillator.h"
 
-class Sine : public Oscillator{
+class Sine : public Oscillator {
   public:
     //Constructor and destructor
-    Sine(double freq,double samplerate);
+    Sine(double samplerate,double freq);
     ~Sine();
 
     void tick();

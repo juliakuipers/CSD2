@@ -4,6 +4,7 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "sine.h"
+#include "square.h"
 
 /*
  * NOTE: jack2 needs to be installed
@@ -21,31 +22,34 @@ int main(int argc,char **argv)
   // create a JackModule instance
   JackModule jack;
 
+  double freq = 220.0;
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  Oscillator osc(220.0,samplerate);
-  Sine sine(220.0,samplerate);
-  sine.setFreq(220.0);
+  //Oscillator osc(samplerate);
+  Sine sine(samplerate,freq);
+  // sine.setFreq(freq);
   sine.setAmp(0.5);
-  //it works but i have to put in the freq and samplerate in both the oscillator and sine. also it sounds weird
-  //Square square(660,samplerate);
 
+  Square square(samplerate,freq);
+  // square.setFreq(freq);
+  square.setAmp(0.5);
+  //nothing goes wrong with setters and getters, maybe in the calculation 
   #if WRITE_TO_FILE
     WriteToFile fileWriter("output.csv", true);
 
     for(int i = 0; i < 500; i++) {
-      fileWriter.write(std::to_string(sine.getSample()) + "\n");
-      sine.tick(); // writes the square 
+      fileWriter.write(std::to_string(square.getSample()) + "\n");
+      square.tick(); 
   } 
 
   float amp = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&sine, &amp ](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&square, &amp ](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = sine.getSample() * amp;
-      sine.tick();
+      outBuf[i] = square.getSample() * amp;
+      square.tick();
     }
     amp = 0.5;
     return 0;

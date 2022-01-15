@@ -1,26 +1,24 @@
 #include "square.h"
 #include "math.h"
+#include <iostream>
 
-Square::Square(double frequency, double samplerate) : frequency(frequency),
-  amplitude(1.0), phase(0), sample(0), samplerate(samplerate)
-{
-  std::cout << "Square - constructor\n";
+Square::Square(double samplerate,double freq) : Oscillator(samplerate,freq), phase(0.0),freq(freq),samplerate(samplerate) {
+  std::cout 
+  << "Square - constructor"
+  << std::endl;
 }
 
 
 
 Square::~Square() {
-  std::cout << "Square - destructor\n";
-}
-
-
-double Square::getSample() {
-  return sample;
+  std::cout
+  << "Square - destructor"
+  << std::endl;
 }
 
 void Square::tick() {
   // NOTE 1. - frequency / SAMPLERATE can be implemented in a more efficient way
-  phase += frequency / samplerate;
+  phase += freq / samplerate;
   // wrap the phase so it stays in the interval [0, 1]
   if(phase > 1) phase -= 1.0;
   // square functionality comes here
@@ -29,17 +27,5 @@ void Square::tick() {
   } else {
     sample = -1.0;
   }
-  sample *= amplitude;
-}
-
-//getters and setters
-void Square::setFrequency(double frequency)
-{
-  // TODO add check to see if parameter is valid
-  this->frequency = frequency;
-}
-
-double Square::getFrequency()
-{
-  return frequency;
+  sample *= amp;
 }
