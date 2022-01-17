@@ -21,6 +21,7 @@ int main(int argc,char **argv)
 {
   // create a JackModule instance
   JackModule jack;
+  //#TODO work with user input for waveforms 
 
   double freq = 220.0;
   // init the jack, use program name as JACK client name
@@ -42,14 +43,15 @@ int main(int argc,char **argv)
       fileWriter.write(std::to_string(square.getSample()) + "\n");
       square.tick(); 
   } 
-
+  //maybe i can put generating of the waveform 
   float amp = 0.15;
   //assign a function to the JackModule::onProces
   jack.onProcess = [&square, &amp ](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = square.getSample() * amp;
-      square.tick();
+      square.tick()
+      //berekening van golfvorm kan zonder audio in een subclass voor fm. dan de freq * de berekening voor frequency modulation. en dan in main zorg je alleen voor het afspelen van de audio 
     }
     amp = 0.5;
     return 0;

@@ -22,8 +22,6 @@ void Sine::tick() {
   // all these exept for phase are set in oscillator.h, the caculation is personal to the waveform
   phase += freq / samplerate;
   sample = sin(M_PI * 2 * phase) * amp;
-  std::cout
-  << (sample)
-  << std::endl;
+  //i think i can make fm by multiplying the frequency with another sinus 
 }
 
