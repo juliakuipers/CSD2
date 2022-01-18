@@ -3,10 +3,10 @@
 class Square : public Oscillator {
 public:
   //Constructor and destructor
-  Square(double samplerate,double freq);
+  Square(double samplerate,double freq,double amp);
   ~Square();
 
-  void tick();
+  void calculate();
 
 private:
   double phase;

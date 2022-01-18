@@ -3,10 +3,10 @@
 class Sine : public Oscillator {
   public:
     //Constructor and destructor
-    Sine(double samplerate,double freq);
+    Sine(double samplerate,double freq,double amp);
     ~Sine();
 
-    void tick();
+    void calculate();
 
   protected:
     double phase;

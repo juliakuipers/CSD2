@@ -2,7 +2,7 @@
 #include "math.h"
 #include <iostream>
 
-Square::Square(double samplerate,double freq) : Oscillator(samplerate,freq), phase(0.0),freq(freq),samplerate(samplerate) {
+Square::Square(double samplerate,double freq,double amp) : Oscillator(samplerate,freq,amp), phase(0.0),freq(freq),samplerate(samplerate) {
   std::cout 
   << "Square - constructor"
   << std::endl;
@@ -16,7 +16,7 @@ Square::~Square() {
   << std::endl;
 }
 
-void Square::tick() {
+void Square::calculate() {
   // NOTE 1. - frequency / SAMPLERATE can be implemented in a more efficient way
   phase += freq / samplerate;
   // wrap the phase so it stays in the interval [0, 1]
