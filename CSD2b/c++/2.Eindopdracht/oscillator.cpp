@@ -17,4 +17,3 @@ void Oscillator::setAmp(double amp){
     this->amp = amp;
 }
 
-#endif

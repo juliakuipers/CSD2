@@ -1,16 +1,11 @@
 #include "synth.h"
 #include <iostream>
 
-Synth::Synth(double samplerate) : sample(0){
+Synth::Synth(double samplerate){
     std::cout << "Synth - constructor \n";
 }
 
 Synth::~Synth(){
-    std::cout << "Synth - destructor \n"
+    std::cout << "Synth - destructor \n";
 }
 
-double Synth::getSample(){
-    return sample;
-}
-
-#endif

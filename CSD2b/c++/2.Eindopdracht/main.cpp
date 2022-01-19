@@ -5,6 +5,7 @@
 #include "writeToFile.h"
 #include "synth.h"
 #include "oscillator.h"
+#include "sine.h"
 #include "saw.h"
 #include "square.h"
 
@@ -16,7 +17,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
+#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file 
 
 
 int main(int argc,char **argv)
@@ -28,27 +29,29 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  Synth synth(samplerate);
-  Oscillator osc(220, 0.5);
+  //Synth synth(samplerate);
+  //Oscillator osc(220, 0.5);
+  Sine sine(samplerate,440,0.5);
+  //Sine sine; 
   //Square square(440,samplerate);
-
+  //sample is also personal to the waveform 
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(square.getSample()) + "\n");
-    square.tick();
+    fileWriter.write(std::to_string(sine.getSample()) + "\n");
+    sine.calculate();
   }
 #else
-
+  std::cout << samplerate << std::endl;
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&synth, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&sine, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
 
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = synth.getSample() * amplitude;
+      outBuf[i] = sine.getSample() * amplitude;
       sine.calculate();
     }
 
@@ -70,7 +73,7 @@ int main(int argc,char **argv)
         jack.end();
         break;
       case 's':
-        osc.setFreq(880);
+        sine.setFreq(880);
     }
   }
 #endif
