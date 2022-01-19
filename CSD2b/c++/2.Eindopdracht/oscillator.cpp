@@ -1,7 +1,7 @@
 #include "oscillator.h"
 #include <iostream>
 
-Oscillator::Oscillator(double freq,double amp) : Synth(samplerate), freq(freq), amp(amp){
+Oscillator::Oscillator(double freq,double amp) : freq(freq), amp(amp){
     std::cout << "Oscillator - constructor \n";
 }
 

@@ -1,6 +1,6 @@
-#include "synth.h"
+#pragma once 
 
-class Oscillator : public Synth {
+class Oscillator  {
     public: 
         Oscillator(double freq, double amp);
         //frequency in oscillator because 

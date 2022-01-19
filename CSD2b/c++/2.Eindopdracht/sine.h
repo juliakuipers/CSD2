@@ -1,6 +1,5 @@
 #include "synth.h"
 #include "oscillator.h"
-#include <iostream>
 
 class Sine : public Synth, public Oscillator {
   public:
@@ -14,4 +13,3 @@ class Sine : public Synth, public Oscillator {
     double phase;
 };
 
-#endif
