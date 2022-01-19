@@ -10,8 +10,8 @@ class Sine : public Oscillator {
 
   protected:
     double phase;
-    double freq;
-    double samplerate;
+    //double freq;
+    //double samplerate;
 };
 
 

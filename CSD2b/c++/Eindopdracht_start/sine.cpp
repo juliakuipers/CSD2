@@ -2,7 +2,7 @@
 #include "math.h"
 #include <iostream>
 
-Sine::Sine(double samplerate,double freq,double amp) : Oscillator(samplerate,freq,amp), phase(0.0) ,freq(freq), samplerate(samplerate) {
+Sine::Sine(double samplerate,double freq,double amp) : Oscillator(samplerate,freq,amp), phase(0.0){
 //            phase is something "personal" to the waveform (i think) that's why i chose to set it here
   std::cout 
   << "Sine - constructor"

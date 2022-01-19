@@ -43,6 +43,7 @@ void Oscillator::setFreq(double freq)
 {
   //this->freq = freq * mFreq;
   this->freq = freq;
+  std::cout << "setFreq\n";
   //my guess is that nframes is samplerate 
 }
 

@@ -24,7 +24,9 @@ int main(int argc,char **argv)
   // create a JackModule instance
   JackModule jack;
   //#TODO work with user input for waveforms 
+  Oscillator* osc = nullptr;
 
+  //work with pointer for the osc 
   double freq = 440.0;
   double ampl = 0.5;
   std::string waveForm;
@@ -36,33 +38,38 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   //Oscillator osc(samplerate);
-  Sine sine(samplerate,freq,ampl);
-  sine.setFreq(220);
-  sine.setAmp(0.5);
+  //Sine sine(samplerate,freq,ampl);
+  // osc.setFreq(220);
+  // osc.setAmp(0.5);
   //todo setters do not work 
-
-  Square square(samplerate,freq,ampl);
+  if (waveForm == "sine") {
+    osc = new Sine(samplerate,freq,ampl);
+  }
+  else if (waveForm == "square") {
+    osc = new Square(samplerate,freq,ampl);
+  }
+  //Square square(samplerate,freq,ampl);
   // square.setFreq(freq);
-  square.setAmp(0.5);
+  // osc.setAmp(0.5);
   //nothing goes wrong with setters and getters, maybe in the calculation 
   #if WRITE_TO_FILE
     WriteToFile fileWriter("output.csv", true);
 
     for(int i = 0; i < 500; i++) {
-      fileWriter.write(std::to_string(sine.getSample()) + "\n");
+      fileWriter.write(std::to_string(osc.getSample()) + "\n");
       //                              i can put the fm fuction in here to see the waveform 
 
-      sine.calculate(); 
+      osc.calculate(); 
   } 
   //maybe i can put generating of the waveform 
   double amp = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&sine, &amp ](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&osc, &amp ](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
     for(unsigned int i = 0; i < nframes; i++) {
       //nframes 
-      outBuf[i] = sine.getSample() * amp;
-      sine.calculate();
+      outBuf[i] = osc.getSample() * amp;
+      osc.calculate();
       //calculation of the waveform is in this for loop so its happening continiously 
       //berekening van golfvorm kan zonder audio in een subclass voor fm. dan de freq * de berekening voor frequency modulation. en dan in main zorg je alleen voor het afspelen van de audio 
     }
@@ -84,11 +91,13 @@ int main(int argc,char **argv)
         jack.end();
         break;
       case 's':
-        sine.setFreq(440);
+        osc.setFreq(440);
         std::cout << "s\n";
     }
   }
 #endif
   //end the program
+  delete osc;
+  osc = nullptr;
   return 0;
 } // main()
