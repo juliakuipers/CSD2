@@ -17,7 +17,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file 
+#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
 
 
 int main(int argc,char **argv)
@@ -35,6 +35,7 @@ int main(int argc,char **argv)
   //Sine sine; 
   //Square square(440,samplerate);
   //sample is also personal to the waveform 
+  //std::cout << samplerate << std::endl;
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
