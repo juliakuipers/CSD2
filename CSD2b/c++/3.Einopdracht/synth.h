@@ -9,10 +9,12 @@ class Synth : public Sine{
 
         double getSample();
         void calculate();
-        // void set();
+        void waveForm();
+        void set();
     
     protected:
         double samplerate;
+        Sine* osc = nullptr;
 };
 
 #endif

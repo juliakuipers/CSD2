@@ -28,6 +28,8 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Synth synth(samplerate);
 
+  synth.waveForm();
+
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 

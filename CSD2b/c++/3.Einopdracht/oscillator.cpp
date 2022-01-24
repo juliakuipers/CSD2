@@ -8,10 +8,10 @@ Oscillator::~Oscillator(){
     std::cout << "Oscillator - destructor \n";
 }
 
-// void Oscillator::setFreq(double freq){
-    // this -> freq = freq;
-// }
-// 
-// void Oscillator::setAmp(double amp){
-    // this -> amp = amp;
-// }
+void Oscillator::setFreq(double freq){
+    this -> freq = freq;
+}
+
+void Oscillator::setAmp(double amp){
+    this -> amp = amp;
+}
