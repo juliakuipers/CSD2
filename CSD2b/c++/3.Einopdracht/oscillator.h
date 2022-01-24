@@ -8,8 +8,8 @@ class Oscillator{
         Oscillator();
         ~Oscillator();
 
-        void setFreq();
-        double getFreq();
+        // void setFreq();
+        // void setAmp(); 
 
     protected:
         double amp;

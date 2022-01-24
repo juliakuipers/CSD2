@@ -3,10 +3,10 @@
 #include <iostream>
 #include "oscillator.h"
 
-class Sine{
+class Sine : public Oscillator{
   public:
     //Constructor and destructor
-    Sine();
+    Sine(double samplerate);
     ~Sine();
 
     // go to next sample
@@ -16,6 +16,8 @@ class Sine{
   protected:
     double phase;
     double sample;
+    double samplerate;
+
 };
 
 #endif

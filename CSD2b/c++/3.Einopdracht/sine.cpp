@@ -1,7 +1,7 @@
 #include "sine.h"
 #include "math.h"
 
-Sine::Sine() : Oscillator(), phase(0), sample(0) {
+Sine::Sine(double samplerate) : Oscillator(), phase(0), sample(0) {
   std::cout << "Sine - constructor\n";
 }
 
