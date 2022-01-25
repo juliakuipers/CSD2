@@ -14,7 +14,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file 
+#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
 
 
 int main(int argc,char **argv)
@@ -41,12 +41,12 @@ int main(int argc,char **argv)
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&sine, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&synth, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
 
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = sine.getSample() * amplitude;
-      sine.calculate();
+      outBuf[i] = synth.getSample() * amplitude;
+      synth.calculate();
     }
 
     amplitude = 0.5;

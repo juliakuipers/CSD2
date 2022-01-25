@@ -1,6 +1,7 @@
 #ifndef _SAW_H_
 #define _SAW_H_
 #include <iostream>
+#include "oscillator.h"
 
 class Saw
 {
