@@ -3,20 +3,25 @@
 #include "synth.h"
 #include <iostream>
 
-Synth::Synth(double samplerate) : Sine(samplerate),samplerate(samplerate){
+Synth::Synth(double samplerate) {
+    this->samplerate = samplerate;
     std::cout << "Synth - constructor \n";
-    osc = new Sine(samplerate);
+    sine = new Sine(samplerate);
+    //saw = new Saw(samplerate);
 }
 
 Synth::~Synth(){
     std::cout << "Synth - destructor \n";
-    delete osc;
-    osc = nullptr;  
+    delete sine;
+    //delete saw;
+    sine = nullptr; 
+    //saw = nullptr; 
 }
 
 void Synth::set(){
-    osc->setFreq(440);
-    osc->setAmp(0.5);
+    sine->setFreq(440);
+    sine->setAmp(0.5);
+    //saw->setFreq(20);
 }
 
 void Synth::waveForm(){
@@ -30,9 +35,9 @@ void Synth::waveForm(){
 
 
 void Synth::calculate(){
-    osc->calculate();
+    sine->calculate();
 }
 
 double Synth::getSample(){
-    return osc->getSample(); 
+    return sine->getSample();
 }

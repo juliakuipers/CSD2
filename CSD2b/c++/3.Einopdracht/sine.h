@@ -12,6 +12,8 @@ class Sine : public Oscillator{
     // go to next sample
     void calculate();
     double getSample();
+    //virtual double getFreq() = 0;
+    //virtual double getAmp() = 0;
 
   protected:
     double phase;

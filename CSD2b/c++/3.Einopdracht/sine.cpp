@@ -3,7 +3,7 @@
 
 Sine::Sine(double samplerate) : Oscillator(), phase(0), sample(0) {
   std::cout << "Sine - constructor\n";
-  this -> samplerate = samplerate;
+  this -> samplerate = samplerate; //kan in de oscillator 
 }
 
 
@@ -22,6 +22,6 @@ void Sine::calculate() {
 }
 
 double Sine::getSample(){
-  std::cout << sample << std::endl;
   return sample;
 }
+

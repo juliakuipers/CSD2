@@ -3,7 +3,8 @@
 #include "jack_module.h"
 #include "math.h"
 #include "writeToFile.h"
-#include "synth.h"
+#include "SimpleSynth.h"
+//#include "fmSynth.h"
 #include "sine.h"
 #include "oscillator.h"
 /*
@@ -26,7 +27,7 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  Synth synth(samplerate);
+  SimpleSynth synth(samplerate);
 
   synth.waveForm();
 
@@ -66,6 +67,8 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
+      case 's':
+        synth.set();
     }
   }
 #endif

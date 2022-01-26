@@ -15,3 +15,11 @@ void Oscillator::setFreq(double freq){
 void Oscillator::setAmp(double amp){
     this -> amp = amp;
 }
+
+double Oscillator::getFreq(){
+    return freq;
+}
+
+double Oscillator::getAmp(){
+    return amp;
+}

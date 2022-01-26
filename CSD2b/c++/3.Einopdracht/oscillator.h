@@ -6,10 +6,15 @@
 class Oscillator{
     public:
         Oscillator();
-        ~Oscillator();
+        virtual ~Oscillator();
 
         void setFreq(double freq);
+        double getFreq();
         void setAmp(double freq); 
+        double getAmp();
+
+        virtual void calculate()=0;
+        virtual double getSample()=0;
 
     protected:
         double amp;
