@@ -24,6 +24,10 @@ void Synth::set(){
     //saw->setFreq(20);
 }
 
+// void Synth::get(){
+    // return sine->getFreq();
+// }
+
 void Synth::waveForm(){
     // std::cout << "input sine \n";
     // std::string waveForm;

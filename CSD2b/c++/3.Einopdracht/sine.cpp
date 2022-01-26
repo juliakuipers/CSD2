@@ -24,4 +24,3 @@ void Sine::calculate() {
 double Sine::getSample(){
   return sample;
 }
-

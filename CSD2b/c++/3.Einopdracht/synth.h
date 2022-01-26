@@ -13,6 +13,7 @@ class Synth{
         //virtual zit een functie die niet wordt aangemaakt in de base class maar wel bestaat en in de derived class kan worden aangeroepen en verandert 
         void waveForm();
         void set();
+        void get();
     
     protected:
         double samplerate;

@@ -4,7 +4,7 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "SimpleSynth.h"
-//#include "fmSynth.h"
+#include "fmSynth.h"
 #include "sine.h"
 #include "oscillator.h"
 /*
@@ -27,7 +27,7 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  SimpleSynth synth(samplerate);
+  FmSynth synth(samplerate);
 
   synth.waveForm();
 

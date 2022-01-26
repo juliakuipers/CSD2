@@ -18,7 +18,7 @@ FmSynth::~FmSynth(){
 void FmSynth::calculate(){
     modulator->calculate();
     carrier->calculate();
-    modFreq = modulator->getFreq()*2;
+    modFreq = modulator->getFreq()*5;
 
 }
 
