@@ -18,7 +18,9 @@ class FmSynth : public Synth {
         Oscillator* carrier;
 
     protected:
-        double modFreq;
+        double modSignal;
+        double carFreq;
+        //modSignal*carFreq in calculate 
 
 };
 #endif

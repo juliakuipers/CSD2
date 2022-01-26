@@ -15,7 +15,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
+//#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
 
 
 int main(int argc,char **argv)
@@ -31,14 +31,15 @@ int main(int argc,char **argv)
 
   synth.waveForm();
 
-#if WRITE_TO_FILE
+
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
     fileWriter.write(std::to_string(synth.getSample()) + "\n");
     synth.calculate();
+    synth.set();
   }
-#else
+
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
@@ -48,6 +49,7 @@ int main(int argc,char **argv)
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = synth.getSample() * amplitude;
       synth.calculate();
+      synth.set();
     }
 
     amplitude = 0.5;
@@ -71,7 +73,7 @@ int main(int argc,char **argv)
         synth.set();
     }
   }
-#endif
+
   //end the program
   return 0;
 

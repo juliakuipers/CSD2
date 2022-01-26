@@ -1,6 +1,6 @@
 #include "oscillator.h"
 
-Oscillator::Oscillator() : amp(0.1),freq(440){
+Oscillator::Oscillator() : amp(0.5),freq(440){
     std::cout << "Oscillator - constructor \n";
 }
 
