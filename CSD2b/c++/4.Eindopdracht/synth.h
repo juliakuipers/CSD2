@@ -1,6 +1,7 @@
 #ifndef _synth_H_
 #define _synth_H_
 #include <iostream>
+#include "oscillator.h"
 
 class Synth {
     public:
@@ -8,7 +9,7 @@ class Synth {
         ~Synth();
 
         double mTof(); 
-        double getSample();
+
         //virtual void calculate()=0;
 
     protected:
