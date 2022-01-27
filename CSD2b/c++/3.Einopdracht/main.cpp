@@ -4,6 +4,7 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "SimpleSynth.h"
+#include "amSynth.h"
 #include "fmSynth.h"
 #include "sine.h"
 #include "oscillator.h"
@@ -27,14 +28,14 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  FmSynth synth(samplerate);
+  AmSynth synth(samplerate);
 
-  synth.waveForm();
+  //synth.waveForm();
 
 
   WriteToFile fileWriter("output.csv", true);
 
-  for(int i = 0; i < 500; i++) {
+  for(int i = 0; i < (samplerate*0.010); i++) {
     fileWriter.write(std::to_string(synth.getSample()) + "\n");
     synth.calculate();
     synth.set();

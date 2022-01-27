@@ -5,7 +5,7 @@ FmSynth::FmSynth(double samplerate) : Synth(samplerate){
     std::cout << "FmSynth - constructor \n";
     carrier = new Sine(samplerate);
     modulator = new Sine(samplerate);
-    modulator->setFreq(220);
+    modulator->setFreq(110);
 }
 
 FmSynth::~FmSynth(){
@@ -23,8 +23,6 @@ void FmSynth::calculate(){
     //modSignal = modulator->getSample();
     
     carrier->setFreq(modulator->getSample()*440);
-    modSignal = carrier->getFreq();
-
     //std::cout << modSignal << std::endl;
 
 }
