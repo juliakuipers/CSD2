@@ -1,21 +1,23 @@
 #ifndef _oscillator_H_
 #define _oscillator_H_
 #include <iostream>
-//TODO check if synth oscillator relationship checks out 
+
 class Oscillator{
     public:
         Oscillator(double samplerate);
-        virtual ~Oscillator();
+        ~Oscillator();
 
         void waveForm();
         void calculate();
         void setFreq(double freq); 
+        void setAmp(double amp);
+        virtual double getSample()=0;
 
     protected:
         double phase;
         double samplerate;
         double freq;
-
+        double amp;
 };
 
 #endif

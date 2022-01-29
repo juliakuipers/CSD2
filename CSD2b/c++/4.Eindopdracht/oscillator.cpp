@@ -15,11 +15,16 @@ void Oscillator::waveForm(){
 
 void Oscillator::setFreq(double freq){
     this -> freq = freq;
+    std::cout << freq << std::endl;
 }
 
-void Oscillator::calculate(){
-    phase += freq / samplerate;
-    if (phase > 1) phase -= 1.0; 
-    std::cout << phase << std::endl; 
+void Oscillator::setAmp(double amp){
+    this -> amp = amp;
+    std::cout << amp << std::endl;
 }
+
+// void Oscillator::calculate(){
+    // phase += freq / samplerate;
+    // if (phase > 1) phase -= 1.0; 
+// }
 
