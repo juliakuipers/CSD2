@@ -11,14 +11,14 @@ class Sine : public Oscillator {
 
     // go to next sample
     void calculate();
-    double getSample() override;
+    double getSample();
     //virtual double getFreq() = 0;
     //virtual double getAmp() = 0;
 
   protected:
     double sample;
     double samplerate;
-    Oscillator* osc;
+    
 
 };
 

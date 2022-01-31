@@ -5,13 +5,13 @@
 class Oscillator{
     public:
         Oscillator(double samplerate);
-        ~Oscillator();
+        virtual ~Oscillator();
 
         void waveForm();
-        void calculate();
         void setFreq(double freq); 
         void setAmp(double amp);
-        virtual double getSample()=0;
+        void calculate();
+        double getSample();
 
     protected:
         double phase;

@@ -14,9 +14,10 @@ void Sine::calculate() {
     phase += freq / samplerate;
     if (phase > 1) phase -= 1.0; 
     sample = sin(M_PI * 2 * phase) * amp;
-    std::cout << sample << std::endl;
+    std::cout << "sample " << sample << std::endl;
 }
 
 double Sine::getSample(){
-  return sample;
+    std::cout << ":) " << std::endl;
+    return sample;
 }

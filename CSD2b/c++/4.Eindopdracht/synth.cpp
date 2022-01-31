@@ -6,33 +6,24 @@ Synth::Synth(double samplerate, double midi, double amp){
     this -> amp = amp;
     this -> midi = midi;
     std::cout << "Synth - constructor \n";
-    sine = new Sine(samplerate);
-    //osc = new Oscillator(samplerate);
+    osc = new Oscillator(samplerate);
     //sine = new Sine(samplerate);
 }
 
 Synth::~Synth(){
     std::cout << "Synth - destructor \n";
     // delete osc;
-    delete sine;
+    delete osc;
     // osc = nullptr;
-    sine = nullptr;
+    osc = nullptr;
 }
 
 void Synth::mTof(){
     freq = (midi /127) * 20000;
-    sine->setFreq(freq);
+    osc->setFreq(freq);
 }
 
 void Synth::setAmp(){
-    sine->setAmp(amp);
+    osc->setAmp(amp);
 }
 
-void Synth::calculate(){
-    sine->calculate();
-}
-
-
-double getSample(){
-    sine->getSample();
-}

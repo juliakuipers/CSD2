@@ -3,18 +3,20 @@
 #include <iostream>
 #include "synth.h"
 #include "sine.h"
-#include "oscillator.h"
+//#include "oscillator.h"
 
-class FmSynth : public Synth {
+class FmSynth : public Synth{
     public:
-        FmSynth(double samplerate);
+        FmSynth(double samplerate, double midi, double amp);
         ~FmSynth();
 
         double getSample();
         void calculate();
 
-        Oscillator* mod;
-        Oscillator* car; 
+    protected:
+        double samplerate;
+        Sine* mod;
+        Sine* car; 
 };
 
 #endif

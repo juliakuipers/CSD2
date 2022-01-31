@@ -1,6 +1,6 @@
 #include "FmSynth.h"
 
-FmSynth::FmSynth(double samplerate) : Synth(samplerate,midi,amp){
+FmSynth::FmSynth(double samplerate, double midi, double amp) : Synth(samplerate, midi, amp){
     std::cout << "FmSynth - constructor \n";
     mod = new Sine(samplerate);
 }

@@ -1,8 +1,8 @@
 #ifndef _synth_H_
 #define _synth_H_
 #include <iostream>
-#include "sine.h"
-//Synth has a Sine 
+#include "oscillator.h"
+
 class Synth {
     public:
         Synth(double samplerate, double midi, double amp);
@@ -10,8 +10,8 @@ class Synth {
 
         void mTof(); 
         void setAmp();
-        void calculate();
-        double getSample();
+        // void calculate();
+        // double getSample();
 
         //virtual void calculate()=0;
 
@@ -20,7 +20,8 @@ class Synth {
         double freq;
         double amp;
         double midi; 
-        Sine* sine = nullptr;
+        Oscillator* osc = nullptr;
+        
         //nu is oscillator a member variable of the class 
 
         
