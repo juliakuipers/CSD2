@@ -1,6 +1,6 @@
 #include "oscillator.h"
 
-Oscillator::Oscillator(double samplerate) : phase(0){
+Oscillator::Oscillator(double samplerate,double freq,double amp) : phase(0){
     this -> samplerate = samplerate;
     std::cout << "Oscillator - constructor \n";
 }
@@ -15,7 +15,7 @@ void Oscillator::waveForm(){
 
 void Oscillator::setFreq(double freq){
     this -> freq = freq;
-    std::cout <<  "freq " << freq << std::endl;
+    std::cout <<  "freq Oscillator " << freq << std::endl;
 }
 
 void Oscillator::setAmp(double amp){

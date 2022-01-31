@@ -6,7 +6,7 @@ Synth::Synth(double samplerate, double midi, double amp){
     this -> amp = amp;
     this -> midi = midi;
     std::cout << "Synth - constructor \n";
-    osc = new Oscillator(samplerate);
+    osc = new Oscillator(samplerate,freq,amp);
     //sine = new Sine(samplerate);
 }
 

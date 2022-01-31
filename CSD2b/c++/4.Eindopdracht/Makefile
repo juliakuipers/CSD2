@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
-#LDFLAGS= -ljack
-SOURCE=synth.o main.o oscillator.o sine.o FmSynth.o
+LDFLAGS= -ljack
+SOURCE=jack_module.o writeToFile.o synth.o main.o oscillator.o sine.o FmSynth.o 
 TARGET=e
 
 $(TARGET) : $(SOURCE)

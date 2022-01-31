@@ -14,7 +14,6 @@ class FmSynth : public Synth{
         void calculate();
 
     protected:
-        double samplerate;
         Sine* mod;
         Sine* car; 
 };

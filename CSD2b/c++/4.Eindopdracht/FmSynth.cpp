@@ -2,7 +2,7 @@
 
 FmSynth::FmSynth(double samplerate, double midi, double amp) : Synth(samplerate, midi, amp){
     std::cout << "FmSynth - constructor \n";
-    mod = new Sine(samplerate);
+    mod = new Sine(samplerate,freq,amp,phase);
 }
 
 FmSynth::~FmSynth(){

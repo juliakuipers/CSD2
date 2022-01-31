@@ -4,8 +4,8 @@
 
 class Oscillator{
     public:
-        Oscillator(double samplerate);
-        virtual ~Oscillator();
+        Oscillator(double samplerate,double freq,double amp);
+        ~Oscillator();
 
         void waveForm();
         void setFreq(double freq); 

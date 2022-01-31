@@ -6,7 +6,7 @@
 class Sine : public Oscillator {
   public:
     //Constructor and destructor
-    Sine(double samplerate);
+    Sine(double samplerate,double freq,double amp,double phase);
     ~Sine();
 
     // go to next sample
@@ -18,6 +18,9 @@ class Sine : public Oscillator {
   protected:
     double sample;
     double samplerate;
+    double freq;
+    double amp;
+    double phase;
     
 
 };
