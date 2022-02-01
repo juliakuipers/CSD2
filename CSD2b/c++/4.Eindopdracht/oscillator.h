@@ -12,6 +12,7 @@ class Oscillator{
         double getSample();
         void setFreq(double freq); 
         void setAmp(double amp);
+        double getFreq();
 
     protected:
         double phase;
