@@ -13,7 +13,10 @@ class FmSynth : public Synth{
         double getSample();
         void calculate();
 
+        void updatePitch();
+
     protected:
+        double freq;
         Oscillator* mod;
         Oscillator* car; 
 };

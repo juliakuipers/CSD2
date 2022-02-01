@@ -8,7 +8,7 @@ class Synth {
         Synth(double samplerate, double midi, double amp);
         ~Synth();
 
-        void mTof(); 
+        double mTof(); 
         void setAmp();
         // void calculate();
         // double getSample();

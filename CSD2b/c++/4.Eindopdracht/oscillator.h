@@ -4,15 +4,16 @@
 
 class Oscillator{
     public:
-        Oscillator(double samplerate,double freq,double amp);
+        Oscillator(double samplerate,double amp);
         virtual ~Oscillator();
 
         void nextSample();
         virtual void calculate() = 0;
-        double getSample();
+        //double getSample();
         void setFreq(double freq); 
         void setAmp(double amp);
         double getFreq();
+        double getSample();
 
     protected:
         double phase;

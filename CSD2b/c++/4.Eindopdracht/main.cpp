@@ -25,7 +25,7 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   FmSynth synth(samplerate,48,0.5);
-
+  synth.setAmp();
   //synth.waveForm();
 
 
@@ -34,7 +34,7 @@ int main(int argc,char **argv)
   for(int i = 0; i < (samplerate*0.010); i++) {
     fileWriter.write(std::to_string(synth.getSample()) + "\n");
     synth.calculate();
-    synth.mTof();
+    synth.updatePitch();
   }
 
 
@@ -46,6 +46,8 @@ int main(int argc,char **argv)
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = synth.getSample() * amplitude;
       synth.calculate();
+      synth.updatePitch();
+      //mtof update de freq in de functie 
       //synth.set();
     }
 
