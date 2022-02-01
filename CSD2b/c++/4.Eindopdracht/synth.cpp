@@ -1,12 +1,11 @@
 #include "synth.h"
 #include "math.h"
 //TODO make sure the relationship between oscillator sine and synth checks out 
-Synth::Synth(double samplerate, double midi, double amp){
+Synth::Synth(double samplerate, double amp){
     this -> samplerate = samplerate;
     this -> amp = amp;
-    this -> midi = midi;
     std::cout << "Synth - constructor \n";
-    osc = new Sine(samplerate,amp);
+    osc = new Sine(samplerate);
     //sine = new Sine(samplerate);
 }
 
@@ -18,8 +17,10 @@ Synth::~Synth(){
     osc = nullptr;
 }
 
-double Synth::mTof(){
-    return (midi /127) * 20000;
+void Synth::mTof(double midi){
+    //TODO i want a function that updates the pitch
+    this -> midi = midi;
+    osc->setFreq((midi /127) * 20000);
 }
 
 void Synth::setAmp(){

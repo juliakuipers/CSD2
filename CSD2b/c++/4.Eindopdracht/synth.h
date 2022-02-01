@@ -5,10 +5,10 @@
 
 class Synth {
     public:
-        Synth(double samplerate, double midi, double amp);
+        Synth(double samplerate, double amp);
         ~Synth();
 
-        double mTof(); 
+        void mTof(double midi); 
         void setAmp();
         // void calculate();
         // double getSample();

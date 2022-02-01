@@ -1,24 +1,22 @@
 #include "oscillator.h"
 
-Oscillator::Oscillator(double samplerate,double amp) : phase(0),sample(0) {
+Oscillator::Oscillator(double samplerate) : phase(0),sample(0) {
     this -> samplerate = samplerate;
     std::cout << "Oscillator - constructor \n";
+    // std::cout << "Oscillator - constructor phase " << phase << std::endl;
+    // std::cout << "Oscillator - constructor sample " << sample << std::endl;
+    std::cout << "Oscillator - constructor amp " << amp << std::endl;
 }
 
 Oscillator::~Oscillator(){
     std::cout << "Oscillator - destructor \n";
 }
 
-// void Oscillator::nextSample(){
-    // phase += freq / samplerate;
-    // if (phase > 1) phase -= 1.0; 
-    // calculate();
-    // std::cout<<sample << std::endl;
-    // omdat calculate virtual is in oscillator en sine een derived class is met die functie kan ik calculate aanroepen in Oscillator
-// } 
+//i can make a function in a derived class which is a virtual function in a base class and call the function in the base class
 
 void Oscillator::setFreq(double freq){
     this -> freq = freq;
+    std::cout << "Oscillator - setFreq freq " << freq << std::endl;
 }
 
 void Oscillator::setAmp(double amp){
@@ -27,6 +25,6 @@ void Oscillator::setAmp(double amp){
 
 double Oscillator::getSample(){
     return sample;
-    //std::cout<<"Oscillator - getSample " << sample << std::endl;
+    std::cout<<"Oscillator - getSample " << sample << std::endl;
 }
 

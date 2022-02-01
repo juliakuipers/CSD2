@@ -7,13 +7,11 @@
 
 class FmSynth : public Synth{
     public:
-        FmSynth(double samplerate, double midi, double amp);
+        FmSynth(double samplerate, double amp);
         ~FmSynth();
 
         double getSample();
         void calculate();
-
-        void updatePitch();
 
     protected:
         double freq;

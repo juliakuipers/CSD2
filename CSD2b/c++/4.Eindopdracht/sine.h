@@ -6,14 +6,12 @@
 class Sine : public Oscillator {
   public:
     //Constructor and destructor
-    Sine(double samplerate,double amp);
+    Sine(double samplerate);
     ~Sine();
 
     // go to next sample
     void calculate() override;
-    
-  protected:
-    double sample;
+
 
 };
 

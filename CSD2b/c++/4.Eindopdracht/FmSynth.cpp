@@ -1,8 +1,8 @@
 #include "FmSynth.h"
 
-FmSynth::FmSynth(double samplerate, double midi, double amp) : Synth(samplerate, midi, amp){
+FmSynth::FmSynth(double samplerate, double amp) : Synth(samplerate, amp){
     std::cout << "FmSynth - constructor \n";
-    mod = new Sine(samplerate,amp);
+    mod = new Sine(samplerate);
 }
 
 FmSynth::~FmSynth(){
@@ -13,10 +13,6 @@ FmSynth::~FmSynth(){
 
 void FmSynth::calculate(){
     mod->calculate();
-}
-
-void FmSynth::updatePitch(){
-    mod->setFreq(mTof());
 }
 
 //TODO make fmSynth be able to return the sample to main

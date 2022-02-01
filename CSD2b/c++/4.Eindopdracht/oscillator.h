@@ -4,7 +4,7 @@
 
 class Oscillator{
     public:
-        Oscillator(double samplerate,double amp);
+        Oscillator(double samplerate);
         virtual ~Oscillator();
 
         void nextSample();
