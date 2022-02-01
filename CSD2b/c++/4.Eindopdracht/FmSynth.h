@@ -14,8 +14,8 @@ class FmSynth : public Synth{
         void calculate();
 
     protected:
-        Sine* mod;
-        Sine* car; 
+        Oscillator* mod;
+        Oscillator* car; 
 };
 
 #endif

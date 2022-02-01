@@ -1,7 +1,7 @@
 #ifndef _synth_H_
 #define _synth_H_
 #include <iostream>
-#include "oscillator.h"
+#include "sine.h"
 
 class Synth {
     public:

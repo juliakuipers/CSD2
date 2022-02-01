@@ -9,7 +9,12 @@ Oscillator::~Oscillator(){
     std::cout << "Oscillator - destructor \n";
 }
 
-void Oscillator::waveForm(){
+void Oscillator::nextSample(){
+    phase += freq / samplerate;
+    if (phase > 1) phase -= 1.0; 
+    std::cout << "freq  " << freq << std::endl;
+    calculate();
+    //omdat calculate virtual is in oscillator en sine een derived class is met die functie kan ik calculate aanroepen in Oscillator
 
 } 
 
@@ -23,8 +28,7 @@ void Oscillator::setAmp(double amp){
     std::cout << "amp " << amp << std::endl;
 }
 
-// void Oscillator::calculate(){
-    // phase += freq / samplerate;
-    // if (phase > 1) phase -= 1.0; 
-// }
+double Oscillator::getSample(){
+    return sample;
+}
 

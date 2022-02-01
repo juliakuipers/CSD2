@@ -2,7 +2,7 @@
 
 FmSynth::FmSynth(double samplerate, double midi, double amp) : Synth(samplerate, midi, amp){
     std::cout << "FmSynth - constructor \n";
-    mod = new Sine(samplerate,freq,amp,phase);
+    mod = new Sine(samplerate,freq,amp);
 }
 
 FmSynth::~FmSynth(){
@@ -12,10 +12,10 @@ FmSynth::~FmSynth(){
 }
 
 void FmSynth::calculate(){
-    mod->calculate();
+    mod->nextSample();
 }
 
 //TODO make fmSynth be able to return the sample to main
 double FmSynth::getSample(){
-    mod->getSample(); 
+    return mod->getSample(); 
 }
