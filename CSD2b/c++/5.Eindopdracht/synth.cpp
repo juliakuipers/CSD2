@@ -8,3 +8,12 @@ Synth::Synth(double samplerate){
 Synth::~Synth(){
     std::cout << "Synth - Destructor \n";
 }
+
+void Synth::tick(){
+    calculate();
+}
+
+double Synth::nextSample(){
+    getSample();
+    std::cout << "Synth - nextSample - getSample() " << getSample() <<  "\n";
+}

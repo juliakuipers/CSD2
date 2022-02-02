@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _oscillator_H_
+#define _oscillator_H_
 #include <iostream>
 
 class Oscillator{
@@ -21,3 +22,5 @@ class Oscillator{
         double freq;
 
 };
+
+#endif

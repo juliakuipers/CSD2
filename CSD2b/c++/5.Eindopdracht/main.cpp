@@ -4,6 +4,8 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "SimpleSynth.h"
+#include "synth.h"
+
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
@@ -12,7 +14,7 @@
  * jackd -d coreaudio
  */
 
-//#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
+#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
 
 
 int main(int argc,char **argv)
@@ -25,32 +27,26 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   SimpleSynth synth(samplerate);
-  synth.mTof(48);
-  //synth.waveForm();
+  synth.mTof(20);
 
 
+#if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 
-  // for(int i = 0; i < (samplerate*0.010); i++) {
-  //   fileWriter.write(std::to_string(synth.getSample()) + "\n");
-  //   synth.mTof(48);
-  //   synth.calculate();
-  // }
-
+  for(int i = 0; i < 500; i++) {
+    fileWriter.write(std::to_string(synth.getSample()) + "\n");
+    synth.calculate();
+  }
+#else
 
   float amplitude = 0.15;
-  
   //assign a function to the JackModule::onProces
   jack.onProcess = [&synth, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
-//                                                      
+
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = synth.getSample() * amplitude;
-      
-      synth.calculate();
-      //if i use the mTof(melody) i can actually update the melody
-      //mtof update de freq in de functie 
-      //synth.set();
+      outBuf[i] = synth.nextSample() * amplitude;
+      synth.tick();
     }
 
     amplitude = 0.5;
@@ -70,11 +66,9 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
-      //case 's':
-        //synth.set();
     }
   }
-
+#endif
   //end the program
   return 0;
 

@@ -10,6 +10,7 @@ Oscillator::~Oscillator(){
 }
 
 void Oscillator::tick(){
+    std::cout << "Oscillator - tick - freq " << freq <<  "\n";
     phase += freq / samplerate;
     if (phase > 1) phase -= 1.0; 
     calculate();
@@ -21,6 +22,5 @@ void Oscillator::setFreq(double freq){
 
 
 double Oscillator::getSample(){
-    std::cout << "Oscillator - getSample - Sample " << sample << "\n";
-    return sample;
+    return sample * amp;
 }

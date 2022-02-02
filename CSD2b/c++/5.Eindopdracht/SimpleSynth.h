@@ -1,20 +1,24 @@
-#pragma once 
+#ifndef _FmSynth_H_
+#define _FmSynth_H_
 #include <iostream>
-#include "synth.h"
 #include "oscillator.h"
 #include "sine.h"
-//                  SimpleSynth is a synth        
-class SimpleSynth : public Synth {
+#include "synth.h"
+
+class SimpleSynth : public Synth{
     public: 
         SimpleSynth(double samplerate);
         ~SimpleSynth();
 
-        void calculate() override;
-        double getSample() override;
-        void mTof(double midi) override;
+        void calculate();
+        double getSample();
+        void mTof(double midi);
 
     protected:
         double freq; 
+        double samplerate;
         double midi;
         Oscillator* osc; 
 };
+
+#endif
