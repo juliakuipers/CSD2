@@ -2,24 +2,26 @@
 
 SimpleSynth::SimpleSynth(double samplerate) : Synth(samplerate), freq(freq){
     std::cout << "SimpleSynth - Constructor \n";
+    osc = new Sine(samplerate);
 }
 
 SimpleSynth::~SimpleSynth(){
     std::cout << "SimpleSynth - Destructor \n";
+    delete osc;
+    osc = nullptr;
 }
 
 void SimpleSynth::calculate(){
-    std::cout << "Calculating \n";
+    mTof(48);
+    osc->tick();
 }
 
 double SimpleSynth::getSample(){
-    std::cout << "Returning Sample \n";
-    return 0;
+    osc->getSample();
 }
 
-double SimpleSynth::mTof(double midi){
+void SimpleSynth::mTof(double midi){
     this -> midi = midi;
     freq = (midi /127.0) * 20000.0;
-    std::cout << "Frequency = " << freq << std::endl;
-    return 0;
+    std::cout << "SimpleSynth - mTof - freq = " << freq << std::endl;
 }

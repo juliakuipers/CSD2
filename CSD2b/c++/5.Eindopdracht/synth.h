@@ -8,7 +8,7 @@ class Synth{
 
         virtual void calculate() = 0;
         virtual double getSample() = 0;
-        virtual double mTof(double midi) = 0; 
+        virtual void mTof(double midi) = 0; 
 
     protected:
         double samplerate;

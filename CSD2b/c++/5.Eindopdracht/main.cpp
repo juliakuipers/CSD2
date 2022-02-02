@@ -6,5 +6,4 @@ int main(){
     SimpleSynth synth(samplerate);
     synth.calculate();
     synth.getSample();
-    synth.mTof(48);
 }
