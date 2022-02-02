@@ -10,10 +10,4 @@ Sine::~Sine(){
 
 void Sine::calculate(){
     sample = sin(M_PI * 2 * phase) * amp;
-    std::cout << "Sine - Calculate \n";
-}
-
-double Sine::getSample(){
-    std::cout << "Sine - getSample \n";
-    return sample;
 }

@@ -7,8 +7,9 @@ class Oscillator{
         virtual ~Oscillator();
 
         virtual void calculate() = 0;
-        virtual double getSample() = 0;
+        double getSample();
         void tick();
+        void setFreq(double freq);
 
 
     protected:

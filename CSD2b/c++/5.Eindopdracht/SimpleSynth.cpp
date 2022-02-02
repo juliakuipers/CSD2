@@ -1,6 +1,6 @@
 #include "SimpleSynth.h"
 
-SimpleSynth::SimpleSynth(double samplerate) : Synth(samplerate), freq(freq){
+SimpleSynth::SimpleSynth(double samplerate) : Synth(samplerate){
     std::cout << "SimpleSynth - Constructor \n";
     osc = new Sine(samplerate);
 }
@@ -12,16 +12,15 @@ SimpleSynth::~SimpleSynth(){
 }
 
 void SimpleSynth::calculate(){
-    mTof(48);
     osc->tick();
 }
 
 double SimpleSynth::getSample(){
     osc->getSample();
+    //std::cout << "SimpleSynth - getSample - osc->getSample() " << osc->getSample() << "\n";
 }
 
 void SimpleSynth::mTof(double midi){
     this -> midi = midi;
-    freq = (midi /127.0) * 20000.0;
-    std::cout << "SimpleSynth - mTof - freq = " << freq << std::endl;
+    osc->setFreq((midi /127.0) * 20000.0);
 }

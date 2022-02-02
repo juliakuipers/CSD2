@@ -7,5 +7,4 @@ class Sine : public Oscillator {
         ~Sine();
 
         void calculate() override;
-        double getSample() override;
 };
