@@ -1,14 +1,13 @@
-#ifndef _SimpleSynth_H_
-#define _SimpleSynth_H_
+#ifndef _FmSynth_H_
+#define _FmSynth_H_
 #include <iostream>
 #include "oscillator.h"
 #include "sine.h"
-#include "saw.h"
 
-class SimpleSynth{
-    public: 
-        SimpleSynth(double samplerate,std::string carrier);
-        ~SimpleSynth();
+class FmSynth{
+    public:
+        FmSynth(double samplerate,std::string carrier,std::string modulator);
+        ~FmSynth();
 
         void calculate();
         double getSample();
@@ -19,7 +18,10 @@ class SimpleSynth{
         double samplerate;
         double midi;
         std::string carrier;
-        Oscillator* osc = nullptr; 
+        std::string modulator;
+        Oscillator* mod = nullptr; 
+        Oscillator* car = nullptr; 
+
 };
 
 #endif

@@ -14,7 +14,6 @@ class Oscillator{
 
 
     protected:
-        //double freq;
         double amp; 
         double sample; 
         double phase; 

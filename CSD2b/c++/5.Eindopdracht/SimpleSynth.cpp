@@ -7,6 +7,10 @@ SimpleSynth::SimpleSynth(double samplerate,std::string carrier){
         osc = new Sine(samplerate);
         std::cout << "Sine is selected \n";
     }
+    if (carrier == "Saw") {
+        osc = new Saw(samplerate);
+        std::cout << "Saw is selected \n";
+    }
     std::cout << "SimpleSynth - Constructor \n";
 }
 

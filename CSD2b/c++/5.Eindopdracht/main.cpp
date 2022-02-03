@@ -4,6 +4,7 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "SimpleSynth.h"
+//#include "FmSynth.h"
 
 /*
  * NOTE: jack2 needs to be installed
@@ -22,9 +23,12 @@ int main(int argc,char **argv)
   // create a JackModule instance
   JackModule jack;
   std::string waveForm = "niks";
-  while(waveForm != "Sine"){
-    std::cout << "input sine or square" << std::endl;
+  while(true){
+    std::cout << "input Sine or Saw" << std::endl;
     std::cin >> waveForm;
+    if(waveForm == "Sine" || waveForm == "Saw"){
+      break;
+    }
   }
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
