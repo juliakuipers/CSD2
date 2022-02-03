@@ -1,5 +1,5 @@
-#ifndef _FmSynth_H_
-#define _FmSynth_H_
+#ifndef _SimpleSynth_H_
+#define _SimpleSynth_H_
 #include <iostream>
 #include "oscillator.h"
 #include "sine.h"
@@ -16,6 +16,7 @@ class SimpleSynth : public Synth{
 
     protected:
         double freq; 
+        double sample;
         double samplerate;
         double midi;
         Oscillator* osc; 

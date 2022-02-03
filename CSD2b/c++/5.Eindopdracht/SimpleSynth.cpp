@@ -19,8 +19,9 @@ void SimpleSynth::calculate(){
 }
 
 double SimpleSynth::getSample(){
-    osc->getSample();
-    // std::cout << "SimpleSynth - getSample - osc->getSample() " << osc->getSample() << "\n";
+    sample = osc->getSample();
+    std::cout << "SimpleSynth - getSample - sample " << sample << "\n";
+    return sample;
 }
 
 void SimpleSynth::mTof(double midi){

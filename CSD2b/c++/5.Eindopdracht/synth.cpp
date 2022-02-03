@@ -14,6 +14,6 @@ void Synth::tick(){
 }
 
 double Synth::nextSample(){
-    getSample();
-    std::cout << "Synth - nextSample - getSample() " << getSample() <<  "\n";
+    return getSample();
+    // std::cout << "Synth - nextSample - getSample() " << getSample() <<  "\n";
 }
