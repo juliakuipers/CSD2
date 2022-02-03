@@ -24,9 +24,9 @@ int main(int argc,char **argv)
   JackModule jack;
   std::string waveForm = "niks";
   while(true){
-    std::cout << "input Sine or Saw" << std::endl;
+    std::cout << "input Sine, Saw or Square" << std::endl;
     std::cin >> waveForm;
-    if(waveForm == "Sine" || waveForm == "Saw"){
+    if(waveForm == "Sine" || waveForm == "Saw" || waveForm == "Square"){
       break;
     }
   }

@@ -11,6 +11,10 @@ SimpleSynth::SimpleSynth(double samplerate,std::string carrier){
         osc = new Saw(samplerate);
         std::cout << "Saw is selected \n";
     }
+    if (carrier == "Square") {
+        osc = new Square(samplerate);
+        std::cout << "Saw is selected \n";
+    }
     std::cout << "SimpleSynth - Constructor \n";
 }
 
