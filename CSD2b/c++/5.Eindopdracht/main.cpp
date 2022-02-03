@@ -4,7 +4,7 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "SimpleSynth.h"
-//#include "FmSynth.h"
+#include "FmSynth.h"
 
 /*
  * NOTE: jack2 needs to be installed
@@ -33,7 +33,7 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  SimpleSynth synth(samplerate,waveForm);
+  FmSynth synth(samplerate,waveForm,waveForm);
   //in here i specify the synth i wanna use 
   synth.mTof(60);
 

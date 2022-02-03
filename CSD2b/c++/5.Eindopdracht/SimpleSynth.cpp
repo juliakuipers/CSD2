@@ -4,15 +4,15 @@ SimpleSynth::SimpleSynth(double samplerate,std::string carrier){
     this -> samplerate = samplerate;
     this -> carrier = carrier;
     if (carrier == "Sine") {
-        osc = new Sine(samplerate);
+        car = new Sine(samplerate);
         std::cout << "Sine is selected \n";
     }
     if (carrier == "Saw") {
-        osc = new Saw(samplerate);
+        car = new Saw(samplerate);
         std::cout << "Saw is selected \n";
     }
     if (carrier == "Square") {
-        osc = new Square(samplerate);
+        car = new Square(samplerate);
         std::cout << "Saw is selected \n";
     }
     std::cout << "SimpleSynth - Constructor \n";
@@ -20,22 +20,22 @@ SimpleSynth::SimpleSynth(double samplerate,std::string carrier){
 
 SimpleSynth::~SimpleSynth(){
     std::cout << "SimpleSynth - Destructor \n";
-    delete osc;
-    osc = nullptr;
+    delete car;
+    car = nullptr;
 }
 
 void SimpleSynth::calculate(){
-    osc->tick();
+    car->tick();
     // std::cout << "SimpleSynth - calcate - osc->tick() " << osc->tick() << "\n";
 
 }
 
 double SimpleSynth::getSample(){
-    return osc->getSample();
+    return car->getSample();
 }
 
 void SimpleSynth::mTof(double midi){
     this -> midi = midi;
     //std::cout << "SimpleSynth - mTof - midi " << midi <<  "\n";
-    osc->setFreq(440 * pow(2 , (midi-69)/12));
+    car->setFreq(440 * pow(2 , (midi-69)/12));
 }

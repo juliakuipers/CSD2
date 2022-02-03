@@ -18,6 +18,7 @@ void Oscillator::tick(){
 
 void Oscillator::setFreq(double freq){
     this -> freq = freq;
+    std::cout << "Oscillator - setFreq - freq " << freq <<  "\n";
 }
 
 

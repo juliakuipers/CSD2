@@ -3,6 +3,8 @@
 #include <iostream>
 #include "oscillator.h"
 #include "sine.h"
+#include "saw.h"
+#include "square.h"
 
 class FmSynth{
     public:

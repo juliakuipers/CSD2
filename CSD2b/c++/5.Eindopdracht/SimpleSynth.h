@@ -20,7 +20,7 @@ class SimpleSynth{
         double samplerate;
         double midi;
         std::string carrier;
-        Oscillator* osc = nullptr; 
+        Oscillator* car = nullptr; 
 };
 
 #endif
