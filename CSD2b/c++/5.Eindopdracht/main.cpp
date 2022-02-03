@@ -24,7 +24,7 @@ int main(int argc,char **argv)
   JackModule jack;
   std::string waveForm = "niks";
   while(true){
-    std::cout << "input Sine, Saw or Square" << std::endl;
+    std::cout << "input Sine, Saw or Square" << std::endl; 
     std::cin >> waveForm;
     if(waveForm == "Sine" || waveForm == "Saw" || waveForm == "Square"){
       break;
@@ -35,7 +35,7 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   SimpleSynth synth(samplerate,waveForm);
   //in here i specify the synth i wanna use 
-  synth.mTof(3);
+  synth.mTof(60);
 
 
 #if WRITE_TO_FILE

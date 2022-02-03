@@ -37,5 +37,5 @@ double SimpleSynth::getSample(){
 void SimpleSynth::mTof(double midi){
     this -> midi = midi;
     //std::cout << "SimpleSynth - mTof - midi " << midi <<  "\n";
-    osc->setFreq((midi /127.0) * 20000.0);
+    osc->setFreq(440 * pow(2 , (midi-69)/12));
 }
