@@ -16,7 +16,6 @@ class Synth{
     protected:
     //implement the same relationship as i have with Sine and Oscillator, Synth being oscillator and Simplesynth being sine
         double samplerate;
-        
 
 };
 

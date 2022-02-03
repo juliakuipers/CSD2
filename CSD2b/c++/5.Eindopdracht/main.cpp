@@ -4,7 +4,6 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "SimpleSynth.h"
-#include "synth.h"
 
 /*
  * NOTE: jack2 needs to be installed
@@ -22,12 +21,17 @@ int main(int argc,char **argv)
 
   // create a JackModule instance
   JackModule jack;
-
+  std::string waveForm = "niks";
+  while(waveForm != "Sine"){
+    std::cout << "input sine or square" << std::endl;
+    std::cin >> waveForm;
+  }
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  SimpleSynth synth(samplerate);
-  synth.mTof(20);
+  SimpleSynth synth(samplerate,waveForm);
+  //in here i specify the synth i wanna use 
+  synth.mTof(3);
 
 
 #if WRITE_TO_FILE
@@ -45,8 +49,8 @@ int main(int argc,char **argv)
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
 
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = synth.nextSample() * amplitude;
-      synth.tick();
+      outBuf[i] = synth.getSample() * amplitude;
+      synth.calculate();
     }
 
     amplitude = 0.5;

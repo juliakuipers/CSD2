@@ -1,9 +1,13 @@
 #include "SimpleSynth.h"
 
-SimpleSynth::SimpleSynth(double samplerate) : Synth(samplerate){
+SimpleSynth::SimpleSynth(double samplerate,std::string carrier){
     this -> samplerate = samplerate;
+    this -> carrier = carrier;
+    if (carrier == "Sine") {
+        osc = new Sine(samplerate);
+        std::cout << "Sine is selected \n";
+    }
     std::cout << "SimpleSynth - Constructor \n";
-    osc = new Sine(samplerate);
 }
 
 SimpleSynth::~SimpleSynth(){
@@ -19,9 +23,7 @@ void SimpleSynth::calculate(){
 }
 
 double SimpleSynth::getSample(){
-    sample = osc->getSample();
-    std::cout << "SimpleSynth - getSample - sample " << sample << "\n";
-    return sample;
+    return osc->getSample();
 }
 
 void SimpleSynth::mTof(double midi){

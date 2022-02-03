@@ -3,11 +3,10 @@
 #include <iostream>
 #include "oscillator.h"
 #include "sine.h"
-#include "synth.h"
 
-class SimpleSynth : public Synth{
+class SimpleSynth{
     public: 
-        SimpleSynth(double samplerate);
+        SimpleSynth(double samplerate,std::string carrier);
         ~SimpleSynth();
 
         void calculate();
@@ -15,8 +14,8 @@ class SimpleSynth : public Synth{
         void mTof(double midi);
 
     protected:
-        double freq; 
-        double sample;
+        double freq;
+        std::string carrier;
         double samplerate;
         double midi;
         Oscillator* osc; 
