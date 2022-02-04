@@ -41,15 +41,17 @@ FmSynth::~FmSynth(){
 }
 
 void FmSynth::calculate(){
-    car->getSample();
-    mod->getSample();
+    mod->tick();
+    car->setFreq((440 * pow(2 , (midi-69)/12))*mod->getSample());
+    //TODO this calculation might be wrong 
+    //TODO also might something that stores the calculation for mtof 
+    car->tick();
 }
 
 void FmSynth::mTof(double midi){
     this -> midi = midi;
     //TODO make the calculation for FmSynth right 
     mod->setFreq((440 * pow(2 , (midi-69)/12))*2);
-    car->setFreq((440 * pow(2 , (midi-69)/12))*mod->getSample());
 }
 
 double FmSynth::getSample(){

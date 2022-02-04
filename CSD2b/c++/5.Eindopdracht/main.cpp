@@ -22,18 +22,27 @@ int main(int argc,char **argv)
 
   // create a JackModule instance
   JackModule jack;
-  std::string waveForm = "niks";
+  std::string Carrier;
+  std::string Modulator;
   while(true){
-    std::cout << "input Sine, Saw or Square" << std::endl; 
-    std::cin >> waveForm;
-    if(waveForm == "Sine" || waveForm == "Saw" || waveForm == "Square"){
+    std::cout << "input Sine, Saw or Square for Carrier " << std::endl; 
+    std::cin >> Carrier;
+    if(Carrier == "Sine" || Carrier == "Saw" || Carrier == "Square"){
+      break;
+    }
+  }
+
+  while(true){
+    std::cout << "input Sine, Saw or Square for Modulator " << std::endl; 
+    std::cin >> Modulator;
+    if(Modulator == "Sine" || Modulator == "Saw" || Modulator == "Square"){
       break;
     }
   }
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  FmSynth synth(samplerate,waveForm,waveForm);
+  FmSynth synth(samplerate,Carrier,Modulator);
   //in here i specify the synth i wanna use 
   synth.mTof(60);
 
