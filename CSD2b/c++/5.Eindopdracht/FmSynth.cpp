@@ -14,7 +14,7 @@ FmSynth::FmSynth(double samplerate,std::string carrier,std::string modulator){
     }
     if (carrier == "Square") {
         car = new Square(samplerate);
-        std::cout << "Saw is selected \n";
+        std::cout << "Square is selected \n";
     }    
 
     if (modulator == "Sine") {
@@ -27,7 +27,7 @@ FmSynth::FmSynth(double samplerate,std::string carrier,std::string modulator){
     }
     if (modulator == "Square") {
         mod = new Square(samplerate);
-        std::cout << "Saw is selected \n";
+        std::cout << "Square is selected \n";
     } 
     std::cout << "FmSynth - Constructor \n";
 }
@@ -42,18 +42,16 @@ FmSynth::~FmSynth(){
 
 void FmSynth::calculate(){
     mod->tick();
-    car->setFreq((440 * pow(2 , (midi-69)/12))*mod->getSample());
-    //TODO this calculation might be wrong 
-    //TODO also might something that stores the calculation for mtof 
+    //TODO also might something that does the calculation for mtof and returns the frequency  
     car->tick();
+}
+
+double FmSynth::getSample(){
+    //std::cout << "FmSynth - getSample - car->getSample " << car->getSample() <<  "\n";
+    return car->getSample();
 }
 
 void FmSynth::mTof(double midi){
     this -> midi = midi;
-    //TODO make the calculation for FmSynth right 
     mod->setFreq((440 * pow(2 , (midi-69)/12))*2);
-}
-
-double FmSynth::getSample(){
-    return car->getSample();
 }

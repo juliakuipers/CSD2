@@ -10,7 +10,7 @@ Oscillator::~Oscillator(){
 }
 
 void Oscillator::tick(){
-    std::cout << "Oscillator - tick - freq " << freq <<  "\n";
+    //std::cout << "Oscillator - tick - freq " << freq <<  "\n";
     phase += freq / samplerate;
     if (phase > 1) phase -= 1.0; 
     calculate();
@@ -18,7 +18,7 @@ void Oscillator::tick(){
 
 void Oscillator::setFreq(double freq){
     this -> freq = freq;
-    std::cout << "Oscillator - setFreq - freq " << freq <<  "\n";
+    //std::cout << "Oscillator - setFreq - freq " << freq <<  "\n";
 }
 
 

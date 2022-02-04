@@ -15,6 +15,7 @@
  */
 
 #define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file 
+#define SELECT_WAVEFORM 0
 
 
 int main(int argc,char **argv)
@@ -22,23 +23,28 @@ int main(int argc,char **argv)
 
   // create a JackModule instance
   JackModule jack;
-  std::string Carrier;
-  std::string Modulator;
-  while(true){
-    std::cout << "input Sine, Saw or Square for Carrier " << std::endl; 
-    std::cin >> Carrier;
-    if(Carrier == "Sine" || Carrier == "Saw" || Carrier == "Square"){
-      break;
-    }
-  }
 
-  while(true){
-    std::cout << "input Sine, Saw or Square for Modulator " << std::endl; 
-    std::cin >> Modulator;
-    if(Modulator == "Sine" || Modulator == "Saw" || Modulator == "Square"){
-      break;
+  #if SELECT_WAVEFORM
+    std::string Carrier;
+    std::string Modulator;
+    while(true){
+      std::cout << "input Sine, Saw or Square for Carrier " << std::endl; 
+      std::cin >> Carrier;
+      if(Carrier == "Sine" || Carrier == "Saw" || Carrier == "Square"){
+        break;
+      }
     }
-  }
+
+    while(true){
+      std::cout << "input Sine, Saw or Square for Modulator " << std::endl; 
+      std::cin >> Modulator;
+      if(Modulator == "Sine" || Modulator == "Saw" || Modulator == "Square"){
+        break;
+      }
+    }
+  #else 
+    std::string Carrier = "Sine";
+    std::string Modulator = "Sine";    
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
@@ -56,7 +62,7 @@ int main(int argc,char **argv)
   }
 #else
 
-  float amplitude = 0.15;
+  float amplitude = 0.25;
   //assign a function to the JackModule::onProces
   jack.onProcess = [&synth, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
@@ -66,7 +72,7 @@ int main(int argc,char **argv)
       synth.calculate();
     }
 
-    amplitude = 0.5;
+    amplitude = 0.25;
     return 0;
   };
 
@@ -85,6 +91,7 @@ int main(int argc,char **argv)
         break;
     }
   }
+#endif
 #endif
   //end the program
   return 0;
