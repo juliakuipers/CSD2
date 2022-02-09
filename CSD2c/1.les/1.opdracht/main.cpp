@@ -4,6 +4,7 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "sine.h"
+#include "circularBuffer.h" 
 
 /*
  * NOTE: jack2 needs to be installed
