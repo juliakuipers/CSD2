@@ -13,6 +13,8 @@ class CircularBuffer{
         //in this i write the samples in the buffer      
 
     private:
+        int wrap(int head);
+        //makes it so that when the buffer is at it's end the read and write head get reset back to the beginning
         int readIndex;
         //read the samples out of the buffer 
         int writeIndex;
