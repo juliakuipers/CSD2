@@ -4,7 +4,8 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "sine.h"
-#include "circularBuffer.h" 
+// #include "circularBuffer.h" 
+#include "tremolo.h"
 
 //segmentation fault: 11; i think i try to acces something like a file which is not included, it probably has to do with inheritance 
 //might also have to do with the pointer i use in circularBuffer, the use might be wrong 
@@ -31,7 +32,8 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   Sine osc(440, samplerate);
-  CircularBuffer cb(samplerate*5,samplerate);
+  Tremolo tremolo(440,samplerate);
+  // CircularBuffer cb(samplerate*5,samplerate);
 
 
 #if WRITE_TO_FILE
@@ -39,9 +41,9 @@ int main(int argc,char **argv)
 
   for(int i = 0; i < 500; i++) {
     fileWriter.write(std::to_string(osc.getSample()) + "\n");
-    cb.write(osc.getSample());
+    // cb.write(osc.getSample());
     osc.genNextSample();
-    cb.read();
+    // cb.read();
   }
 #else
 

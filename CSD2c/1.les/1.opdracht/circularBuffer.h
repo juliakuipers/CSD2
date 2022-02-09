@@ -1,5 +1,5 @@
-#include <iostream>
 #pragma once
+#include <iostream>
 
 class CircularBuffer{
     public:
@@ -17,7 +17,7 @@ class CircularBuffer{
         //read the samples out of the buffer 
         int writeIndex;
         //write the info of the samples in the buffer 
-        // int size; 
+        int size; 
         //size of the buffer, depending on how long i want the delay to be 
         float numSamplesDelay;
         //amount of samples delay 

@@ -36,7 +36,7 @@ float Oscillator::getSample() {
   return sample;
 }
 
-void Oscillator::setFrequency(float frequency)
+void Oscillator::setFrequency(float freq)
 {
   // TODO add check to see if parameter is valid
   this->freq = freq;

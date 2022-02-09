@@ -6,7 +6,7 @@
 
 class Tremolo{
     public:
-        Tremolo(float samplerate);
+        Tremolo(float freq,float samplerate);
         ~Tremolo();
 
         void setModFreq(float freq);
