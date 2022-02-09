@@ -31,14 +31,14 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Sine osc(440, samplerate);
   Tremolo tremolo(220,samplerate);
-  CircularBuffer cb(samplerate*5,samplerate);
+  CircularBuffer cb(samplerate*5,50);
 
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(tremolo.process(osc.getSample())) + "\n");
+    fileWriter.write(std::to_string(osc.getSample()) + "\n");
     cb.write(osc.getSample());
     osc.genNextSample();
     cb.read();
