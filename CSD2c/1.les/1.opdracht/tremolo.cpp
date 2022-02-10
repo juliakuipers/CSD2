@@ -1,7 +1,7 @@
 #include "tremolo.h"
 #include "sine.h" 
 
-Tremolo::Tremolo(float freq,float samplerate) : modFreq(0), modSignal(0){
+Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate), modFreq(0), modSignal(0){
     osc = new Sine(freq, samplerate);
 }
 

@@ -4,9 +4,9 @@
 #include "math.h"
 #include "writeToFile.h"
 #include "sine.h"
-#include "circularBuffer.h" 
+// #include "effect.h"
+// #include "delay.h" 
 #include "tremolo.h"
-
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
@@ -28,8 +28,7 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   Sine osc(440, samplerate);
-  Tremolo tremolo(220,samplerate);
-  CircularBuffer delay(samplerate*5,50);
+  Tremolo effect(440,samplerate);
 
 
 #if WRITE_TO_FILE
@@ -37,7 +36,7 @@ int main(int argc,char **argv)
 
   for(int i = 0; i < 500; i++) {
     fileWriter.write(std::to_string(osc.getSample()) + "\n");
-    delay.calculate(osc.getSample());
+    // effect.calculate(osc.getSample());
     osc.genNextSample();
 
   }
