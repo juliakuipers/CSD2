@@ -23,6 +23,10 @@ CircularBuffer::~CircularBuffer(){
     buffer = nullptr;
 }
 
+void CircularBuffer::setReadIndex(int numSamplesDelay){
+    readIndex = size - numSamplesDelay;
+}
+
 void CircularBuffer::write(float value){
     // std::cout << "circularBuffer - write \n"; 
     buffer[writeIndex] = value;

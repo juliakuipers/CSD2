@@ -1,6 +1,6 @@
 #include "delay.h"
 
-Delay::~Delay(int size, int numSamplesDelay){
+Delay::Delay(int size, int numSamplesDelay) : size(size), numSamplesDelay(numSamplesDelay),feedback(0.2),drywet(0.3){
 //              size is 5* samplerate
     this -> size = size;
     this -> numSamplesDelay = numSamplesDelay;
@@ -19,9 +19,24 @@ void Delay::setDrywet(int drywet){
     this -> drywet = drywet;
 } 
 
-void Delay::setNumSamplesDelay(int numSamplesDelay){
-    this -> numSamplesDelay = numSamplesDelay;
+// void Delay::setNumSamplesDelay(int numSamplesDelay){
+    // this -> numSamplesDelay = numSamplesDelay;
+    // setReadIndex(numSamplesDelay);
+// }
+
+// void Delay::setMSecDelay(int mSec){
+//     //turn mSec into samples 
+//     numSamplesDelay = 
+//     setReadIndex(numSamplesDelay);
+//     //1 second is the samplerate * 1 
+//     //size is the samplerate * 5 
+// }
+float Delay::calculate(float value){
+    value *= drywet;
+    write(value);
+    return read(); 
 }
+
 
 //write might be a function is should call in the delay 
 

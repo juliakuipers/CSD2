@@ -1,4 +1,5 @@
 #pragma once 
+#include <iostream>
 
 class Delay{
     public:
@@ -16,7 +17,7 @@ class Delay{
         void setDrywet(int drywet);
         //maybe make one function for both feedback and drywet 
         void setNumSamplesDelay(int numSamplesdelay);
-        void setMSecDelay(int mSec);
+        // void setMSecDelay(int mSec);
 
         //the function calculate should also return in feedback which returns to calculate 
         //so the signal of the return sample * feedback 
@@ -26,11 +27,11 @@ class Delay{
         //size of the buffer, depending on how long i want the delay to be 
         int numSamplesDelay;
         //amount of samples delay 
-        int feedback;
+        float feedback;
 
-        int drywet; 
+        float drywet; 
 
-        int mSec;
+        // int mSec;
         //the incoming signal * how much wet i want 
     
         //both drywet and feeback need setters 

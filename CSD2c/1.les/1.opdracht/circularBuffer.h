@@ -11,7 +11,9 @@ class CircularBuffer : public Delay{
         float read() override;
         // in here i return the delayed samples 
         void write(float value) override;  
-        //in this i write the samples in the buffer      
+        //in this i write the samples in the buffer 
+
+        void setReadIndex(int numSamplesDelay);     
 
     private:
         int wrap(int head);
