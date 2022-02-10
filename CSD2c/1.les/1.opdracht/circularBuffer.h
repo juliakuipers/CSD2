@@ -1,24 +1,25 @@
 #pragma once
 #include <iostream>
+#include "delay.h"
 
-class CircularBuffer{
+class CircularBuffer : public Delay{
     public:
         CircularBuffer(int size, int numSamplesDelay);
         //numSamplesDelay, space between readIndex and writeIndex 
         ~CircularBuffer();
 
-        float read();
+        float read() override;
         // in here i return the delayed samples 
-        void write(float value);  
+        void write(float value) override;  
         //in this i write the samples in the buffer      
 
     private:
         int wrap(int head);
         //makes it so that when the buffer is at it's end the read and write head get reset back to the beginning
 
-        int size; 
+        // int size; 
         //size of the buffer, depending on how long i want the delay to be 
-        int numSamplesDelay;
+        // int numSamplesDelay;
         //amount of samples delay 
         int readIndex;
         //read the samples out of the buffer 

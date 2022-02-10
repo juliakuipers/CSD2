@@ -10,9 +10,8 @@ read value
 wrap
 */
 
-CircularBuffer::CircularBuffer(int size, int numSamplesDelay) : readIndex(size - numSamplesDelay),writeIndex(0){
-    this -> size = size;
-    this -> numSamplesDelay = numSamplesDelay;
+CircularBuffer::CircularBuffer(int size, int numSamplesDelay) : Delay(size,numSamplesDelay), readIndex(size - numSamplesDelay),writeIndex(0){
+//                                                                                          maybe make a seperate function to set the readIndex    
     std::cout << "Constructor \n";
     buffer =  new float[size]; 
 
@@ -32,7 +31,6 @@ void CircularBuffer::write(float value){
 }
 
 float CircularBuffer::read(){
-    // std::cout << "circularBuffer - buffer[readIndex] " << buffer[readIndex] <<  "\n";
     //something goes wrong when calculating the buffer[readIndex]
     //should only read the index once it surpasses 0
     readIndex = wrap(buffer[readIndex]);
