@@ -9,11 +9,11 @@ class Effect{
         float calcDryWet(float drywet);
         float getSample(float sample);
 
-    // protected:
-        // float sample;
+    protected:
+        virtual float process(float sample) = 0;
         
     private:
-        virtual float process(float sample) = 0;
+        // virtual float process(float sample) = 0;
         
 };
 

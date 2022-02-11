@@ -35,7 +35,7 @@ int main(int argc,char **argv)
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(osc.getSample()) + "\n");
+    fileWriter.write(std::to_string(effect.process(osc.getSample())) + "\n");
     // effect.calculate(osc.getSample());
     osc.genNextSample();
 

@@ -1,7 +1,6 @@
 #include "effect.h"
 
-Effect::Effect(float freq, float samplerate): drywet(0.5){
-}
+Effect::Effect(float freq, float samplerate) { }
 
 Effect::~Effect(){}
 
@@ -13,10 +12,10 @@ Effect::~Effect(){}
 
 //drywet might be something i can put when i return the sample 
 
-float getSample(float sample){
+float Effect::getSample(float sample){
     // osc->getSample() * (1-drywet);
-    process(sample);
-    return 0;
+
+    return process(sample);
 }
 
 //effect should return the sample 
