@@ -1,0 +1,19 @@
+/* 
+    audioeffect base class
+        samplerate 
+        drywet 
+        bypass 
+        getsample 
+
+    delay 
+        circular buffer 
+            
+        setdelaytime 
+        sampleToMs
+        feedback 
+    
+    tremolo
+        waveforms 
+        setfrequency 
+
+*/

@@ -15,7 +15,7 @@ Effect::~Effect(){}
 float Effect::getSample(float sample){
     // osc->getSample() * (1-drywet);
 
-    return process(sample);
+    return calculate(sample);
 }
 
 //effect should return the sample 

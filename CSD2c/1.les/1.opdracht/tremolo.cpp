@@ -1,8 +1,8 @@
 #include "tremolo.h"
-#include "sine.h" 
+#include "square.h" 
 
 Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate), modFreq(0), modSignal(0){
-    osc = new Sine(freq, samplerate);
+    osc = new Square(freq, samplerate);
 }
 
 Tremolo::~Tremolo(){
@@ -15,7 +15,7 @@ void Tremolo::setModFreq(float freq){
     osc->setFrequency(freq);
 }
 
-float Tremolo::process(float sample){
+float Tremolo::calculate(float sample){
     //oscillator is in range [-1,1]
     modSignal = (osc->genNextSample() + 1.0f)*0.5f;
     

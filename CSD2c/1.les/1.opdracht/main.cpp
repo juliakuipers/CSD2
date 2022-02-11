@@ -3,10 +3,10 @@
 #include "jack_module.h"
 #include "math.h"
 #include "writeToFile.h"
-#include "sine.h"
+#include "square.h"
 // #include "effect.h"
-// #include "delay.h" 
-#include "tremolo.h"
+#include "delay.h" 
+// #include "tremolo.h"
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
@@ -27,15 +27,15 @@ int main(int argc,char **argv)
   // init the jack, use program name as JACK client name
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
-  Sine osc(440, samplerate);
-  Tremolo effect(440,samplerate);
+  Square osc(440, samplerate);
+  Delay effect(440,samplerate);
 
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(effect.process(osc.getSample())) + "\n");
+    fileWriter.write(std::to_string(effect.calculate(osc.getSample())) + "\n");
     // effect.calculate(osc.getSample());
     osc.genNextSample();
 

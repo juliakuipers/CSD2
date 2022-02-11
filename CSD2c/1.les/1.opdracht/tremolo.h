@@ -10,12 +10,11 @@ class Tremolo : public Effect{
         Tremolo(float freq,float samplerate);
         ~Tremolo();
 
-        void setModFreq(float freq);
-
-        float process(float sample) override; 
+        void setModFreq(float freq); 
+        float calculate(float sample) override;
 
     private:
-        Oscillator* osc;
+        Oscillator* osc = nullptr;
         float modFreq; 
         float modSignal;  
 
