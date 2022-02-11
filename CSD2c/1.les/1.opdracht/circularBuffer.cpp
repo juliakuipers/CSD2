@@ -11,8 +11,8 @@ wrap
 */
 
 // maybe i should make the relationship betweet the circbuffer and the delay the same as tremolo and square
-
-CircularBuffer::CircularBuffer(int size, int numSamplesDelay) : size(size),numSamplesDelay(numSamplesDelay),readIndex(size - numSamplesDelay),writeIndex(0){
+CircularBuffer::CircularBuffer(){}
+CircularBuffer::CircularBuffer(float size, float numSamplesDelay) : size(size),numSamplesDelay(numSamplesDelay),readIndex(size - numSamplesDelay),writeIndex(0){
 //                                                                                          maybe make a seperate function to set the readIndex    
     std::cout << "Constructor \n";
     buffer =  new float[size]; 

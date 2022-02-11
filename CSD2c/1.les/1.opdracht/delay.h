@@ -26,6 +26,7 @@ class Delay : public Effect{
 
         float drywet; 
     private:
+        CircularBuffer circ;
         //the incoming signal * how much wet i want 
     
         //both drywet and feeback need setters 

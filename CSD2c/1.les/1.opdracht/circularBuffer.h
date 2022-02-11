@@ -3,6 +3,7 @@
 
 class CircularBuffer{
     public:
+        CircularBuffer();
         CircularBuffer(float size, float numSamplesDelay);
         ~CircularBuffer();
 
