@@ -1,19 +1,22 @@
+#pragma once
 #include <iostream>
 
 class CircularBuffer{
     public:
-        CircularBuffer(int size, int numSamplesDelay);
-        //numSamplesDelay, space between readIndex and writeIndex 
-        ~CircularBuffer();
+      // CircularBuffer();
+      CircularBuffer(int size, int numSamplesDelay);
+      ~CircularBuffer();
 
-        float read();
-        void write(float value);       
+      void setReadIndex();
+      void write(float sample);
+      //function wherein i write the buffer, this one is always a few steps ahead of the read
+      float read();
 
     private:
-        int readIndex;
-        //positions in the list 
-        int writeIndex;
-        int size; 
-        float numSamplesDelay;
-        float* buffer;
+      int size;
+      int numSamplesDelay;
+      int readIndex;
+      int writeIndex;
+      int wrap(int head);
+      float* buffer = nullptr;
 };
