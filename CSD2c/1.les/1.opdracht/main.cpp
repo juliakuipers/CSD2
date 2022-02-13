@@ -5,7 +5,7 @@
 #include "writeToFile.h"
 #include "square.h"
 // #include "effect.h"
-#include "delay.h" 
+#include "delay.h"
 // #include "tremolo.h"
 /*
  * NOTE: jack2 needs to be installed
@@ -15,7 +15,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file 
+#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file
 
 
 int main(int argc,char **argv)

@@ -1,46 +1,53 @@
 #include "circularBuffer.h"
 /*
-Circular buffer 
-- buffer 
-- read index 
+Circular buffer
+- buffer
+- read index
 - write index
 initialize
-write value 
-read value 
+write value
+read value
 wrap
 */
 
 // maybe i should make the relationship betweet the circbuffer and the delay the same as tremolo and square
 CircularBuffer::CircularBuffer(){}
-CircularBuffer::CircularBuffer(float size, float numSamplesDelay) : size(size),numSamplesDelay(numSamplesDelay),readIndex(size - numSamplesDelay),writeIndex(0){
-//                                                                                          maybe make a seperate function to set the readIndex    
-    std::cout << "Constructor \n";
-    buffer =  new float[size]; 
+CircularBuffer::CircularBuffer(float size, float numSamplesDelay) :
+ readIndex(size - numSamplesDelay),writeIndex(0){
+   this -> size = size;
+   this-> numSamplesDelay = numSamplesDelay;
+//                                                                                          maybe make a seperate function to set the readIndex
+    std::cout << "CircularBuffer - Constructor \n";
+    buffer =  new float[size];
+
 
 }
 
 CircularBuffer::~CircularBuffer(){
-    std::cout << "Destructor \n";
+    std::cout << "Circular - Destructor \n";
     delete [] buffer;
     buffer = nullptr;
 }
 
-void CircularBuffer::setReadIndex(int numSamplesDelay){
+void CircularBuffer::setReadIndex(float numSamplesDelay){
     readIndex = size - numSamplesDelay;
-}
+    std::cout << "CircularBuffer - setReadIndex - readIndex " << readIndex << "\n";
+  }
 
-void CircularBuffer::write(float value){
-    // std::cout << "circularBuffer - write \n"; 
-    buffer[writeIndex] = value;
+void CircularBuffer::write(float sample){
+    //either the buffer or the write is not right
+    //something might go wrong with the buffer itself but the number i get when i print buffer could also be because its such a big buffer
+    std::cout << "CircularBuffer - write - writeIndex " << writeIndex << "\n";
+    buffer[writeIndex] = sample;
+
+
     writeIndex = wrap(buffer[writeIndex]);
-    //so in the writeIndex i input the value of the sample that get put into write 
+    //so in the writeIndex i input the value of the sample that get put into write
 }
 
 float CircularBuffer::read(){
-    //something goes wrong when calculating the buffer[readIndex]
-    //should only read the index once it surpasses 0
     readIndex = wrap(buffer[readIndex]);
-    return buffer[readIndex]; 
+    return buffer[readIndex];
 
 }
 
@@ -51,7 +58,7 @@ int CircularBuffer::wrap(int head){
     return head;
 }
 
-/* 
-buffer[readIndex] = 
+/*
+buffer[readIndex] =
 
 */
