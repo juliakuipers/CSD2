@@ -3,24 +3,25 @@
 
 int main(){
 
-int list = 10;
-int array [10] = {1,2,3,4,5,6,7,8,9,10};
-int numSamplesDelay= 8;
+int size = 10;
+int foo [10] = { };
+int numSamplesDelay= 1;
 
-std::cout << "Main - array " << array << "\n";
-
-CircularBuffer cb(list, numSamplesDelay);
+CircularBuffer cb(size, numSamplesDelay);
 //initilize CircularBuffer
 cb.setReadIndex();
+cb.calculateRW();
 //set the readIndex of the buffer
-std::cout << "main - array " << array << "\n";
+//so apparantly cpp cant print entire lists
 
-for(int i = 0 ; i < list ; i++){
-  array[i] = i;
-  std::cout << "main - forloop - array " << array << "\n";
-  std::cout << "main - i " << i << "\n";
+for(int i = 0 ; i < size ; i++){
+  foo[i] = i;
+  cb.write(foo[i]);
+  // std::cout << "main - foo[i]" << foo[i] << "\n";
+  cb.read();
+  cb.calculateRW();
 }
-
+cb.calculateRW();
 
 
 
