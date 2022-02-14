@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
 LDFLAGS= -ljack
-SOURCE=CircularBuffer.o main.o
+SOURCE=CircularBuffer.o delay.o oscillator.o jack_module.o writeToFile.o square.o main.o
 TARGET=e
 
 $(TARGET) : $(SOURCE)

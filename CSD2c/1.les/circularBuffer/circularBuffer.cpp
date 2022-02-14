@@ -29,7 +29,7 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
 
   void CircularBuffer::calculateRW()
   {
-    int readRW = buffer[writeIndex] - buffer[readIndex];
+    int readRW = writeIndex - readIndex;
     std::cout << "CircularBuffer - calculateRW - readRW " << readRW << "\n";
     std::cout << "CircularBuffer - calculateRW - writeIndex " << writeIndex << "\n";
     std::cout << "CircularBuffer - calculateRW - readIndex " << readIndex << "\n";
@@ -39,7 +39,9 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
   void CircularBuffer::write(float sample)
   {
     buffer[writeIndex++] = sample;
-    // std::cout << "CircularBuffer - write - buffer[writeIndex] " << buffer[writeIndex] << "\n";
+    std::cout << "CircularBuffer - write - buffer[writeIndex] " << buffer[writeIndex] << "\n";
+    std::cout << "CircularBuffer - write - sample " << sample << "\n";
+
     writeIndex = wrap(writeIndex);
   }
 
