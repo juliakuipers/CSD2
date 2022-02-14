@@ -3,7 +3,7 @@
 
 class CircularBuffer{
     public:
-      // CircularBuffer();
+      CircularBuffer();
       CircularBuffer(int size, int numSamplesDelay);
       ~CircularBuffer();
 
@@ -14,10 +14,10 @@ class CircularBuffer{
       void calculateRW();
 
     private:
-      int size;
-      int numSamplesDelay;
       int readIndex;
       int writeIndex;
       int wrap(int head);
+      int size;
+      int numSamplesDelay;
       float* buffer = nullptr;
 };

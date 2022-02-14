@@ -4,7 +4,6 @@ Oscillator::Oscillator(float frequency, float samplerate) :
   frequency(frequency), amplitude(1.0), phase(0), sample(0),
   samplerate(samplerate)
   {
-    // TODO - use setFrequency & question Mila
   }
 
 Oscillator::~Oscillator() {}

@@ -5,7 +5,7 @@
 #include "writeToFile.h"
 #include "square.h"
 // #include "effect.h"
-#include "CircularBuffer.h"
+#include "delay.h"
 // #include "tremolo.h"
 /*
  * NOTE: jack2 needs to be installed
@@ -28,17 +28,16 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
-  CircularBuffer effect(samplerate*5,20);
-  effect.setReadIndex();
+  Delay effect(440, samplerate);
 
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(effect.read()) + "\n");
-    effect.write(osc.getSample());
-    effect.calculateRW();
+    fileWriter.write(std::to_string(osc.getSample()) + "\n");
+    // effect.write(osc.getSample());
+    // effect.calculateRW();
     // effect.calculate(osc.getSample());
     osc.genNextSample();
 

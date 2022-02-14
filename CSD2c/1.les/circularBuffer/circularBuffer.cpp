@@ -1,6 +1,6 @@
 #include "CircularBuffer.h"
 
-// CircularBuffer::CircularBuffer(){};
+CircularBuffer::CircularBuffer(){};
 CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
   readIndex(0), writeIndex(0)
   {
@@ -39,8 +39,8 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
   void CircularBuffer::write(float sample)
   {
     buffer[writeIndex++] = sample;
-    std::cout << "CircularBuffer - write - buffer[writeIndex] " << buffer[writeIndex] << "\n";
-    std::cout << "CircularBuffer - write - sample " << sample << "\n";
+    // std::cout << "CircularBuffer - write - buffer[writeIndex] " << buffer[writeIndex] << "\n";
+    // std::cout << "CircularBuffer - write - sample " << sample << "\n";
 
     writeIndex = wrap(writeIndex);
   }
