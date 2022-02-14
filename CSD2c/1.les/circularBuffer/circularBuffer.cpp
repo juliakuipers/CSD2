@@ -6,7 +6,8 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
   {
     this -> size = size;
     this -> numSamplesDelay = numSamplesDelay;
-
+    std::cout << "Constructor - CircularBuffer - size " << size << "\n";
+    std::cout << "Constructor - CircularBuffer - numSamplesDelay " << numSamplesDelay << "\n";
     std::cout << "Constructor - CircularBuffer \n";
     buffer = new float [size];
     //this way i can indicate how large i want the buffer size to be
@@ -23,7 +24,8 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
   void CircularBuffer::setReadIndex()
   {
     //setReadIndex should only be used when i change the delay time and in the beginning when initilizing the delay
-    readIndex = size - numSamplesDelay;
+    readIndex = size - 20;
+    std::cout << "CircularBuffer - setReadIndex - readIndex " << readIndex << "\n";
     //so i checked the readIndex and it works like this, it could be that in my previous code it didn't work because i also work with wrap;
   }
 
@@ -38,8 +40,10 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
 
   void CircularBuffer::write(float sample)
   {
+    // this -> sample = sample;
     buffer[writeIndex++] = sample;
-    // std::cout << "CircularBuffer - write - buffer[writeIndex] " << buffer[writeIndex] << "\n";
+    // std::cout << "CircularBuffer - write - sample " << sample << "\n";
+    // std::cout << "CircularBuffer - write - writeIndex " << writeIndex << "\n";
     // std::cout << "CircularBuffer - write - sample " << sample << "\n";
 
     writeIndex = wrap(writeIndex);
@@ -47,9 +51,10 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
 
   float CircularBuffer::read()
   {
+    // std::cout << "CircularBuffer - read \n";
+    // std::cout << "CircularBuffer - readIndex - writeIndex " << readIndex << "\n";
     float sample = buffer[readIndex++];
     readIndex = wrap(readIndex);
-    // std::cout << "CircularBuffer - read - buffer[readIndex] " << buffer[readIndex] << "\n";
     return sample;
   }
 

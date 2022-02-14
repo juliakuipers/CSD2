@@ -1,24 +1,31 @@
 #include "delay.h"
-#include "square.h"
 
 Delay::Delay(float freq, float samplerate) : size(samplerate*5), numSamplesDelay(samplerate)
 {
-  CircularBuffer circ(size,numSamplesDelay);
-  osc = new Square(freq,samplerate);
+  circ = new CircularBuffer(size,numSamplesDelay);
   std::cout << "Delay - Constructor \n";
 }
 
 Delay::~Delay()
 {
   std::cout << "Delay - Destructor \n";
-  delete osc;
-  osc = nullptr;
+
 }
 
-float Delay::calculate()
+float Delay::calculate(float sample)
 {
-  circ.setReadIndex();
-  circ.write(osc->genNextSample());
-  float sample = circ.read();
-  return sample;
+
+  // std::cout << "Delay - calculate - sample " << sample << "\n";
+  // circ.setReadIndex();
+  circ->write(sample);
+  float samp = circ->read();
+  // std::cout << "Delay - calculate - samp "<< samp<<"\n";
+
+  // ding();
+  return samp;
+}
+
+void Delay::ding()
+{
+  circ->setReadIndex();
 }

@@ -17,6 +17,7 @@ class CircularBuffer{
       int readIndex;
       int writeIndex;
       int wrap(int head);
+      float sample;
       int size;
       int numSamplesDelay;
       float* buffer = nullptr;

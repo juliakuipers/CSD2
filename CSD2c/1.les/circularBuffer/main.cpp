@@ -29,13 +29,13 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
   Delay effect(440, samplerate);
-
+  effect.ding();
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(osc.getSample()) + "\n");
+    fileWriter.write(std::to_string(effect.calculate(osc.getSample())) + "\n");
     // effect.write(osc.getSample());
     // effect.calculateRW();
     // effect.calculate(osc.getSample());
