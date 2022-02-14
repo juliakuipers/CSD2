@@ -1,19 +1,22 @@
 #pragma once
 #include "oscillator.h"
-//sharedcodepath moet kloppen 
-//git pull origin prep-cc1 
+// #include "effect.h"
+//sharedcodepath moet kloppen
+//git pull origin prep-cc1
 
 
-class Tremolo{
+class Tremolo
+{
     public:
-        Tremolo(float samplerate);
+        Tremolo(float freq,float samplerate);
         ~Tremolo();
 
         void setModFreq(float freq);
-        float process(float sample); 
+        float calculate(float sample);
 
     private:
-        Oscillator* osc;
-        float modFreq;   
+        Oscillator* osc = nullptr;
+        // float modFreq;
+        float modSignal;
 
 };

@@ -1,5 +1,5 @@
 # Which subdirs do we want to scan for <makefile>.mk ?
-MODULES := oscillators tremolo utilities
+MODULES := oscillators tremolo utilities circularBuffer
 
 # $(patsubst pattern,replacement,text)
 # Finds whitespace-separated words in text that match pattern and

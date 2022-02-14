@@ -3,27 +3,22 @@
 
 class CircularBuffer{
     public:
-        CircularBuffer();
-        CircularBuffer(float size, float numSamplesDelay);
-        ~CircularBuffer();
+      CircularBuffer();
+      CircularBuffer(int size, int numSamplesDelay);
+      ~CircularBuffer();
 
-        void setReadIndex(float numSamplesDelay);
-        float read();
-        void write(float sample);
+      void setReadIndex();
+      void write(float sample);
+      //function wherein i write the buffer, this one is always a few steps ahead of the read
+      float read();
+      void calculateRW();
 
     private:
-        int wrap(int head);
-        int size;
-        //size of the buffer, depending on how long i want the delay to be
-        int numSamplesDelay;
-        //numSamplesDelay, space between readIndex and writeIndex
-        unsigned int readIndex;
-        //read the samples out of the buffer
-        int writeIndex;
-        //write the info of the samples in the buffer
-        float* buffer;
-
-        //the readIndex an writeIndex are always equally far apart = numSamplesDelay
-        //everytime a sample goes through the buffer gets filled one step
-
+      int readIndex;
+      int writeIndex;
+      int wrap(int head);
+      float sample;
+      int size;
+      int numSamplesDelay;
+      float* buffer = nullptr;
 };

@@ -4,7 +4,7 @@ LDFLAGS=
 
 OBJ = oscillator.o sine.o
 
-all: a_test
+all: oscillator
 
 a_test: $(OBJ)
 	$(CPP) -o $@ $(CFLAGS) $(OBJ) $(LDFLAGS)

@@ -1,64 +1,67 @@
-#include "circularBuffer.h"
-/*
-Circular buffer
-- buffer
-- read index
-- write index
-initialize
-write value
-read value
-wrap
-*/
+#include "CircularBuffer.h"
 
-// maybe i should make the relationship betweet the circbuffer and the delay the same as tremolo and square
-CircularBuffer::CircularBuffer(){}
-CircularBuffer::CircularBuffer(float size, float numSamplesDelay) :
- readIndex(size - numSamplesDelay),writeIndex(0){
-   this -> size = size;
-   this-> numSamplesDelay = numSamplesDelay;
-//                                                                                          maybe make a seperate function to set the readIndex
-    std::cout << "CircularBuffer - Constructor \n";
-    buffer =  new float[size];
+CircularBuffer::CircularBuffer(){};
+CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
+  readIndex(0), writeIndex(0)
+  {
+    this -> size = size;
+    this -> numSamplesDelay = numSamplesDelay;
+    std::cout << "Constructor - CircularBuffer - size " << size << "\n";
+    std::cout << "Constructor - CircularBuffer - numSamplesDelay " << numSamplesDelay << "\n";
+    std::cout << "Constructor - CircularBuffer \n";
+    buffer = new float [size];
+    //this way i can indicate how large i want the buffer size to be
 
-
-}
-
-CircularBuffer::~CircularBuffer(){
-    std::cout << "Circular - Destructor \n";
-    delete [] buffer;
-    buffer = nullptr;
-}
-
-void CircularBuffer::setReadIndex(float numSamplesDelay){
-    readIndex = size - numSamplesDelay;
-    std::cout << "CircularBuffer - setReadIndex - readIndex " << readIndex << "\n";
   }
 
-void CircularBuffer::write(float sample){
-    //either the buffer or the write is not right
-    //something might go wrong with the buffer itself but the number i get when i print buffer could also be because its such a big buffer
-    std::cout << "CircularBuffer - write - writeIndex " << writeIndex << "\n";
-    buffer[writeIndex] = sample;
+  CircularBuffer::~CircularBuffer()
+  {
+    std::cout << "Destructor - CircularBuffer \n";
+    delete [] buffer;
+    buffer = nullptr;
+  }
 
+  void CircularBuffer::setReadIndex()
+  {
+    //setReadIndex should only be used when i change the delay time and in the beginning when initilizing the delay
+    readIndex = size - 20;
+    std::cout << "CircularBuffer - setReadIndex - readIndex " << readIndex << "\n";
+    //so i checked the readIndex and it works like this, it could be that in my previous code it didn't work because i also work with wrap;
+  }
 
-    writeIndex = wrap(buffer[writeIndex]);
-    //so in the writeIndex i input the value of the sample that get put into write
-}
+  void CircularBuffer::calculateRW()
+  {
+    int readRW = writeIndex - readIndex;
+    std::cout << "CircularBuffer - calculateRW - readRW " << readRW << "\n";
+    std::cout << "CircularBuffer - calculateRW - writeIndex " << writeIndex << "\n";
+    std::cout << "CircularBuffer - calculateRW - readIndex " << readIndex << "\n";
 
-float CircularBuffer::read(){
-    readIndex = wrap(buffer[readIndex]);
-    return buffer[readIndex];
+  }
 
-}
+  void CircularBuffer::write(float sample)
+  {
+    // this -> sample = sample;
+    buffer[writeIndex++] = sample;
+    // std::cout << "CircularBuffer - write - sample " << sample << "\n";
+    // std::cout << "CircularBuffer - write - writeIndex " << writeIndex << "\n";
+    // std::cout << "CircularBuffer - write - sample " << sample << "\n";
 
-int CircularBuffer::wrap(int head){
-    if(head>=size){
-        head-=size;
-    }
+    writeIndex = wrap(writeIndex);
+  }
+
+  float CircularBuffer::read()
+  {
+    // std::cout << "CircularBuffer - read \n";
+    // std::cout << "CircularBuffer - readIndex - writeIndex " << readIndex << "\n";
+    float sample = buffer[readIndex++];
+    readIndex = wrap(readIndex);
+    return sample;
+  }
+
+  int CircularBuffer::wrap(int head)
+  {
+    if(head >= size) head -= size;
+
+    // std::cout << "CircBuffer - wrap - head " << head << "\n";
     return head;
-}
-
-/*
-buffer[readIndex] =
-
-*/
+  }

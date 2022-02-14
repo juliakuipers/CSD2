@@ -1,17 +1,14 @@
-CPP = g++
-CFLAGS = -Wall
-LDFLAGS=
+CXX= g++
+CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
+LDFLAGS= -ljack
+SOURCE=jack_module.o writeToFile.o oscillator.o square.o tremolo.o main.o
+TARGET=e
 
-OBJ = tremolo.o main.o
-
-all: main
-
-a_test: $(OBJ)
-	$(CPP) -o $@ $(CFLAGS) $(OBJ) $(LDFLAGS)
-
-clean:
-	rm -f *.o
-	rm -f `find . -perm /111 -type f`
+$(TARGET) : $(SOURCE)
+	$(CXX) -o $@ $(SOURCE) $(LDFLAGS)
 
 .cpp.o:
-	$(CPP) -c $(CFLAGS) $<
+	$(CXX) -c $< $(CXXFLAGS)
+
+clean:
+	rm -f $(TARGET) *.o
