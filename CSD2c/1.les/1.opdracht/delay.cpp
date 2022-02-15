@@ -21,7 +21,6 @@ float Delay::calculate(float sample)
   // circ.setReadIndex();
   circ->write(sample);
   float samp = circ->read();
-  std::cout << "Tremolo - calculate \n";
   // std::cout << "Delay - calculate - samp "<< samp<<"\n";
 
   // ding();
@@ -32,3 +31,9 @@ void Delay::ding()
 {
   circ->setReadIndex();
 }
+// 
+// void Delay::drywet()
+// {
+//   float drywet = Effect::drywet();
+//   std::cout << "hjfidsa;\n";
+// }

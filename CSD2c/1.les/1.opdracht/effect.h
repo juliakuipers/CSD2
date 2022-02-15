@@ -10,12 +10,15 @@ class Effect{
         float getSample(float sample);
 
         virtual float calculate(float sample) = 0;
+        void setDryWet();
 
     protected:
+      float drywet = 101;
+      // float scaledDW;
 
-        
     private:
-        
+
+
 };
 
 //for both the delay and the tremolo it would be best if the effect sends the sample back

@@ -30,6 +30,7 @@ int main(int argc,char **argv)
   Square osc(440, samplerate);
   Delay effect(440,samplerate);
   effect.ding();
+  effect.setDryWet();
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);

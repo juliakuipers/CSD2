@@ -1,7 +1,7 @@
 #include "tremolo.h"
 #include "square.h"
 
-Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate), modFreq(0), modSignal(0){
+Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate), modSignal(0){
     osc = new Square(freq, samplerate);
 }
 

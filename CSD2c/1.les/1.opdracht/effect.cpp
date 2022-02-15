@@ -15,7 +15,16 @@ Effect::~Effect(){}
 float Effect::getSample(float sample){
     // osc->getSample() * (1-drywet);
     // std::cout << "effect - getSample \n";
-    return calculate(sample);
+    return calculate(sample*(drywet/100));
+}
+
+void Effect::setDryWet()
+{
+  while (drywet > 100)
+  {
+    std::cout << "select drywet (0/100) \n";
+    std::cin >> drywet;
+  }
 }
 
 //effect should return the sample
