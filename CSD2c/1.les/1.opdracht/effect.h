@@ -11,12 +11,14 @@ class Effect{
 
         virtual float calculate(float sample) = 0;
         void setDryWet();
+        int bypass();
+        // what if i want to use two effects at the same time?
+        // feedback
 
     protected:
       float drywet = 101;
-      // float scaledDW;
-
     private:
+      int onoff = 1;
 
 
 };

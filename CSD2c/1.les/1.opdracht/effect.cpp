@@ -1,21 +1,12 @@
 #include "effect.h"
 
-Effect::Effect(float freq, float samplerate) { }
+Effect::Effect(float freq, float samplerate){}
 
 Effect::~Effect(){}
 
-
-
-// float Effect::calcDryWet(float drywet){
-    // return sample*=drywet;
-// }
-
-//drywet might be something i can put when i return the sample
-
 float Effect::getSample(float sample){
-    // osc->getSample() * (1-drywet);
-    // std::cout << "effect - getSample \n";
-    return calculate(sample*drywet) + sample*(1-drywet);
+    if(onoff == 1) return calculate(sample*drywet) + sample*(1-drywet);
+    else return sample;
 }
 
 void Effect::setDryWet()
@@ -28,5 +19,8 @@ void Effect::setDryWet()
   drywet /= 100;
 }
 
-//effect should return the sample
-//so it needs the virtual function of calculate from tremolo
+int Effect::bypass()
+{
+  onoff *= -1;
+  return onoff;
+}

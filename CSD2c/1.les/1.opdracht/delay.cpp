@@ -31,9 +31,14 @@ void Delay::ding()
 {
   circ->setReadIndex();
 }
-// 
+//
 // void Delay::drywet()
 // {
 //   float drywet = Effect::drywet();
 //   std::cout << "hjfidsa;\n";
 // }
+
+//pitchmodulation on the delayed signal
+//repitch
+//if i want to set the delay time in a natural way i might use an if loop so:
+//if(i<numSamplesDelay; i++)

@@ -45,11 +45,11 @@ int main(int argc,char **argv)
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&synth, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&square, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
 
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = osc.getSample() * amplitude;
+      outBuf[i] = effect.getSample(osc.getSample()) * amplitude;
       osc.genNextSample();
     }
 
@@ -70,6 +70,9 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
+
+      case 'b':
+        effect.bypass();
     }
   }
 #endif
