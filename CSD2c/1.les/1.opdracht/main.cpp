@@ -28,8 +28,8 @@ int main(int argc,char **argv)
   jack.init(argv[0]);
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
-  Tremolo effect(440,samplerate);
-
+  Delay effect(440,samplerate);
+  effect.ding();
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
