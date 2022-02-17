@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
 # LDFLAGS= -ljack
-SOURCE=staticInterpolation.o main.o
+SOURCE=staticInterpolation.o CircularBuffer.o oscillator.o sine.o main.o
 TARGET=e
 
 $(TARGET) : $(SOURCE)
