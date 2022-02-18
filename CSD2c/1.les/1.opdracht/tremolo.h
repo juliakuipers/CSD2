@@ -18,5 +18,4 @@ class Tremolo : public Effect
         Oscillator* osc = nullptr;
         // float modFreq;
         float modSignal;
-
 };

@@ -10,8 +10,10 @@ public:
   ~Delay();
 
   float calculate(float sample) override;
-  void ding();
+  // void ding();
   // void drywet() override;
+
+  
 
 protected:
   int size;

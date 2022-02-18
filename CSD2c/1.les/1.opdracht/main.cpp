@@ -15,7 +15,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file
+#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file
 
 
 int main(int argc,char **argv)
@@ -29,7 +29,6 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
   Delay effect(440,samplerate);
-  effect.ding();
   effect.setDryWet();
 
 #if WRITE_TO_FILE
@@ -45,7 +44,7 @@ int main(int argc,char **argv)
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&square, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&osc, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
 
     for(unsigned int i = 0; i < nframes; i++) {

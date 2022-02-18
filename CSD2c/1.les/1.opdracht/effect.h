@@ -17,12 +17,14 @@ class Effect{
 
     protected:
       float drywet = 101;
+      float feedback;
+      //feedback drywet
+
     private:
       int onoff = 1;
 
 
 };
 
-//for both the delay and the tremolo it would be best if the effect sends the sample back
-//value and sample are the same thing, depending on what i choose to use in the constructor i can return a sample of the tremolo or the delay
-//should probably work with a pointer that points to either tremolo or delay for calculate
+//feedback is the used and modified signal getting send back into the calculate function
+//might work with virtual and override and then

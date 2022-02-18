@@ -4,6 +4,7 @@ Delay::Delay(float freq, float samplerate) : Effect(freq,samplerate), size(sampl
 {
   circ = new CircularBuffer(size,numSamplesDelay);
   std::cout << "Delay - Constructor \n";
+  circ->setReadIndex();
 }
 
 Delay::~Delay()
@@ -27,10 +28,10 @@ float Delay::calculate(float sample)
   return samp;
 }
 
-void Delay::ding()
-{
-  circ->setReadIndex();
-}
+// void Delay::ding()
+// {
+//   circ->setReadIndex();
+// }
 //
 // void Delay::drywet()
 // {

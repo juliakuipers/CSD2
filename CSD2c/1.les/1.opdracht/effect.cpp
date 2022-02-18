@@ -4,9 +4,10 @@ Effect::Effect(float freq, float samplerate){}
 
 Effect::~Effect(){}
 
-float Effect::getSample(float sample){
-    if(onoff == 1) return calculate(sample*drywet) + sample*(1-drywet);
-    else return sample;
+float Effect::getSample(float sample)
+{
+  if(onoff == 1) return calculate(sample*drywet) + sample*(1-drywet);
+  else return sample;
 }
 
 void Effect::setDryWet()
