@@ -10,10 +10,6 @@ public:
   ~Delay();
 
   float calculate(float sample) override;
-  // void ding();
-  // void drywet() override;
-
-  
 
 protected:
   int size;
@@ -21,5 +17,6 @@ protected:
 
 private:
   CircularBuffer* circ = nullptr;
+  float delaySample = 0;
 
 };

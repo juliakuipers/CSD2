@@ -15,7 +15,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file
+#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file
 
 
 int main(int argc,char **argv)

@@ -6,19 +6,17 @@ class Effect{
         Effect(float freq, float samplerate);
         virtual ~Effect();
 
-        float calcDryWet(float drywet);
+        // float calcDryWet(float drywet);
         float getSample(float sample);
 
         virtual float calculate(float sample) = 0;
         void setDryWet();
         int bypass();
-        // what if i want to use two effects at the same time?
-        // feedback
+        void setFeedback();
 
     protected:
       float drywet = 101;
-      float feedback;
-      //feedback drywet
+      float feedback = 101;
 
     private:
       int onoff = 1;

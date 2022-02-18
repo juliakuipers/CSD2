@@ -5,6 +5,7 @@ Delay::Delay(float freq, float samplerate) : Effect(freq,samplerate), size(sampl
   circ = new CircularBuffer(size,numSamplesDelay);
   std::cout << "Delay - Constructor \n";
   circ->setReadIndex();
+  setFeedback();
 }
 
 Delay::~Delay()
@@ -17,26 +18,18 @@ Delay::~Delay()
 
 float Delay::calculate(float sample)
 {
+  circ->write(sample + (delaySample*feedback));
+  delaySample = circ->read();
 
-  // std::cout << "Delay - calculate - sample " << sample << "\n";
-  // circ.setReadIndex();
-  circ->write(sample);
-  float samp = circ->read();
-  // std::cout << "Delay - calculate - samp "<< samp<<"\n";
-
-  // ding();
-  return samp;
+  return delaySample;
 }
 
-// void Delay::ding()
+
+//new feedback function which has the delaySample and returns to calculate
+
+// void Delay::setFeedback()
 // {
-//   circ->setReadIndex();
-// }
-//
-// void Delay::drywet()
-// {
-//   float drywet = Effect::drywet();
-//   std::cout << "hjfidsa;\n";
+//   Effect::setFeedback();
 // }
 
 //pitchmodulation on the delayed signal

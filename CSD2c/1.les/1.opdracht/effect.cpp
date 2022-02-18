@@ -14,7 +14,7 @@ void Effect::setDryWet()
 {
   while (drywet > 100)
   {
-    std::cout << "select drywet (0/100) \n";
+    std::cout << "set drywet (0/100) \n";
     std::cin >> drywet;
   }
   drywet /= 100;
@@ -24,4 +24,14 @@ int Effect::bypass()
 {
   onoff *= -1;
   return onoff;
+}
+
+void Effect::setFeedback()
+{
+  while (feedback > 100)
+  {
+    std::cout << "set feedback (0/100) \n";
+    std::cin >> feedback;
+  }
+   feedback /= 100;
 }
