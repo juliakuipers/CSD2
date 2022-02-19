@@ -48,10 +48,11 @@ int main(int argc,char **argv)
   //assign a function to the JackModule::onProces
   jack.onProcess = [&osc, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
-
+    //
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = effect.getSample(osc.getSample()) * amplitude;
       osc.genNextSample();
+
     }
 
     // for(unsigned int sample = 0; sample < nframes; sample++){

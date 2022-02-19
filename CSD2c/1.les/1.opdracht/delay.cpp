@@ -32,23 +32,13 @@ void Delay::setDelayTime()
   //need a calculation from time to numSamplesDelay
   std::cout << "set delay time " << std::endl;
   std::cin >> msDelay;
-  float samplesDelay = (samplerate/msDelay) * msDelay;
+  float calc = size/5000;
+  std::cout << "calc = " << calc << std::endl;
+  numSamplesDelay = calc * msDelay;
+  circ->setReadIndex();
   //40/100*50
   //
   //1ms tot 5000ms
-
-  std::cout << "samplerate = " << samplerate << std::endl;
-  std::cout << "samplesDelay = " << samplesDelay << std::endl;
-  //1000ms = 1 sec, size = 5sec
-  //size = 5000ms
-  //maxMsDelay = size to ms
-  //size = samplerate * 5, samplerate = 1 ms  
-  //float calc = samplesDelay/maxMsDelay
-  //numSamplesDelay = calc * size
-  //size = 220500, 500ms = 110250
-  //scale 5000ms to size 0.0 to 1
-  //(samplerate/500)*samplerate
-
 
 }
 

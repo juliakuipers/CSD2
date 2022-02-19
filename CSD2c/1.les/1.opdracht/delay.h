@@ -13,13 +13,13 @@ public:
   void setDelayTime();
 
 protected:
-  int size;
-  int numSamplesDelay;
+  float size;
+  float numSamplesDelay;
 
 private:
   CircularBuffer* circ = nullptr;
-  float delaySample = 0;
   float msDelay;
   float samplerate;
+  float delaySample;
 
 };
