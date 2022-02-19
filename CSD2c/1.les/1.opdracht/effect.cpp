@@ -16,8 +16,11 @@ void Effect::setDryWet()
   {
     std::cout << "set drywet (0/100) \n";
     std::cin >> drywet;
+    if (drywet < 101){
+      drywet /= 100;
+      break;
+    }
   }
-  drywet /= 100;
 }
 
 int Effect::bypass()
@@ -32,6 +35,14 @@ void Effect::setFeedback()
   {
     std::cout << "set feedback (0/100) \n";
     std::cin >> feedback;
+    if (feedback < 101){
+      feedback /= 100;
+      break;
+    }
   }
-   feedback /= 100;
 }
+
+// void Effect::set()
+// {
+//   setDelayTime();
+// }

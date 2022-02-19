@@ -13,6 +13,8 @@ class Effect{
         void setDryWet();
         int bypass();
         void setFeedback();
+        void setWaveform();
+        void set();
 
     protected:
       float drywet = 101;

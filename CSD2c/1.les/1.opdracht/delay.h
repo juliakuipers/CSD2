@@ -10,6 +10,7 @@ public:
   ~Delay();
 
   float calculate(float sample) override;
+  void setDelayTime();
 
 protected:
   int size;
@@ -18,5 +19,7 @@ protected:
 private:
   CircularBuffer* circ = nullptr;
   float delaySample = 0;
+  float msDelay;
+  float samplerate;
 
 };

@@ -3,6 +3,7 @@
 
 Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate), modSignal(0){
     osc = new Square(freq, samplerate);
+    // setDryWet();
 }
 
 Tremolo::~Tremolo(){

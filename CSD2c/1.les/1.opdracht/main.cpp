@@ -29,7 +29,9 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
   Delay effect(440,samplerate);
-  effect.setDryWet();
+  // effect.setDryWet();
+  // effect.setFeedback();
+  //so for the effects to work i can make it return a true
 
 #if WRITE_TO_FILE
   WriteToFile fileWriter("output.csv", true);
@@ -51,6 +53,10 @@ int main(int argc,char **argv)
       outBuf[i] = effect.getSample(osc.getSample()) * amplitude;
       osc.genNextSample();
     }
+
+    // for(unsigned int sample = 0; sample < nframes; sample++){
+    //   outBuf[sample] = inBuf[sample];
+    // }
 
     amplitude = 0.5;
     return 0;
