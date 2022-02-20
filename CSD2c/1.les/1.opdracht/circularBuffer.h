@@ -9,7 +9,6 @@ class CircularBuffer{
 
       void setReadIndex();
       void write(float sample);
-      //function wherein i write the buffer, this one is always a few steps ahead of the read
       float read();
       void calculateRW();
 

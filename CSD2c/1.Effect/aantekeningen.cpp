@@ -1,0 +1,5 @@
+/*
+  main and oscillator with waveForms
+  first make a melody generator
+   
+*/
