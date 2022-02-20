@@ -31,7 +31,8 @@ float StaticInterpolation::linMap(float sample)
   //so as input i have two samples of the oscillator and my current sample
   //i need a buffer for the Sine
   //also the possibility to change the frequency of the Sine
-   
+  //sample = x
+  //
 
   circ->write(sample);
   return circ->read();

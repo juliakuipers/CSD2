@@ -1,18 +1,21 @@
-#pragma once
-#include <iostream>
+#include "melodyGen.h"
 
-class MelodyGen
+MelodyGen::MelodyGen(float samplerate) : sampleCount(0), index(0){
+  this -> samplerate = samplerate;
+}
+
+MelodyGen::~MelodyGen(){}
+
+
+int MelodyGen::melody()
 {
-public:
-  MelodyGen(float samplerate);
-  ~MelodyGen();
+  sampleCount += 1;
+  if(sampleCount >= samplerate)
+  {
+    sampleCount = 0;
+    index += 1;
+    if(index>=8) index = 0;
 
-  int melody();
-
-
-private:
-  unsigned int sampleCount;
-  float samplerate;
-  unsigned int[8] = {110,220,330,440,550,660,770,880};
-
+  }
+  return freqList[index];
 }

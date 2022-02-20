@@ -17,8 +17,8 @@ class Effect{
         void set();
 
     protected:
-      unsigned int drywet = 20;
-      unsigned int feedback = 20;
+      unsigned int drywet = 0;
+      unsigned int feedback = 0;
 
     private:
       int onoff = 1;

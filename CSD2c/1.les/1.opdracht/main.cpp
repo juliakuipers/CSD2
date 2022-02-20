@@ -7,6 +7,7 @@
 // #include "effect.h"
 #include "delay.h"
 #include "tremolo.h"
+#include "melodyGen.h"
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
@@ -29,6 +30,7 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
   Delay effect(440,samplerate);
+  MelodyGen mel(samplerate);
   // effect.setDryWet();
   // effect.setFeedback();
   //so for the effects to work i can make it return a true
@@ -39,6 +41,7 @@ int main(int argc,char **argv)
   for(int i = 0; i < 500; i++) {
     fileWriter.write(std::to_string(effect.getSample(osc.getSample())) + "\n");
     // effect.calculate(osc.getSample());
+    //thing thats happening is because of the effect
     osc.genNextSample();
 
   }
@@ -46,13 +49,13 @@ int main(int argc,char **argv)
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&osc, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&osc, &mel, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
     //
     for(unsigned int i = 0; i < nframes; i++) {
       outBuf[i] = effect.getSample(osc.getSample()) * amplitude;
       osc.genNextSample();
-
+      // osc.setFrequency(mel.melody());
     }
 
     // for(unsigned int sample = 0; sample < nframes; sample++){
