@@ -1,5 +1,6 @@
 /*
   main and oscillator with waveForms
   first make a melody generator
-   
+  might add oscillator to effect base class
+  frequency in tremolo should be a lot lower than the frequency of oscillator 
 */

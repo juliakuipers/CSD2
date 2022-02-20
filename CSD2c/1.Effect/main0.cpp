@@ -28,7 +28,7 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
   MelodyGen mel(samplerate);
-  Tremolo tremolo(27.5,samplerate);
+  Tremolo tremolo(440,samplerate);
   // effect.setDryWet();
   // effect.setFeedback();
   //so for the effects to work i can make it return a true
@@ -77,8 +77,6 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
-      case 's':
-          tremolo.setModFreq();
     }
   }
 #endif
