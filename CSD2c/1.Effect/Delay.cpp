@@ -1,6 +1,6 @@
 #include "Delay.h"
 
-Delay::Delay(float freq, float samplerate) : size(samplerate*5), numSamplesDelay(samplerate)
+Delay::Delay(float freq, float samplerate) : Effect(freq,samplerate), size(samplerate*5), numSamplesDelay(samplerate)
 {
   circ = new CircularBuffer(size,numSamplesDelay);
 }
@@ -25,8 +25,15 @@ void Delay::setDelayTime()
     std::cout << "set delay time " << std::endl;
     std::cin >> msDelay;
     calc = size/5000;
-    if(std::cin.fail()) std::cin.clear();
-    if(!std::cin.fail()) break;
+    if(std::cin.fail() || msDelay > 5000 || msDelay < 0 )
+    {
+      std::cin.clear();
+      std::cout << " wrong input " << std::endl;
+    }
+    if(!std::cin.fail())
+    {
+      break;
+    }
   }
   numSamplesDelay = calc * msDelay;
   std::cout << "Delay - setDelayTime - numSamplesDelay = " << numSamplesDelay << std::endl;

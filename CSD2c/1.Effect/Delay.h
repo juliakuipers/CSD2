@@ -1,14 +1,15 @@
 #pragma once
 #include <iostream>
 #include "CircularBuffer.h"
+#include "Effect.h"
 
-class Delay
+class Delay : public Effect
 {
 public:
   Delay(float freq,float samplerate);
   ~Delay();
 
-  float calculate(float sample);
+  float calculate(float sample) override;
   void setDelayTime();
 
 protected:

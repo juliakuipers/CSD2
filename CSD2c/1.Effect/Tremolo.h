@@ -1,15 +1,15 @@
 #pragma once
 #include <iostream>
-// #include<limits>
+#include "Effect.h"
 #include "oscillator.h"
 
-class Tremolo
+class Tremolo : public Effect
 {
 public:
   Tremolo(float freq, float samplerate);
   ~Tremolo();
 
-  float calculate(float sample);
+  float calculate(float sample) override;
   void setModFreq();
 
 private:

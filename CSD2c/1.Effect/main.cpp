@@ -29,8 +29,8 @@ int main(int argc,char **argv)
   double samplerate = jack.getSamplerate();
   Square osc(440, samplerate);
   MelodyGen mel(samplerate);
-  Tremolo tremolo(27.5,samplerate);
-  Delay cb(440,samplerate);
+  // Tremolo tremolo(27.5,samplerate);
+  Delay effect(440,samplerate);
   // effect.setDryWet();
   // effect.setFeedback();
   //so for the effects to work i can make it return a true
@@ -39,7 +39,7 @@ int main(int argc,char **argv)
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(cb.calculate(osc.getSample())) + "\n");
+    fileWriter.write(std::to_string(effect.getEffectSample(osc.getSample())) + "\n");
     osc.genNextSample();
 
   }
@@ -49,11 +49,11 @@ int main(int argc,char **argv)
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&osc, &mel, &cb, &tremolo, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&osc, &mel, &effect, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
     //
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = cb.calculate(osc.getSample()) * amplitude;
+      outBuf[i] = effect.getEffectSample(osc.getSample()) * amplitude;
       osc.genNextSample();
       osc.setFrequency(mel.melody());
     }
@@ -79,10 +79,12 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
-      case 't':
-          tremolo.setModFreq();
+      // case 't':
+      //     effect.setModFreq();
       case 'd':
-        cb.setDelayTime();
+        effect.setDelayTime();
+      case 'w':
+        effect.setDryWet();
     }
   }
 #endif

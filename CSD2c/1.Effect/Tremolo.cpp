@@ -2,7 +2,7 @@
 #include "square.h"
 #include "sine.h"
 
-Tremolo::Tremolo(float freq,float samplerate)
+Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate)
 {
   osc = new Sine(freq,samplerate);
 }
