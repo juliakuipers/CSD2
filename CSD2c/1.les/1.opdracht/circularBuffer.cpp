@@ -24,7 +24,7 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) :
   void CircularBuffer::setReadIndex()
   {
     //setReadIndex should only be used when i change the delay time and in the beginning when initilizing the delay
-    readIndex = size - 20;
+    readIndex = size - numSamplesDelay;
     std::cout << "CircularBuffer - setReadIndex - readIndex " << readIndex << "\n";
     //so i checked the readIndex and it works like this, it could be that in my previous code it didn't work because i also work with wrap;
   }

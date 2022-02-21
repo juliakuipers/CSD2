@@ -22,7 +22,6 @@ void Tremolo::setModFreq()
     std::cout << "Tremolo setModFreq break \n" ;
     osc->setFrequency(setMFreq);
     //source https://www.hackerearth.com/practice/notes/validating-user-input-in-c/
-  //fast medium slow
 }
 
 float Tremolo::calculate(float sample)

@@ -6,6 +6,7 @@
 #include "square.h"
 #include "melodyGen.h"
 #include "Tremolo.h"
+#include "CircularBuffer.h"
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
@@ -14,7 +15,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file
+#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file
 
 
 int main(int argc,char **argv)
@@ -29,6 +30,7 @@ int main(int argc,char **argv)
   Square osc(440, samplerate);
   MelodyGen mel(samplerate);
   Tremolo tremolo(27.5,samplerate);
+  CircularBuffer cb (samplerate*5,samplerate);
   // effect.setDryWet();
   // effect.setFeedback();
   //so for the effects to work i can make it return a true
@@ -37,7 +39,7 @@ int main(int argc,char **argv)
   WriteToFile fileWriter("output.csv", true);
 
   for(int i = 0; i < 500; i++) {
-    fileWriter.write(std::to_string(tremolo.calculate(osc.getSample())) + "\n");
+    fileWriter.write(std::to_string(cb.calculate(osc.getSample())) + "\n");
     osc.genNextSample();
 
   }
