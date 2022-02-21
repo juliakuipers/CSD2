@@ -13,10 +13,16 @@ Tremolo::~Tremolo()
 void Tremolo::setModFreq()
 {
   float setMFreq;
-  std::cout << " Tremolo - setModFreq " << std::endl;
-  std::cin >> setMFreq;
-  osc->setFrequency(setMFreq);
-  //fast medium slow 
+  while(1){
+    std::cout << " Tremolo - setModFreq " << std::endl;
+    std::cin >> setMFreq;
+    if(std::cin.fail()) std::cin.clear();
+    if(!std::cin.fail()) break;
+    }
+    std::cout << "Tremolo setModFreq break \n" ;
+    osc->setFrequency(setMFreq);
+    //source https://www.hackerearth.com/practice/notes/validating-user-input-in-c/
+  //fast medium slow
 }
 
 float Tremolo::calculate(float sample)
