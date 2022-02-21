@@ -2,6 +2,7 @@
 
 Delay::Delay(float freq, float samplerate) : Effect(freq,samplerate), size(samplerate*5), numSamplesDelay(samplerate)
 {
+  std::cout << "Delay - Constructor " << std::endl;
   circ = new CircularBuffer(size,numSamplesDelay);
 }
 

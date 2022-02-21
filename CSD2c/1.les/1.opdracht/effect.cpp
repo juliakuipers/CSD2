@@ -42,6 +42,11 @@ void Effect::setFeedback()
   }
 }
 
+void Effect::setWaveForm()
+{
+  
+}
+
 // void Effect::set()
 // {
 //   setDelayTime();

@@ -18,6 +18,10 @@ void CircularBuffer::setReadIndex(int numSamplesDelay)
 {
   std::cout << "CircularBuffer - setReadIndex - numSamplesDelay = " << numSamplesDelay << std::endl;
   readIndex = size - numSamplesDelay;
+  writeIndex = 0;
+  std::cout << "CircularBuffer - setReadIndex - readIndex = " << readIndex << std::endl;
+  std::cout << "CircularBuffer - setReadIndex - writeIndex = " << writeIndex << std::endl;
+  //readIndex = writeIndex - numSamplesDelay
 }
 
 void CircularBuffer::write(float sample)

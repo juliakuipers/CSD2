@@ -1,7 +1,13 @@
 #include "Effect.h"
+// #include "square.h"
+// #include "sine.h"
 
 Effect::Effect(float freq, float samplerate) : drywet(0), feedback(0)
-{}
+{
+  this -> freq = freq;
+  this -> samplerate = samplerate;
+  // osc = new Sine(freq,samplerate);
+}
 
 Effect::~Effect()
 {}

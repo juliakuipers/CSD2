@@ -11,13 +11,11 @@ public:
   void write(float sample);
   float read();
 
-  // float calculate(float sample);
-
 private:
   int warp(int head);
-  int readIndex;
-  int writeIndex;
-  int size;
+  unsigned int readIndex;
+  unsigned int writeIndex;
+  unsigned int size;
   int numSamplesDelay;
   float* buffer = nullptr;
 

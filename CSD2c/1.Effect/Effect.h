@@ -14,6 +14,8 @@ public:
   int bypass();
 
 protected:
+  float samplerate;
+  float freq;
 
 private:
   float drywet;

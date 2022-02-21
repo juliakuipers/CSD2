@@ -8,7 +8,10 @@ Tremolo::Tremolo(float freq,float samplerate) : Effect(freq,samplerate)
 }
 
 Tremolo::~Tremolo()
-{}
+{
+  delete osc;
+  osc = nullptr;
+}
 
 void Tremolo::setModFreq()
 {
