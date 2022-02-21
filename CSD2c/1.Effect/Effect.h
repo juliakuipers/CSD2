@@ -19,5 +19,6 @@ private:
   float drywet;
   float feedback;
   float getSample;
+  int onoff;
 
 };

@@ -30,7 +30,7 @@ int main(int argc,char **argv)
   Square osc(440, samplerate);
   MelodyGen mel(samplerate);
   // Tremolo tremolo(27.5,samplerate);
-  Delay effect(440,samplerate);
+  Tremolo effect(440,samplerate);
   // effect.setDryWet();
   // effect.setFeedback();
   //so for the effects to work i can make it return a true
@@ -79,12 +79,14 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
-      // case 't':
-      //     effect.setModFreq();
-      case 'd':
-        effect.setDelayTime();
+      case 't':
+          effect.setModFreq();
+      // case 'd':
+      //   effect.setDelayTime();
       case 'w':
         effect.setDryWet();
+      case 'b':
+        effect.bypass();
     }
   }
 #endif

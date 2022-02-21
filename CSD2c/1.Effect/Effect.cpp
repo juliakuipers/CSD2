@@ -9,7 +9,8 @@ Effect::~Effect()
 float Effect::getEffectSample(float sample)
 {
   // std::cout << drywet << std::endl;
-  return calculate(sample*drywet) + sample*(1-drywet);
+  if(onoff == 1) return calculate(sample*drywet) + sample*(1-drywet);
+  else return sample;
 }
 
 void Effect::setDryWet()
@@ -28,5 +29,10 @@ void Effect::setDryWet()
     }
   }
   drywet /= 100;
-  std::cout << "Effect - getEffectSample - drywet = " << drywet << std::endl;
+}
+
+int Effect::bypass()
+{
+  onoff *= -1;
+  return onoff;
 }
