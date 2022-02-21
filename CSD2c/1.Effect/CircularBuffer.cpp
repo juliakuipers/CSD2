@@ -5,7 +5,7 @@ CircularBuffer::CircularBuffer(int size, int numSamplesDelay) : readIndex(0), wr
   this -> size = size;
   this -> numSamplesDelay = numSamplesDelay;
   buffer = new float [size];
-  // setReadIndex();
+  setReadIndex(numSamplesDelay);
 }
 
 CircularBuffer::~CircularBuffer()
@@ -14,34 +14,24 @@ CircularBuffer::~CircularBuffer()
   buffer = nullptr;
 }
 
-void CircularBuffer::setReadIndex()
+void CircularBuffer::setReadIndex(int numSamplesDelay)
 {
-  readIndex = size - 20;
+  std::cout << "CircularBuffer - setReadIndex - numSamplesDelay = " << numSamplesDelay << std::endl;
+  readIndex = size - numSamplesDelay;
 }
 
 void CircularBuffer::write(float sample)
 {
   buffer[writeIndex++] = sample;
-  std::cout << "CircularBuffer - write - writeIndex = " << writeIndex << std::endl;
   writeIndex = warp(writeIndex);
 }
 
 float CircularBuffer::read()
 {
   float sample = buffer[readIndex++];
-  std::cout << "CircularBuffer - write - readIndex = " << readIndex << std::endl;
-  // std::cout << "CircularBuffer - write - sample = " << sample << std::endl;
   readIndex = warp(readIndex);
   return sample;
 
-}
-
-float CircularBuffer::calculate(float sample)
-{
-  write(sample);
-  float readSample = read();
-  // std::cout << "CircularBuffer - calculate - readSample = " << readSample << std::endl;
-  return readSample;
 }
 
 int CircularBuffer::warp(int head)

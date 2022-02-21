@@ -6,7 +6,7 @@
 #include "square.h"
 #include "melodyGen.h"
 #include "Tremolo.h"
-#include "CircularBuffer.h"
+#include "Delay.h"
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
@@ -15,7 +15,7 @@
  * jackd -d coreaudio
  */
 
-#define WRITE_TO_FILE 1 //WRITE_TO_FILE 1 to make file
+#define WRITE_TO_FILE 0 //WRITE_TO_FILE 1 to make file
 
 
 int main(int argc,char **argv)
@@ -30,7 +30,7 @@ int main(int argc,char **argv)
   Square osc(440, samplerate);
   MelodyGen mel(samplerate);
   Tremolo tremolo(27.5,samplerate);
-  CircularBuffer cb (samplerate*5,samplerate);
+  Delay cb(440,samplerate);
   // effect.setDryWet();
   // effect.setFeedback();
   //so for the effects to work i can make it return a true
@@ -49,11 +49,11 @@ int main(int argc,char **argv)
 
   float amplitude = 0.15;
   //assign a function to the JackModule::onProces
-  jack.onProcess = [&osc, &mel, &tremolo, &amplitude](jack_default_audio_sample_t *inBuf,
+  jack.onProcess = [&osc, &mel, &cb, &tremolo, &amplitude](jack_default_audio_sample_t *inBuf,
     jack_default_audio_sample_t *outBuf, jack_nframes_t nframes) {
     //
     for(unsigned int i = 0; i < nframes; i++) {
-      outBuf[i] = tremolo.calculate(osc.getSample()) * amplitude;
+      outBuf[i] = cb.calculate(osc.getSample()) * amplitude;
       osc.genNextSample();
       osc.setFrequency(mel.melody());
     }
@@ -79,8 +79,10 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
-      case 's':
+      case 't':
           tremolo.setModFreq();
+      case 'd':
+        cb.setDelayTime();
     }
   }
 #endif

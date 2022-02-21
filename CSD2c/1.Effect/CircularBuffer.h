@@ -7,11 +7,11 @@ public:
   CircularBuffer(int size, int numSamplesDelay);
   ~CircularBuffer();
 
-  void setReadIndex();
+  void setReadIndex(int numSamplesDelay);
   void write(float sample);
   float read();
 
-  float calculate(float sample);  
+  // float calculate(float sample);
 
 private:
   int warp(int head);
