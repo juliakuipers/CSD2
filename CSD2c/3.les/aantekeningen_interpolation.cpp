@@ -1,5 +1,4 @@
 /*
-  TODO: make right map structure, write a chorus and waveshaper
   waveshaper
   with arctan
   the higher value k is the heavier the distortion
@@ -31,4 +30,14 @@
     this places the linear interpolated point or value somwhere between low and high
 
     floating point index + the incremented value
+
+    linear interpollation with a buffer
+
+    make a buffer + buffer size
+    the index of the buffer needs to be an int with the possibility of being a float
+    since we use linear interpollation so the result may be a .x number
+
+
+
+
 */
