@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "jack_moduleStereo.h"
 #include "square.h"
+#include "chorus.h"
 
 JackModule jack;
 unsigned long samplerate=44100;
@@ -38,9 +39,9 @@ int main(int argc,char **argv)
   jack.autoConnect();
   samplerate=jack.getSamplerate();
   std::cout << "samplerate = " << samplerate << std::endl;
-
+  Chorus chorus;
   std::cout << "running \n";
-  std::thread audioThread(audioProcess);
+  // std::thread audioThread(audioProcess);
   while(running)
   {
     switch (std::cin.get())
@@ -50,7 +51,7 @@ int main(int argc,char **argv)
         break;
     }
   }
-  audioThread.join();
+  // audioThread.join();
   //ending the thread
   return 0;
 }

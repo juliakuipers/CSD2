@@ -197,7 +197,7 @@ int JackModule::onProcess(jack_nframes_t nframes)
   }
 
   frames_pushed=inputringbuffer->push((jack_default_audio_sample_t *)tempbuffer,nframes*numberOfInputChannels);
-  if(frames_pushed<nframes*numberOfInputChannels) std::cout << "Buffer full\n";
+  // if(frames_pushed<nframes*numberOfInputChannels) std::cout << "Buffer full\n";
 
 
   // pop samples from output ringbuffer into JACK channel buffers
@@ -205,7 +205,7 @@ int JackModule::onProcess(jack_nframes_t nframes)
   // appropriate JACK output buffers
 
   frames_popped=outputringbuffer->pop((jack_default_audio_sample_t *)tempbuffer,nframes*numberOfOutputChannels);
-  if(frames_popped<nframes*numberOfOutputChannels) std::cout << "Buffer empty\n";
+  // if(frames_popped<nframes*numberOfOutputChannels) std::cout << "Buffer empty\n";
 
   ringbufferindex=0;
   for(int frame=0; frame<(int)nframes; frame++){

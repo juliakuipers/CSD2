@@ -4,9 +4,9 @@ LDFLAGS=-ljack
 # the cpp files from the current project to include
 SRC_PROJECT = main.cpp
 # the directory to the folder with the shared modules
-SHAREDCODE_PATH = sharedCode/
+SHAREDCODE_PATH = audio/
 # the modules to include
-MODULES = oscillators utilities
+MODULES = oscillators utilities chorus circularBuffer
 
 
 # append shared code path prefix to modules
