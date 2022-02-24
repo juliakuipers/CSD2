@@ -7,6 +7,7 @@
 #include "melodyGen.h"
 #include "Tremolo.h"
 #include "Delay.h"
+#include "ringbuffer.h"
 /*
  * NOTE: jack2 needs to be installed
  * jackd invokes the JACK audio server daemon
