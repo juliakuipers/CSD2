@@ -20,7 +20,7 @@
 *
 *  File name     : ringbuffer.h
 *  System name   : jack_module
-* 
+*
 *  Description   : ring buffer class description
 *		   Supports atomic read and write pointer updates and
 *		    blocking and non-blocking modes
@@ -37,6 +37,7 @@
  * ringbuffer.h
  */
 
+#pragma once 
 #include <atomic>
 #include <string>
 
@@ -64,4 +65,3 @@ private:
   bool blockingPop;
   unsigned long blockingNap=500;
 }; // RingBuffer{}
-
