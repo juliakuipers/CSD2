@@ -1,15 +1,39 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
 LDFLAGS= -ljack
-SOURCE=main.o jack_moduleStereo.o ringbuffer.o
-# SOURCE=jack_module.o melodyGen.o writeToFile.o oscillator.o square.o Tremolo.o sine.o CircularBuffer.o Delay.o Effect.o main.o
+# the cpp files from the current project to include
+SRC_PROJECT = main.cpp
+# the directory to the folder with the shared modules
+SHAREDCODE_PATH = ../../../3.les/
+MODULES = oscillators utilities
+# append shared code path prefix to modules
+MODULE_PATHS = $(addprefix $(3.les_PATH),$(MODULES))
+# module .mk files
+MODULE_MK = $(patsubst %,%/module.mk,$(MODULE_PATHS))
+# include the description for each module
+SRC_MODULES =
+include $(MODULE_MK)
+SRC = $(addprefix $(3.les),$(SRC_MODULES))
+SRC+= $(SRC_PROJECT)
+# look for include files in
+# each of the modules
+CXXFLAGS += $(patsubst %,-I%,./$(MODULE_PATHS))
+# determine the object files --> replace all .cpp in SRC with .o
+OBJ := $(patsubst %.cpp,%.o, $(filter %.cpp,$(SRC)))
+# log OBJ
+$(info $$OBJ is [${OBJ}])
 TARGET=e
 
 $(TARGET) : $(SOURCE)
 	$(CXX) -o $@ $(SOURCE) $(LDFLAGS)
 
-.cpp.o:
-	$(CXX) -c $< $(CXXFLAGS)
+	# -o $*.o --> write .o file to the directory of the current target
+	.cpp.o:
+		$(CXX) -c $< $(CXXFLAGS) -o $*.o
 
-clean:
-	rm -f $(TARGET) *.o
+	plot:
+		python3 $(SHAREDCODE_PATH)utilities/plot.py
+
+	clean:
+		rm $(TARGET)
+		rm $(OBJ)
