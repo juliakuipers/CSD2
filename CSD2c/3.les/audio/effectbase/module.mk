@@ -1,1 +1,1 @@
-SRC_MODULES += $(patsubst %,effectbase/%, Effect.cpp)
+SRC_MODULES += $(patsubst %,delay/%, Delay.cpp)

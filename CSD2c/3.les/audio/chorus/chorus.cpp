@@ -1,10 +1,10 @@
 #include "chorus.h"
-#include "square.h"
+#include "sine.h"
 
-Chorus::Chorus()
+Chorus::Chorus(float freq, float samplerate) : Effect(freq,samplerate)
 {
   std::cout << "Chorus - Constructor \n";
-  osc = new Square(440,44100);
+  osc = new Sine(440,44100);
   circ = new CircularBuffer(4,2);
 }
 
@@ -16,3 +16,12 @@ Chorus::~Chorus()
   osc = nullptr;
   circ = nullptr;
 }
+
+float Chorus::calculate(float sample)
+{
+  return sample;
+}
+
+//buffer for chorus can be a lot smaller than the delay buffer
+//might need 2 circularbuffers
+//one dry signal one or two delayed signals

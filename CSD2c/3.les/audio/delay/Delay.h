@@ -1,24 +1,22 @@
 #pragma once
 #include <iostream>
 #include "CircularBuffer.h"
-#include "oscillator.h"
 #include "Effect.h"
 
-class Chorus : public Effect
+class Delay : public Effect
 {
 public:
-  Chorus(float freq, float samplerate);
-  ~Chorus();
+  Delay(float freq,float samplerate);
+  ~Delay();
 
   float calculate(float sample) override;
+  void setDelayTime();
 
 protected:
   int size;
   int numSamplesDelay;
 
 private:
-  Oscillator* osc = nullptr;
   CircularBuffer* circ = nullptr;
-
 
 };

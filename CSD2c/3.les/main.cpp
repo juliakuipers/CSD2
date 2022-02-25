@@ -4,15 +4,14 @@
 #include "jack_moduleStereo.h"
 #include "square.h"
 #include "chorus.h"
-#include "Tremolo.h"
+// #include "Tremolo.h"
 
 JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
 Square osc1(440,samplerate);
 Square osc2(220,samplerate);
-Tremolo effect(2,samplerate);
-Chorus chorus;
+Chorus effect(440,samplerate);
 
 bool running = true;
 static void audioProcess()
@@ -52,8 +51,8 @@ int main(int argc,char **argv)
         running = false;
         jack.end();
         break;
-      case 't':
-          effect.setModFreq();
+      // case 't':
+      //     effect.setModFreq();
       // case 'd':
       //   effect.setDelayTime();
       case 'w':
