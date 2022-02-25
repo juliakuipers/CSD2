@@ -10,7 +10,7 @@ JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
 Square osc1(440,samplerate);
-Square osc2(220,samplerate);
+Square osc2(440,samplerate);
 Chorus effect(440,samplerate);
 
 bool running = true;

@@ -17,8 +17,15 @@ protected:
   int numSamplesDelay;
 
 private:
-  Oscillator* osc = nullptr;
-  CircularBuffer* circ = nullptr;
+  Oscillator* osc1 = nullptr;
+  Oscillator* osc2 = nullptr;
+  CircularBuffer* circ1 = nullptr;
+  CircularBuffer* circ2 = nullptr;
+  void setDelayAmt();
+  float oscAmp1;
+  float oscAmp2;
+  float sample1;
+  float sample2;
 
 
 };
