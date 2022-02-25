@@ -1,1 +1,1 @@
-SRC_MODULES += $(patsubst %,circularBuffer/%, circularBuffer.cpp)
+SRC_MODULES += $(patsubst %,circularBuffer/%, CircularBuffer.cpp)

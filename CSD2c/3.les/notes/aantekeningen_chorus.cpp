@@ -13,6 +13,7 @@
   amplitude modulation
 
   setModFreq
+  voices
   setDelayAmt
   setAmpMod
   feedback

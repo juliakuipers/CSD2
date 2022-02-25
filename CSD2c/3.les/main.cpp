@@ -4,25 +4,28 @@
 #include "jack_moduleStereo.h"
 #include "square.h"
 #include "chorus.h"
+#include "Tremolo.h"
 
 JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
+Square osc1(440,samplerate);
+Square osc2(220,samplerate);
+Tremolo effect(2,samplerate);
+Chorus chorus;
 
 bool running = true;
 static void audioProcess()
 {
   float *inBuffer = new float [chunksize];
   float *outBuffer = new float [chunksize*2];
-  Square osc1(440,samplerate);
-  Square osc2(220,samplerate);
   float amp = 0.2;
   do{
       jack.readSamples(inBuffer,chunksize);
       for(unsigned int i = 0 ; i<chunksize ; i++)
       {
-        outBuffer[2*i] = osc1.getSample()*amp;
-        outBuffer[2*i+1] = osc2.getSample()*amp;
+        outBuffer[2*i] = effect.getEffectSample(osc1.getSample())*amp;
+        outBuffer[2*i+1] = effect.getEffectSample(osc2.getSample())*amp;
         osc1.genNextSample();
         osc2.genNextSample();
         }
@@ -39,19 +42,27 @@ int main(int argc,char **argv)
   jack.autoConnect();
   samplerate=jack.getSamplerate();
   std::cout << "samplerate = " << samplerate << std::endl;
-  Chorus chorus;
   std::cout << "running \n";
-  // std::thread audioThread(audioProcess);
-  while(running)
+  std::thread audioThread(audioProcess);
+  while (running)
   {
     switch (std::cin.get())
     {
       case 'q':
         running = false;
+        jack.end();
         break;
+      case 't':
+          effect.setModFreq();
+      // case 'd':
+      //   effect.setDelayTime();
+      case 'w':
+        effect.setDryWet();
+      case 'b':
+        effect.bypass();
     }
   }
-  // audioThread.join();
+  audioThread.join();
   //ending the thread
   return 0;
 }

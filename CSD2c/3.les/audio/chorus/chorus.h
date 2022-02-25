@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "circularBuffer.h"
+#include "CircularBuffer.h"
 #include "oscillator.h"
 
 class Chorus {
@@ -10,5 +10,7 @@ public:
 
 private:
   Oscillator* osc = nullptr;
+  CircularBuffer* circ = nullptr;
+
 
 };

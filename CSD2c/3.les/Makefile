@@ -6,7 +6,7 @@ SRC_PROJECT = main.cpp
 # the directory to the folder with the shared modules
 SHAREDCODE_PATH = audio/
 # the modules to include
-MODULES = oscillators utilities chorus circularBuffer
+MODULES = chorus circularBuffer effectbase oscillators tremolo utilities 
 
 
 # append shared code path prefix to modules
