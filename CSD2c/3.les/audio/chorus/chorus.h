@@ -10,7 +10,9 @@ public:
   Chorus(float freq, float samplerate);
   ~Chorus();
 
-  float calculate(float sample) override;
+  float calculateM(float sample) override;
+  float calculateL(float sample) override;
+  float calculateR(float sample) override;
 
 protected:
   int size;

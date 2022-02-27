@@ -27,7 +27,7 @@ void Tremolo::setModFreq()
     //source https://www.hackerearth.com/practice/notes/validating-user-input-in-c/
 }
 
-float Tremolo::calculate(float sample)
+float Tremolo::calculateM(float sample)
 {
   modSig = (osc->genNextSample() + 1.0)*0.5;
   // std::cout << "Tremolo::calculate - modSig = " << modSig << std::endl;

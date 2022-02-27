@@ -2,7 +2,7 @@
 // #include "square.h"
 // #include "sine.h"
 
-Effect::Effect(float freq, float samplerate) : drywet(0), feedback(0)
+Effect::Effect(float freq, float samplerate) : drywet(1), feedback(0), onoff(1)
 {
   this -> freq = freq;
   this -> samplerate = samplerate;
@@ -12,10 +12,24 @@ Effect::Effect(float freq, float samplerate) : drywet(0), feedback(0)
 Effect::~Effect()
 {}
 
-float Effect::getEffectSample(float sample)
+float Effect::getEffectSampleM(float sample)
 {
   // std::cout << drywet << std::endl;
-  if(onoff == 1) return calculate(sample*drywet) + sample*(1-drywet);
+  if(onoff == 1) return calculateM(sample*drywet) + sample*(1-drywet);
+  else return sample;
+}
+
+float Effect::getEffectSampleL(float sample)
+{
+  // std::cout << drywet << std::endl;
+  if(onoff == 1) return calculateL(sample*drywet) + sample*(1-drywet);
+  else return sample;
+}
+
+float Effect::getEffectSampleR(float sample)
+{
+  // std::cout << drywet << std::endl;
+  if(onoff == 1) return calculateR(sample*drywet) + sample*(1-drywet);
   else return sample;
 }
 

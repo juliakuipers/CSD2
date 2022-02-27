@@ -12,7 +12,7 @@ Delay::~Delay()
   circ = nullptr;
 }
 
-float Delay::calculate(float sample)
+float Delay::calculateM(float sample)
 {
   circ->write(sample);
   return circ->read();

@@ -9,7 +9,7 @@ public:
   Delay(float freq,float samplerate);
   ~Delay();
 
-  float calculate(float sample) override;
+  float calculateM(float sample) override;
   void setDelayTime();
 
 protected:

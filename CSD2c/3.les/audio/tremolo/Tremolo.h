@@ -9,7 +9,7 @@ public:
   Tremolo(float freq, float samplerate);
   ~Tremolo();
 
-  float calculate(float sample) override;
+  float calculateM(float sample) override;
   void setModFreq();
 
 private:

@@ -23,10 +23,10 @@ static void audioProcess()
       jack.readSamples(inBuffer,chunksize);
       for(unsigned int i = 0 ; i<chunksize ; i++)
       {
-        outBuffer[2*i] = effect.getEffectSample(osc1.getSample())*amp;
-        outBuffer[2*i+1] = effect.getEffectSample(osc2.getSample())*amp;
+        outBuffer[2*i] = effect.getEffectSampleL(osc1.getSample())*amp;
+        outBuffer[2*i+1] = effect.getEffectSampleR(osc1.getSample())*amp;
         osc1.genNextSample();
-        osc2.genNextSample();
+        // osc2.genNextSample();
         }
       jack.writeSamples(outBuffer,chunksize*2);
   }while(running);
@@ -49,7 +49,6 @@ int main(int argc,char **argv)
     {
       case 'q':
         running = false;
-        jack.end();
         break;
       // case 't':
       //     effect.setModFreq();
