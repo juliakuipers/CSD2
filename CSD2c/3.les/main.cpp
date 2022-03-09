@@ -13,7 +13,7 @@ unsigned long chunksize = 256;
 int monoStereo = 1;
 Square osc1(440,samplerate);
 Square osc2(440,samplerate);
-Chorus effect(440,samplerate);
+Tremolo effect(440,samplerate);
 
 bool running = true;
 static void audioProcess()
@@ -25,8 +25,8 @@ static void audioProcess()
       jack.readSamples(inBuffer,chunksize);
       for(unsigned int i = 0 ; i<chunksize ; i++)
       {
-        outBuffer[2*i] = effect.getEffectSampleL(osc1.getSample())*amp;
-        outBuffer[2*i+1] = effect.getEffectSampleR(osc1.getSample())*amp;
+        outBuffer[2*i] = effect.getEffectSampleM(osc1.getSample())*amp;
+        outBuffer[2*i+1] = effect.getEffectSampleM(osc1.getSample())*amp;
         osc1.genNextSample();
         // osc2.genNextSample();
         }
@@ -52,8 +52,8 @@ int main(int argc,char **argv)
       case 'q':
         running = false;
         break;
-      case 't':
-          effect.setModFreq();
+      // case 't':
+      //     effect.setModFreq();
       case 's':
         monoStereo *= -1;
       // case 'd':
