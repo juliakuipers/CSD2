@@ -4,7 +4,7 @@
 #include "jack_moduleStereo.h"
 #include "square.h"
 #include "chorus.h"
-// #include "waveshaper.h"
+#include "waveshaper.h"
 #include "Tremolo.h"
 
 JackModule jack;
