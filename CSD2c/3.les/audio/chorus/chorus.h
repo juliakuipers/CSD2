@@ -29,5 +29,4 @@ private:
   float sample1;
   float sample2;
 
-
 };

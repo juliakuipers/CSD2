@@ -4,11 +4,13 @@
 #include "jack_moduleStereo.h"
 #include "square.h"
 #include "chorus.h"
-// #include "Tremolo.h"
+// #include "waveshaper.h"
+#include "Tremolo.h"
 
 JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
+int monoStereo = 1;
 Square osc1(440,samplerate);
 Square osc2(440,samplerate);
 Chorus effect(440,samplerate);
@@ -50,8 +52,10 @@ int main(int argc,char **argv)
       case 'q':
         running = false;
         break;
-      // case 't':
-      //     effect.setModFreq();
+      case 't':
+          effect.setModFreq();
+      case 's':
+        monoStereo *= -1;
       // case 'd':
       //   effect.setDelayTime();
       case 'w':
