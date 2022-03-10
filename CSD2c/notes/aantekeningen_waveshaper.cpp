@@ -10,6 +10,5 @@ enum stores a number in a name so:
 Static void:
   executes the function it holds everytime its called
 
-
-
+i will need a buffer at first to fill with the sigmoid 
 */

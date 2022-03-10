@@ -10,4 +10,9 @@ public:
 
   float calculateM(float sample) override;
 
+private:
+  float* buffer = nullptr;
+  int bufSize;
+  void fillBuffer(float buffer, int bufSize);
+
 };
