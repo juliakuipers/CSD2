@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "writeToFile.h"
 
 class Waveshaper
 {
@@ -8,11 +9,12 @@ public:
   ~Waveshaper();
 
   float calculateM(float sample);
-  void interpolation(float x);
+  void setCurve(float k);
 
 private:
   float* buffer = nullptr;
   int bufSize;
-  void fillBuffer();
-
+  float interpolation(float x);
+  WriteToFile* wtf = nullptr;
+  
 };

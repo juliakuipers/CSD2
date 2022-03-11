@@ -4,5 +4,5 @@
 int main()
 {
   Waveshaper waveshaper;
-  waveshaper.interpolation(1);
+  // waveshaper.fillBuffer(1);
 }
