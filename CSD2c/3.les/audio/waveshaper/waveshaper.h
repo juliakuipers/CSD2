@@ -1,18 +1,18 @@
 #pragma once
 #include <iostream>
-#include "Effect.h"
 
-class Waveshaper : public Effect
+class Waveshaper
 {
 public:
-  Waveshaper(float freq, float samplerate);
+  Waveshaper();
   ~Waveshaper();
 
-  float calculateM(float sample) override;
+  float calculateM(float sample);
+  void interpolation(float x);
 
 private:
   float* buffer = nullptr;
   int bufSize;
-  void fillBuffer(float buffer, int bufSize);
+  void fillBuffer();
 
 };
