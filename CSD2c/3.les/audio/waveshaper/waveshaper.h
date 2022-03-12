@@ -14,7 +14,7 @@ public:
 private:
   float* buffer = nullptr;
   int bufSize;
-  float interpolation(float x);
+  float interpolation(float x, float high, float low);
   WriteToFile* wtf = nullptr;
-  
+
 };
