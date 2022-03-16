@@ -47,7 +47,7 @@ int main(int argc,char **argv)
   samplerate=jack.getSamplerate();
   std::cout << "samplerate = " << samplerate << std::endl;
   std::cout << "running \n";
-bool write = true;
+bool write = false;
 if(write == true){
   WriteToFile writeFile("outpus.csv",true);
     for(int i = 0; i < 500; i++) {
