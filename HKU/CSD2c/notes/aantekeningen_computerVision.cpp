@@ -1,0 +1,5 @@
+/*
+  computer de wereld laten interpeteren dmv camerainput
+
+
+*/

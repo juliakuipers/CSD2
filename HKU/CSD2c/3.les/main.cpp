@@ -40,26 +40,22 @@ static void audioProcess()
 
 int main(int argc,char **argv)
 {
-// bool write = false;
-// if(write == true){
-//   WriteToFile writeFile("outpus.csv",true);
-//     for(int i = 0; i < 500; i++) {
-//       writeFile.write(std::to_string(effect.getEffectSampleM(osc1.getSample())) + "\n");
-//       // effect.calculate(osc.getSample());
-//       //thing thats happening is because of the effect
-//       osc1.genNextSample();
-//       std::cout << "ding \n";
-//
-//     }
-//   }
-// else {
-    jack.setNumberOfInputChannels(2);
-    jack.setNumberOfOutputChannels(2);
-    jack.init(argv[0]);
-    jack.autoConnect();
-    samplerate=jack.getSamplerate();
-    std::cout << "samplerate = " << samplerate << std::endl;
-    std::cout << "running \n";
+  jack.setNumberOfInputChannels(2);
+  jack.setNumberOfOutputChannels(2);
+  jack.init(argv[0]);
+  jack.autoConnect();
+  samplerate=jack.getSamplerate();
+  std::cout << "samplerate = " << samplerate << std::endl;
+  std::cout << "running \n";
+bool write = true;
+if(write == true){
+  WriteToFile writeFile("outpus.csv",true);
+    for(int i = 0; i < 500; i++) {
+      writeFile.write(std::to_string(effect.getEffectSampleM(osc1.getSample())) + "\n");
+      osc1.genNextSample();
+    }
+  }
+else {
     std::thread audioThread(audioProcess);
 
     while (running)
@@ -79,10 +75,12 @@ int main(int argc,char **argv)
           effect.setDryWet();
           case 'b':
           effect.bypass();
+          case 'c':
+          effect.setCurve(3);
         }
       }
       audioThread.join();
       //ending the thread
       return 0;
-    // }
+    }
 }

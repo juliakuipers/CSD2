@@ -6,7 +6,7 @@ Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), 
   // std::cout << "Waveshaper - constructor \n";
   // wtf = new WriteToFile("output.csv", true);
   buffer = new float [bufSize];
-  setCurve(9);
+  setCurve(7);
 }
 
 Waveshaper::~Waveshaper()
@@ -37,15 +37,15 @@ void Waveshaper::setCurve(float k)
 
 float Waveshaper::calculateM(float sample)
 {
-  // std::cout<< "Waveshaper::calculateM - sample = " << sample << std::endl;
-  float f = (sample + 1) / 2 * bufSize;
+  float f = ((sample + 1) / 2) * bufSize;
+  //sample = [-1,1] + 1 = [0,2] / 2 = max 1 * bufSize = scaled to buffer
   //incoming sample gets scaled from [-1,1] to [0,512]
-  //scale the sample so its in [0,2] then scale it to the buffer size 
+  //scale the sample so its in [0,2] then scale it to the buffer size
   int intF = (int) f;
+  //retrieve the int from the scaled sample
   float x = f - intF;
+  //retrieve the .x number from the sample
   float waveshape = interpolate(x,buffer[intF+1],buffer[intF]);
-  //[0,2] to [0,512]
-  // std::cout<< "Waveshaper::calculateM - waveshape = " << waveshape << std::endl;
   return waveshape;
 }
 
