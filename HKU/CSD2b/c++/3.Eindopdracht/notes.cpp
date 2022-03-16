@@ -1,0 +1,9 @@
+/* 
+TODO when starting over 
+make a seperate class for selecting a waveform 
+make a calculation for modulator
+make a mtof 
+maybe make a seperate class only for modulator and carrier in this class make a waveform selector 
+maybe put modulator and carrier in osc 
+
+*/
