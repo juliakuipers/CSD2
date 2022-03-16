@@ -1,7 +1,7 @@
 #include "waveshaper.h"
 #include "math.h"
 
-Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), bufSize(512)
+Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), bufSize(512 )
 {
   // std::cout << "Waveshaper - constructor \n";
   // wtf = new WriteToFile("output.csv", true);
