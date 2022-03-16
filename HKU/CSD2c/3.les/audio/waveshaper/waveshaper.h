@@ -7,9 +7,10 @@ class Waveshaper : public Effect
 public:
   Waveshaper(float freq,float samplerate);
   ~Waveshaper();
-
-  float calculateM(float sample) override;
   void setCurve(float k);
+
+protected:
+  float calculateM(float sample) override;
   float calculateR(float sample) override;
   float calculateL(float sample) override;
 

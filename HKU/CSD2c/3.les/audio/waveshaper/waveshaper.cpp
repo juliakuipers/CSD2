@@ -1,19 +1,14 @@
 #include "waveshaper.h"
 #include "math.h"
 
-Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), bufSize(512 )
+Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), bufSize(4096)
 {
-  // std::cout << "Waveshaper - constructor \n";
-  // wtf = new WriteToFile("output.csv", true);
   buffer = new float [bufSize];
-  setCurve(7);
+  setCurve(0);
 }
 
 Waveshaper::~Waveshaper()
-{
-  // delete wtf;
-  // wtf = nullptr;
-}
+{}
 
 void Waveshaper::setCurve(float k)
 {
@@ -22,8 +17,6 @@ void Waveshaper::setCurve(float k)
   for(int i = 0 ; i<bufSize ; i++)
   {
     // float x = i / bufSize;
-    // std::cout<< "Waveshaper::setCurve - x = " << x << std::endl;
-    // std::cout<< "Waveshaper::setCurve - i = " << i << std::endl;
     // std::cout<< "Waveshaper::setCurve - bufSize = " << bufSize << std::endl;
     //scale i to buffer
     float sigmoid = interpolation(i,bufSize,0);
@@ -52,9 +45,6 @@ float Waveshaper::calculateM(float sample)
 float Waveshaper::interpolation(float x, float high, float low)
 {
   float scale = x / bufSize;
-  // float delta = high - low;
-  // std::cout<< "Waveshaper::interpolation - delta = " << delta << std::endl;
-  // std::cout<< "Waveshaper::interpolation - scale = " << scale << std::endl;
   float interpolate = (scale*2) + -1;
   // std::cout<< "Waveshaper::interpolation - interpolate = " << interpolate << std::endl;
   return interpolate;
