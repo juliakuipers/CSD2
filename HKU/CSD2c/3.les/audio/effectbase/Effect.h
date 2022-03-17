@@ -14,7 +14,7 @@ public:
   float getEffectSampleM(float sample);
   float getEffectSampleL(float sample);
   float getEffectSampleR(float sample);
-  
+
   void setDryWet();
   void setFeedback();
   int bypass();

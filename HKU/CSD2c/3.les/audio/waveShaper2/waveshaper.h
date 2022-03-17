@@ -1,14 +1,17 @@
 #include <iostream>
 #include "math.h"
 #include "writeToFile.h"
+// #include "Effect.h"
 
 class Waveshaper
 {
 public:
-  Waveshaper();
+  Waveshaper(float freq,float samplerate);
   ~Waveshaper();
 
-  float calculate(float sample);
+  float calculateM(float sample);
+  float calculateR(float sample);
+  float calculateL(float sample);
   void setCurve(float k);
 
 protected:
