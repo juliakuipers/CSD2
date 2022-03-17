@@ -19,5 +19,6 @@ private:
   int bufSize;
   float interpolation(float x, float high, float low);
   float interpolate(float sample, float high, float low);
+  int intF;
 
 };

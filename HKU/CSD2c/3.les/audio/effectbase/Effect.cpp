@@ -14,9 +14,10 @@ Effect::~Effect()
 
 float Effect::getEffectSampleM(float sample)
 {
-  // std::cout << "Effect::getEffectSampleM - sample = " << sample << std::endl;
-
-  if(onoff == 1) return calculateM(sample*drywet) + sample*(1-drywet);
+  // std::cout << "Effect::getEffectSampleM - calculateM(sample) = " << calculateM(sample) << std::endl;
+  float s = calculateM(sample*drywet) + sample*(1-drywet);
+  std::cout << "Effect::getEffectSampleM - s = " << s << std::endl;
+  if(onoff == 1) return s;
   else return sample;
 }
 

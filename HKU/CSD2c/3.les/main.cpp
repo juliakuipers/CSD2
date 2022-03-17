@@ -16,7 +16,7 @@ unsigned long chunksize = 256;
 int monoStereo = 1;
 Sine osc1(440,samplerate);
 Sine osc2(440,samplerate);
-Tremolo effect(440,samplerate);
+Waveshaper effect(440,samplerate);
 
 bool running = true;
 static void audioProcess()
@@ -51,7 +51,9 @@ bool write = true;
 if(write == true){
   WriteToFile writeFile("output.csv",true);
     for(int i = 0; i < 500; i++) {
-      writeFile.write(std::to_string(effect.getEffectSampleM(osc1.getSample())) + "\n");
+      float s  = effect.getEffectSampleM(osc1.getSample());
+      writeFile.write(std::to_string(s) + "\n");
+      std::cout << "main  - s = " << s << std::endl;
       osc1.genNextSample();
     }
   }
@@ -65,9 +67,9 @@ else {
         case 'q':
           running = false;
           break;
-          case 't':
-              effect.setModFreq();
-          break;
+          // case 't':
+          //     effect.setModFreq();
+          // break;
           case 's':
           monoStereo *= -1;
           break;
