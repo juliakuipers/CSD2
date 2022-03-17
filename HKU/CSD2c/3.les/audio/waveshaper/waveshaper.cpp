@@ -39,7 +39,7 @@ float Waveshaper::calculateM(float sample)
   float x = f - intF;
   //retrieve the .x number from the sample
   // std::cout << "Waveshaper::interpolate - buffer[intF+1] & buffer[intF] = " << buffer[intF+1] << " & " << buffer[intF] << std::endl;
-  float waveshape = interpolate(x,buffer[intF+1],buffer[intF]);
+  float waveshape = inter(x,buffer[intF+1],buffer[intF]);
   std::cout << "Waveshaper::interpolate - waveshape = " << waveshape << std::endl;
   return waveshape;
 }
@@ -49,10 +49,10 @@ float Waveshaper::interpolation(float x, float high, float low)
   float scale = x / bufSize;
   float interpolate = (scale*2) + -1;
   // std::cout<< "Waveshaper::interpolation - interpolate = " << interpolate << std::endl;
-  return interpolate;
+  return inter(interpolate,1,-1);
 }
 
-float Waveshaper::interpolate(float sample, float high, float low)
+float Waveshaper::inter(float sample, float high, float low)
 {
   // std::cout << "Waveshaper::interpolate - high & low = " << high << " & " << low << std::endl;
   float delta = high-low;
