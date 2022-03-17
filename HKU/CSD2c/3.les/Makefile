@@ -6,7 +6,7 @@ SRC_PROJECT = main.cpp
 # the directory to the folder with the shared modules
 SHAREDCODE_PATH = audio/
 # the modules to include
-MODULES = chorus circularBuffer delay effectbase oscillators tremolo utilities waveshaper
+MODULES = chorus circularBuffer delay effectbase oscillators tremolo utilities waveShaper2
 
 
 # append shared code path prefix to modules

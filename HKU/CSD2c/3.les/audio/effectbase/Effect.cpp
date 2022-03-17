@@ -2,7 +2,7 @@
 // #include "square.h"
 // #include "sine.h"
 
-Effect::Effect(float freq, float samplerate) : drywet(1), feedback(0), onoff(0)
+Effect::Effect(float freq, float samplerate) : drywet(1), feedback(0), onoff(1)
 {
   this -> freq = freq;
   this -> samplerate = samplerate;
