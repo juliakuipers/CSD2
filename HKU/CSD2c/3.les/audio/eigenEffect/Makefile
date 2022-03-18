@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
 LDFLAGS= -ljack
-SOURCE=freqShifter.o main.o 
+SOURCE=main.o writeToFile.o
 TARGET=e
 
 $(TARGET) : $(SOURCE)

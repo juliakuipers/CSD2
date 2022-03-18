@@ -1,65 +1,61 @@
 #include "waveshaper.h"
 #include "math.h"
 
-Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), bufSize(4096)
+Waveshaper::Waveshaper(float freq, float samplerate) : Effect(freq,samplerate), bufSize(512)
 {
+  std::cout << "Waveshaper - constructor \n";
   buffer = new float [bufSize];
-  setCurve(1);
+  setCurve(20);
 }
 
 Waveshaper::~Waveshaper()
-{}
+{
+  std::cout << "Waveshaper - destructor \n";
+  delete buffer;
+  buffer = nullptr;
+}
 
 void Waveshaper::setCurve(float k)
 {
-  float normalize = 1 / atan(k);
-  // std::cout<< "Waveshaper::setCurve - normalize = " << normalize << std::endl;
-  for(int i = 0 ; i<bufSize ; i++)
+  float normalize = 1.0f / atan(k);
+  for(int i = 0; i < bufSize; i++)
   {
-    // float x = i / bufSize;
-    // std::cout<< "Waveshaper::setCurve - bufSize = " << bufSize << std::endl;
-    //scale i to buffer
-    float sigmoid = interpolation(i,bufSize,0);
-    buffer[i] = normalize * atan(k*sigmoid);
-    //fill buffer with sigmoid function
-    // wtf->write(std::to_string(normalize * atan(k*sigmoid)) + "\n");
-    //scale to buffer so buffer is 512 and the sample (bv 0.83) gets scaled to the buffer
-    //
+    float y = interpolation(i,0,bufSize,-1,1);
+    // wtf->write(std::to_string(normalize * atan(k*y)) + "\n");
+    buffer[i] = normalize * atan(k*y);
   }
 }
 
 float Waveshaper::calculateM(float sample)
 {
-  float f = ((sample + 1) / 2) * bufSize;
-  //sample = [-1,1] + 1 = [0,2] / 2 = max 1 * bufSize = scaled to buffer
-  //incoming sample gets scaled from [-1,1] to [0,512]
-  //scale the sample so its in [0,2] then scale it to the buffer size
-  intF = (int) f;
-  //retrieve the int from the scaled sample
-  float x = f - intF;
-  //retrieve the .x number from the sample
-  // std::cout << "Waveshaper::interpolate - buffer[intF+1] & buffer[intF] = " << buffer[intF+1] << " & " << buffer[intF] << std::endl;
-  float waveshape = inter(x,buffer[intF+1],buffer[intF]);
-  std::cout << "Waveshaper::interpolate - waveshape = " << waveshape << std::endl;
-  return waveshape;
+  sample += 1.0;
+  float x = scale(sample,0,2.1,0,bufSize);
+  unsigned int intX = (int) x;
+  float s = interpolation(x,intX,intX+1,buffer[intX],buffer[intX+1]);
+  return s;
 }
 
-float Waveshaper::interpolation(float x, float high, float low)
+float Waveshaper::scale(float y, float x1From, float x2From, float x1To, float x2To)
 {
-  float scale = x / bufSize;
-  float interpolate = (scale*2) + -1;
-  // std::cout<< "Waveshaper::interpolation - interpolate = " << interpolate << std::endl;
-  return inter(interpolate,1,-1);
+  float delta = x2From - x1From;
+  float yScaled = y/delta;
+  std::cout << yScaled << std::endl;
+  float newBufSize = x2To - x1To;
+  float scale = (yScaled * newBufSize) + x1To;
+  return scale;
 }
 
-float Waveshaper::inter(float sample, float high, float low)
+float Waveshaper::interpolation(float x, float x1, float x2, float y1, float y2)
 {
-  // std::cout << "Waveshaper::interpolate - high & low = " << high << " & " << low << std::endl;
-  float delta = high-low;
-  // std::cout << "Waveshaper::interpolate - delta = " << delta << std::endl;
-  // std::cout << "Waveshaper::interpolate - (sample * delta) + low = " << (sample * delta) + low << std::endl;
-  return (sample * delta) + low;
-  // return (high + ((low - high) * ((sample-intF) / ((intF+1)-intF))));
+  float y = y1 + (y2-y1) * ((x-x1) / (x2-x1));
+  // interpolation(scaledSample,i,i+1,buffer[i],buffer[i+1])
+  // std::cout << "Waveshaper::interpolation - x = " << x << std::endl;
+  // std::cout << "Waveshaper::interpolation - x1 = " <<x1 << std::endl;
+  // std::cout << "Waveshaper::interpolation - x2 = " << x2 << std::endl;
+  // std::cout << "Waveshaper::interpolation - y1 = " << y1 << std::endl;
+  // std::cout << "Waveshaper::interpolation - y2 = " << y2 << std::endl;
+  // std::cout << "Waveshaper::interpolation - y = " << y << std::endl;
+  return y;
 }
 
 float Waveshaper::calculateL(float sample)
@@ -72,6 +68,7 @@ float Waveshaper::calculateR(float sample)
   return 0;
 }
 
-//first make the interpolation
-//make a buffer which has just some numbers in it
-//then the arctan sigmoid function
+// y1 and y2 are the low and the high value
+// x1 and x2 are the i value and the i + 1 value from the buffer
+// x is the .x value inbetween x1 and x2
+// y is the output

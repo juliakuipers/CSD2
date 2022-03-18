@@ -2,6 +2,6 @@
 
 int main()
 {
-  Waveshaper waveshaper;
-  waveshaper.calculateM(-0.38);
+  Waveshaper effect(440,44100);
+  effect.calculateM(-0.24);
 }
