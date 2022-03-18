@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS = -I/usr/local/include -Wall -std=c++1z
 LDFLAGS= -ljack
-SOURCE=main.o writeToFile.o
+SOURCE=main.o writeToFile.o pickSample.o
 TARGET=e
 
 $(TARGET) : $(SOURCE)
