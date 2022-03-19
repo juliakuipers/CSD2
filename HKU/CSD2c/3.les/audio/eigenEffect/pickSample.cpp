@@ -1,12 +1,15 @@
 #include "pickSample.h"
 AudioFile<double> audioFile;
 
-PickSample::PickSample() : numSamples(audioFile.getNumSamplesPerChannel()), bufSize(numSamples)
+PickSample::PickSample()
 {
   std::cout << "PickSample - Constructor " << std::endl;
   audioFile.load ("../eigenEffect/samples/OH.wav");
+  numSamples = audioFile.getNumSamplesPerChannel();
+  bufSize = numSamples;
   audioFile.printSummary();
   buffer = new float[bufSize];
+  std::cout << "PickSample::Constructor - bufSize = " << bufSize << std::endl;
   fillBuffer();
 }
 
@@ -18,20 +21,17 @@ PickSample::~PickSample()
 float PickSample::calculateM(float sample)
 {
   sample += 1;
-  //sample goes from [-1,1]
-  //sample += 1 so [0,2]
   float s = scale(sample,0,2.1,0,numSamples);
   return s;
 }
 
 float PickSample::scale(float sample, float x1From, float x2From, float x1To, float x2To)
 {
-  //scale sample to buffersize so [0,numSamples]
+  //scale sample to buffersize so [0,numSamples
   float xFromDistance = x2From - x1From;
   float sampleScaled = sample/xFromDistance;
   float xToDistance = x2To - x1To;
   float x = (sampleScaled * xToDistance) + x1To;
-  std::cout << "PickSample::scale - x = " << x << std::endl;
   return x;
 }
 
