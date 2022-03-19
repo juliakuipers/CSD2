@@ -1,6 +1,0 @@
-/* 
-TODO when starting over 
-make a seperate class for selecting a waveform 
-
-
-*/

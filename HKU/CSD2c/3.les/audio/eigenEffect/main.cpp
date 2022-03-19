@@ -4,7 +4,7 @@
 int main()
 {
   PickSample ps;
-  ps.calculateM(0.5);
+  ps.calculateM(-0.3);
   // WriteToFile writeFile("output.csv",true);
   // std::cout << "hi \n";
   // audioFile.load ("../eigenEffect/samples/OH.wav");

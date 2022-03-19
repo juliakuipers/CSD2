@@ -8,6 +8,7 @@
 #include "waveshaper.h"
 #include "Tremolo.h"
 #include "writeToFile.h"
+#include "pickSample.h"
 
 
 JackModule jack;
@@ -16,7 +17,7 @@ unsigned long chunksize = 256;
 int monoStereo = 1;
 Sine osc1(440,samplerate);
 Sine osc2(440,samplerate);
-Chorus effect(440,samplerate);
+PickSample effect(440,samplerate);
 
 bool running = true;
 static void audioProcess()
@@ -40,6 +41,7 @@ static void audioProcess()
 
 int main(int argc,char **argv)
 {
+  effect.fillBuffer();
   jack.setNumberOfInputChannels(2);
   jack.setNumberOfOutputChannels(2);
   jack.init(argv[0]);
@@ -47,13 +49,12 @@ int main(int argc,char **argv)
   samplerate=jack.getSamplerate();
   std::cout << "samplerate = " << samplerate << std::endl;
   std::cout << "running \n";
-bool write = false;
+bool write = true;
 if(write == true){
   WriteToFile writeFile("output.csv",true);
-    for(int i = 0; i < 500; i++) {
+    for(int i = 0; i < 30319; i++) {
       float s  = effect.getEffectSampleM(osc1.getSample());
       writeFile.write(std::to_string(s) + "\n");
-      // std::cout << "main  - s = " << s << std::endl;
       osc1.genNextSample();
     }
   }
