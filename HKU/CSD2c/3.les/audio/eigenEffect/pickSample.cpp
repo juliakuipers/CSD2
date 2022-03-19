@@ -1,17 +1,18 @@
 #include "pickSample.h"
 AudioFile<float> audioFile;
+using namespace std;
 
 PickSample::PickSample(float freq, float samplerate) : Effect(freq,samplerate)
 {
   audioFile.load ("../3.les/audio/eigenEffect/samples/VOX.wav");
   audioFile.printSummary();
   numSamples = audioFile.getNumSamplesPerChannel();
-  std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
+  cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
   numSamples = 80000;
   bufSize = numSamples;
   buffer = new float[bufSize];
   fillBuffer();
-  // std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
+  // cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
 }
 
 PickSample::~PickSample()
@@ -19,44 +20,44 @@ PickSample::~PickSample()
 
 float PickSample::calculateM(float sample)
 {
-  // std::cout << "PickSample::calculateM - sample =  = " << sample << std::endl;
+  // cout << "PickSample::calculateM - sample =  = " << sample << endl;
   sample += 1;
-  // std::cout << "PickSample::calculateM - sample +=1 =  = " << sample << std::endl;
-  // std::cout << "PickSample::calculateM - numSamples =  = " << numSamples << std::endl;
-  float s = scale(sample,0,2,0,numSamples);
-  // std::cout << "PickSample::calculateM - s =  = " << s << std::endl;
+  // cout << "PickSample::calculateM - sample +=1 =  = " << sample << endl;
+  // std::cout << "PickSample::calculateM - numSamples =  = " << numSamples << endl;
+  float s = scale(sample,0,2.1,0,numSamples);
+  // cout << "PickSample::calculateM - s =  = " << s << endl;
   int intS = (int) s;
-  // std::cout << "PickSample::calculateM - intS =  = " << intS << std::endl;
+  // cout << "PickSample::calculateM - intS =  = " << intS << endl;
   float y = interpolate(s,intS,intS+1,buffer[intS],buffer[intS+1]);
-  // std::cout << "PickSample::calculateM - buffer[intS] and buffer[intS+1] = " << buffer[intS] << " and " << buffer[intS+1] << std::endl;
-  // std::cout << "PickSample::calculateM - y =  = " << y << std::endl;
+  // cout << "PickSample::calculateM - buffer[intS] and buffer[intS+1] = " << buffer[intS] << " and " << buffer[intS+1] << endl;
+  // cout << "PickSample::calculateM - y =  = " << y << endl;
   return y;
 }
 
 float PickSample::scale(float sample, float x1From, float x2From, float x1To, float x2To)
 {
   float xFromDistance = x2From - x1From;
-  // std::cout << "PickSample::scale - xFromDistance = " << xFromDistance << std::endl;
+  // cout << "PickSample::scale - xFromDistance = " << xFromDistance << endl;
   float sampleScaled = sample/xFromDistance;
-  // std::cout << "PickSample::scale - sampleScaled = " << sampleScaled << std::endl;
-  // std::cout << "PickSample::scale - x1To = " << x1To << std::endl;
-  // std::cout << "PickSample::scale - x2To = " << x2To << std::endl;
+  // cout << "PickSample::scale - sampleScaled = " << sampleScaled << endl;
+  // cout << "PickSample::scale - x1To = " << x1To << endl;
+  // cout << "PickSample::scale - x2To = " << x2To << endl;
   float xToDistance = x2To - x1To;
-  // std::cout << "PickSample::scale - xToDistance = " << xToDistance << std::endl;
+  // cout << "PickSample::scale - xToDistance = " << xToDistance << endl;
   float x = (sampleScaled * xToDistance) + x1To;
-  // std::cout << "PickSample::scale - x = " << x << std::endl;
+  // cout << "PickSample::scale - x = " << x << endl;
   return x;
 }
 
 float PickSample::interpolate(float sample, float x1, float x2, float y1, float y2)
 {
   float y = y1 + (y2-y1) * ((sample-x1) / (x2-x1));
-  // std::cout << "Waveshaper::interpolation - sample = " << sample << std::endl;
-  // std::cout << "Waveshaper::interpolation - x1 = " <<x1 << std::endl;
-  // std::cout << "Waveshaper::interpolation - x2 = " << x2 << std::endl;
-  // std::cout << "Waveshaper::interpolation - y1 = " << y1 << std::endl;
-  // std::cout << "Waveshaper::interpolation - y2 = " << y2 << std::endl;
-  // std::cout << "Waveshaper::interpolation - y = " << y << std::endl;
+  // cout << "Waveshaper::interpolation - sample = " << sample << endl;
+  // cout << "Waveshaper::interpolation - x1 = " <<x1 << endl;
+  // cout << "Waveshaper::interpolation - x2 = " << x2 << endl;
+  // cout << "Waveshaper::interpolation - y1 = " << y1 << endl;
+  // cout << "Waveshaper::interpolation - y2 = " << y2 << endl;
+  // cout << "Waveshaper::interpolation - y = " << y << endl;
   return y;
 }
 
@@ -64,15 +65,16 @@ void PickSample::fillBuffer()
 {
   int channel = 0;
   audioFile.setBitDepth(16);
-  std::cout << "PickSample::fillBuffer - numSamples = " << numSamples <<std::endl;
+  cout << "PickSample::fillBuffer - numSamples = " << numSamples <<endl;
   audioFile.setAudioBufferSize(1, numSamples);
   audioFile.printSummary();
   for(int i = 0; i < numSamples; i++)
   {
     float currentSample = audioFile.samples[channel][i];
-    // std::cout << "PickSample::fillBuffer - currentSample = " << currentSample << std::fixed << "\n";
+    // cout << "PickSample::fillBuffer - currentSample = " << currentSample << fixed << "\n";
     buffer[i] = currentSample;
   }
+  sort(buffer,buffer+numSamples);
 }
 
 float PickSample::calculateL(float sample)

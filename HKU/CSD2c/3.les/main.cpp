@@ -4,6 +4,7 @@
 #include "jack_moduleStereo.h"
 #include "square.h"
 #include "sine.h"
+#include "saw.h"
 #include "chorus.h"
 #include "waveshaper.h"
 #include "Tremolo.h"
@@ -15,7 +16,7 @@ JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
 int monoStereo = 1;
-Sine osc1(0.2,samplerate);
+Sine osc1(440,samplerate);
 Sine osc2(440,samplerate);
 PickSample effect(440,samplerate);
 
@@ -51,7 +52,7 @@ int main(int argc,char **argv)
 bool write = false;
 if(write == true){
   WriteToFile writeFile("output.csv",true);
-    for(int i = 0; i < 20000; i++) {
+    for(int i = 0; i < 500; i++) {
       float s  = effect.getEffectSampleM(osc1.getSample());
       writeFile.write(std::to_string(s) + "\n");
       osc1.genNextSample();
