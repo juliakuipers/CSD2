@@ -15,7 +15,7 @@ JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
 int monoStereo = 1;
-Sine osc1(440,samplerate);
+Sine osc1(4,samplerate);
 Sine osc2(440,samplerate);
 PickSample effect(440,samplerate);
 
@@ -41,7 +41,6 @@ static void audioProcess()
 
 int main(int argc,char **argv)
 {
-  effect.fillBuffer();
   jack.setNumberOfInputChannels(2);
   jack.setNumberOfOutputChannels(2);
   jack.init(argv[0]);
@@ -52,7 +51,7 @@ int main(int argc,char **argv)
 bool write = false;
 if(write == true){
   WriteToFile writeFile("output.csv",true);
-    for(int i = 0; i < 512; i++) {
+    for(int i = 0; i < 20000; i++) {
       float s  = effect.getEffectSampleM(osc1.getSample());
       writeFile.write(std::to_string(s) + "\n");
       osc1.genNextSample();

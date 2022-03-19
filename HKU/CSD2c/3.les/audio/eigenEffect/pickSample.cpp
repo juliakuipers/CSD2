@@ -3,21 +3,18 @@ AudioFile<float> audioFile;
 
 PickSample::PickSample(float freq, float samplerate) : Effect(freq,samplerate)
 {
-  std::cout << "PickSample::Constructor " << std::endl;
   audioFile.load ("../3.les/audio/eigenEffect/samples/OH.wav");
-  audioFile.setAudioBufferSize (1, 512);
-  fillBuffer();
-  numSamples = 512;
-  std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
-  bufSize = numSamples;
   audioFile.printSummary();
+  numSamples = audioFile.getNumSamplesPerChannel();
+  numSamples = 20000;
+  bufSize = numSamples;
   buffer = new float[bufSize];
+  fillBuffer();
+  std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
 }
 
 PickSample::~PickSample()
-{
-  std::cout << "PickSample::Destructor " << std::endl;
-}
+{}
 
 float PickSample::calculateM(float sample)
 {
@@ -65,12 +62,13 @@ float PickSample::interpolate(float sample, float x1, float x2, float y1, float 
 void PickSample::fillBuffer()
 {
   int channel = 0;
-  audioFile.setBitDepth (8);
+  audioFile.setBitDepth(16);
+  std::cout << "PickSample::fillBuffer - numSamples = " << numSamples <<std::endl;
+  audioFile.setAudioBufferSize(1, numSamples);
+  audioFile.printSummary();
   for(int i = 0; i < numSamples; i++)
   {
     float currentSample = audioFile.samples[channel][i];
-    // currentSample += 1;
-    // float b = scale(currentSample,0,2,0,numSamples);
     std::cout << "PickSample::fillBuffer - currentSample = " << currentSample << std::fixed << "\n";
     buffer[i] = currentSample;
   }
