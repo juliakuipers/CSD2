@@ -2,6 +2,8 @@
 #include "AudioFile.h"
 // #include "Effect.h"
 #include "writeToFile.h"
+#include <vector>
+using namespace std;
 
 class PickSample //: public Effect
 {
@@ -19,8 +21,9 @@ protected:
 
 
 private:
+  vector<float> v;
   int numSamples = 0;
-  float* buffer = nullptr;
+  // float* buffer = nullptr;
   int bufSize = 0;
   void fillBuffer();
   float scale(float sample, float x1From, float x2From, float x1To, float x2To);

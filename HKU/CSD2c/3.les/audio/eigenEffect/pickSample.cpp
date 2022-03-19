@@ -1,6 +1,5 @@
 #include "pickSample.h"
 AudioFile<float> audioFile;
-using namespace std;
 
 PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
 {
@@ -11,8 +10,8 @@ PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
   numSamples = audioFile.getNumSamplesPerChannel();
   cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
   numSamples -= 1;
-  bufSize = numSamples;
-  buffer = new float[bufSize];
+  // bufSize = numSamples;
+  // buffer = new float[bufSize];
   fillBuffer();
 }
 
@@ -27,22 +26,16 @@ float PickSample::calculateM(float sample)
   sample += 1;
   float s = scale(sample,0,2.1,0,numSamples);
   int intS = (int) s;
-  float y = interpolate(s,intS,intS+1,buffer[intS],buffer[intS+1]);
-  return y;
+  // float y = interpolate(s,intS,intS+1,buffer[intS],buffer[intS+1]);
+  return s;
 }
 
 float PickSample::scale(float sample, float x1From, float x2From, float x1To, float x2To)
 {
   float xFromDistance = x2From - x1From;
-  // cout << "PickSample::scale - xFromDistance = " << xFromDistance << endl;
   float sampleScaled = sample/xFromDistance;
-  // cout << "PickSample::scale - sampleScaled = " << sampleScaled << endl;
-  // cout << "PickSample::scale - x1To = " << x1To << endl;
-  // cout << "PickSample::scale - x2To = " << x2To << endl;
   float xToDistance = x2To - x1To;
-  // cout << "PickSample::scale - xToDistance = " << xToDistance << endl;
   float x = (sampleScaled * xToDistance) + x1To;
-  // cout << "PickSample::scale - x = " << x << endl;
   return x;
 }
 
@@ -56,20 +49,26 @@ void PickSample::fillBuffer()
 {
   int channel = 0;
   audioFile.setBitDepth(24);
-  cout << "PickSample::fillBuffer - numSamples = " << numSamples <<endl;
+  // cout << "PickSample::fillBuffer - numSamples = " << numSamples <<endl;
   audioFile.printSummary();
   for(int i = 0; i < numSamples; i++)
   {
     float currentSample = audioFile.samples[channel][i];
-    if(currentSample != 0.0) {cout << "currentSample != 0 - value = " << currentSample << fixed << endl;}
+    if(currentSample > 9.97782e-05 || currentSample < -9.95398e-05) {v.push_back(currentSample);}
     // wtf->write(std::to_string(currentSample) + "\n");
-    buffer[i] = currentSample;
+    // buffer[i] = currentSample;
   }
-  sort(buffer,buffer+numSamples);
-  for(int i = 0; i < numSamples; i++)
+  // sort(buffer,buffer+numSamples);
+  sort(v.begin(), v.end());
+  // for(int i = 0; i < numSamples; i++)
+  // {
+  //   // cout << "PickSample::fillBuffer - buffer[i] = " << buffer[i] << fixed << "\n";
+  //   wtf->write(std::to_string(buffer[i]) + "\n");
+  // }
+  for (auto i = v.begin(); i != v.end(); ++i)
   {
-    // cout << "PickSample::fillBuffer - buffer[i] = " << buffer[i] << fixed << "\n";
-    wtf->write(std::to_string(buffer[i]) + "\n");
+    cout << *i <<"\n ";
+    wtf->write(std::to_string(*i) + "\n");
   }
 }
 
