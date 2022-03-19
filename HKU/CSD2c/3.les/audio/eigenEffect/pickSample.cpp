@@ -5,7 +5,7 @@ PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
 {
   wtf = new WriteToFile("output.csv",true);
   // audioFile.load ("../3.les/audio/eigenEffect/samples/PAD.wav");
-  audioFile.load ("../eigenEffect/samples/CLAP.wav");
+  audioFile.load ("../eigenEffect/samples/OH.wav");
   audioFile.printSummary();
   numSamples = audioFile.getNumSamplesPerChannel();
   cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
@@ -65,9 +65,16 @@ void PickSample::fillBuffer()
   //   // cout << "PickSample::fillBuffer - buffer[i] = " << buffer[i] << fixed << "\n";
   //   wtf->write(std::to_string(buffer[i]) + "\n");
   // }
+  float begin = *v.begin();
+  float end = *v.end();
+  // float end = *v.end();
   for (auto i = v.begin(); i != v.end(); ++i)
   {
-    cout << *i <<"\n ";
+    cout << "PickSample::fillBuffer - v.i* =" << *i <<"\n ";
+    v.erase(v.begin());
+    cout << "PickSample::fillBuffer - begin =" << begin <<"\n ";
+    cout << "PickSample::fillBuffer - end = " << end <<"\n \n";
+    v.push_back(scale(*i, begin, end, -1, 1));
     wtf->write(std::to_string(*i) + "\n");
   }
 }
