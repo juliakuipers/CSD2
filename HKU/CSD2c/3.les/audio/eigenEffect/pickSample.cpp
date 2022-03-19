@@ -3,14 +3,15 @@ AudioFile<float> audioFile;
 
 PickSample::PickSample(float freq, float samplerate) : Effect(freq,samplerate)
 {
-  audioFile.load ("../3.les/audio/eigenEffect/samples/OH.wav");
+  audioFile.load ("../3.les/audio/eigenEffect/samples/VOX.wav");
   audioFile.printSummary();
   numSamples = audioFile.getNumSamplesPerChannel();
-  numSamples = 20000;
+  std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
+  numSamples = 80000;
   bufSize = numSamples;
   buffer = new float[bufSize];
   fillBuffer();
-  std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
+  // std::cout << "PickSample::Constructor - numSamples = " << numSamples <<std::endl;
 }
 
 PickSample::~PickSample()
@@ -69,7 +70,7 @@ void PickSample::fillBuffer()
   for(int i = 0; i < numSamples; i++)
   {
     float currentSample = audioFile.samples[channel][i];
-    std::cout << "PickSample::fillBuffer - currentSample = " << currentSample << std::fixed << "\n";
+    // std::cout << "PickSample::fillBuffer - currentSample = " << currentSample << std::fixed << "\n";
     buffer[i] = currentSample;
   }
 }

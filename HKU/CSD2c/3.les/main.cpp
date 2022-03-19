@@ -15,7 +15,7 @@ JackModule jack;
 unsigned long samplerate=44100;
 unsigned long chunksize = 256;
 int monoStereo = 1;
-Sine osc1(4,samplerate);
+Sine osc1(0.2,samplerate);
 Sine osc2(440,samplerate);
 PickSample effect(440,samplerate);
 
