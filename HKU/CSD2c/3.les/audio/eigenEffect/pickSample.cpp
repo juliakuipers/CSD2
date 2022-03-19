@@ -4,6 +4,7 @@ AudioFile<float> audioFile;
 PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
 {
   wtf = new WriteToFile("output.csv",true);
+  v.clear();
   // audioFile.load ("../3.les/audio/eigenEffect/samples/PAD.wav");
   audioFile.load ("../eigenEffect/samples/OH.wav");
   audioFile.printSummary();
@@ -19,6 +20,7 @@ PickSample::~PickSample()
 {
   delete wtf;
   wtf = nullptr;
+  v.clear();
 }
 
 float PickSample::calculateM(float sample)
@@ -32,10 +34,15 @@ float PickSample::calculateM(float sample)
 
 float PickSample::scale(float sample, float x1From, float x2From, float x1To, float x2To)
 {
+  // cout << "PickSample::scale - sample =" << sample <<"\n ";
   float xFromDistance = x2From - x1From;
+  // cout << "PickSample::scale - xFromDistance =" << xFromDistance <<"\n ";
   float sampleScaled = sample/xFromDistance;
+  // cout << "PickSample::scale - sampleScaled =" << sampleScaled <<"\n ";
   float xToDistance = x2To - x1To;
+  // cout << "PickSample::scale - xToDistance =" << xToDistance <<"\n ";
   float x = (sampleScaled * xToDistance) + x1To;
+  // cout << "PickSample::scale - x =" << x <<"\n \n";
   return x;
 }
 
@@ -54,28 +61,25 @@ void PickSample::fillBuffer()
   for(int i = 0; i < numSamples; i++)
   {
     float currentSample = audioFile.samples[channel][i];
+    cout << "PickSample::fillBuffer - currentSample = " << currentSample <<"\n ";
+    //currentSample is not right, somewhere while retrieving it something goes wrong
+    cout << "PickSample::fillBuffer - channel = " << channel <<"\n ";
+    cout << "PickSample::fillBuffer - i = " << i <<"\n \n ";
+
     if(currentSample > 9.97782e-05 || currentSample < -9.95398e-05) {v.push_back(currentSample);}
     // wtf->write(std::to_string(currentSample) + "\n");
-    // buffer[i] = currentSample;
   }
-  // sort(buffer,buffer+numSamples);
   sort(v.begin(), v.end());
-  // for(int i = 0; i < numSamples; i++)
-  // {
-  //   // cout << "PickSample::fillBuffer - buffer[i] = " << buffer[i] << fixed << "\n";
-  //   wtf->write(std::to_string(buffer[i]) + "\n");
-  // }
   float begin = *v.begin();
-  float end = *v.end();
-  // float end = *v.end();
-  for (auto i = v.begin(); i != v.end(); ++i)
+  float back = v.back();
+  for (auto j = v.begin(); j != v.end(); ++j)
   {
-    cout << "PickSample::fillBuffer - v.i* =" << *i <<"\n ";
     v.erase(v.begin());
-    cout << "PickSample::fillBuffer - begin =" << begin <<"\n ";
-    cout << "PickSample::fillBuffer - end = " << end <<"\n \n";
-    v.push_back(scale(*i, begin, end, -1, 1));
-    wtf->write(std::to_string(*i) + "\n");
+    // cout << "PickSample::fillBuffer - begin =" << begin <<"\n ";
+    // cout << "PickSample::fillBuffer - back = " << back <<"\n";
+    // cout << "PickSample::fillBuffer - v.i* =" << *i <<"\n \n ";
+    v.push_back(scale(*j, begin, back, -1, 1));
+    wtf->write(std::to_string(*j) + "\n");
   }
 }
 
@@ -88,7 +92,3 @@ float PickSample::calculateR(float sample)
 {
   return 0;
 }
-
-//first i should know how many times 0 is in the sample
-//i could make 2 buffers
-//i'm not sure if i can resize the buffer
