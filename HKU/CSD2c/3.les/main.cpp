@@ -29,8 +29,8 @@ static void audioProcess()
       jack.readSamples(inBuffer,chunksize);
       for(unsigned int i = 0 ; i<chunksize ; i++)
       {
-        outBuffer[2*i] = effect.getEffectSampleL(osc1.getSample())*amp;
-        outBuffer[2*i+1] = effect.getEffectSampleR(osc1.getSample())*amp;
+        outBuffer[2*i] = effect.getEffectSampleM(osc1.getSample())*amp;
+        outBuffer[2*i+1] = effect.getEffectSampleM(osc1.getSample())*amp;
         osc1.genNextSample();
         // osc2.genNextSample();
         }
@@ -49,10 +49,10 @@ int main(int argc,char **argv)
   samplerate=jack.getSamplerate();
   std::cout << "samplerate = " << samplerate << std::endl;
   std::cout << "running \n";
-bool write = true;
+bool write = false;
 if(write == true){
   WriteToFile writeFile("output.csv",true);
-    for(int i = 0; i < 30319; i++) {
+    for(int i = 0; i < 512; i++) {
       float s  = effect.getEffectSampleM(osc1.getSample());
       writeFile.write(std::to_string(s) + "\n");
       osc1.genNextSample();
