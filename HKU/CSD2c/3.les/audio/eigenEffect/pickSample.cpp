@@ -2,35 +2,32 @@
 AudioFile<float> audioFile;
 using namespace std;
 
-PickSample::PickSample(float freq, float samplerate) : Effect(freq,samplerate)
+PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
 {
-  audioFile.load ("../3.les/audio/eigenEffect/samples/VOX.wav");
+  wtf = new WriteToFile("output.csv",true);
+  // audioFile.load ("../3.les/audio/eigenEffect/samples/PAD.wav");
+  audioFile.load ("../eigenEffect/samples/CLAP.wav");
   audioFile.printSummary();
   numSamples = audioFile.getNumSamplesPerChannel();
   cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
-  numSamples = 80000;
+  numSamples -= 1;
   bufSize = numSamples;
   buffer = new float[bufSize];
   fillBuffer();
-  // cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
 }
 
 PickSample::~PickSample()
-{}
+{
+  delete wtf;
+  wtf = nullptr;
+}
 
 float PickSample::calculateM(float sample)
 {
-  // cout << "PickSample::calculateM - sample =  = " << sample << endl;
   sample += 1;
-  // cout << "PickSample::calculateM - sample +=1 =  = " << sample << endl;
-  // std::cout << "PickSample::calculateM - numSamples =  = " << numSamples << endl;
   float s = scale(sample,0,2.1,0,numSamples);
-  // cout << "PickSample::calculateM - s =  = " << s << endl;
   int intS = (int) s;
-  // cout << "PickSample::calculateM - intS =  = " << intS << endl;
   float y = interpolate(s,intS,intS+1,buffer[intS],buffer[intS+1]);
-  // cout << "PickSample::calculateM - buffer[intS] and buffer[intS+1] = " << buffer[intS] << " and " << buffer[intS+1] << endl;
-  // cout << "PickSample::calculateM - y =  = " << y << endl;
   return y;
 }
 
@@ -52,29 +49,28 @@ float PickSample::scale(float sample, float x1From, float x2From, float x1To, fl
 float PickSample::interpolate(float sample, float x1, float x2, float y1, float y2)
 {
   float y = y1 + (y2-y1) * ((sample-x1) / (x2-x1));
-  // cout << "Waveshaper::interpolation - sample = " << sample << endl;
-  // cout << "Waveshaper::interpolation - x1 = " <<x1 << endl;
-  // cout << "Waveshaper::interpolation - x2 = " << x2 << endl;
-  // cout << "Waveshaper::interpolation - y1 = " << y1 << endl;
-  // cout << "Waveshaper::interpolation - y2 = " << y2 << endl;
-  // cout << "Waveshaper::interpolation - y = " << y << endl;
   return y;
 }
 
 void PickSample::fillBuffer()
 {
   int channel = 0;
-  audioFile.setBitDepth(16);
+  audioFile.setBitDepth(24);
   cout << "PickSample::fillBuffer - numSamples = " << numSamples <<endl;
-  audioFile.setAudioBufferSize(1, numSamples);
   audioFile.printSummary();
   for(int i = 0; i < numSamples; i++)
   {
     float currentSample = audioFile.samples[channel][i];
-    // cout << "PickSample::fillBuffer - currentSample = " << currentSample << fixed << "\n";
+    if(currentSample != 0.0) {cout << "currentSample != 0 - value = " << currentSample << fixed << endl;}
+    // wtf->write(std::to_string(currentSample) + "\n");
     buffer[i] = currentSample;
   }
   sort(buffer,buffer+numSamples);
+  for(int i = 0; i < numSamples; i++)
+  {
+    // cout << "PickSample::fillBuffer - buffer[i] = " << buffer[i] << fixed << "\n";
+    wtf->write(std::to_string(buffer[i]) + "\n");
+  }
 }
 
 float PickSample::calculateL(float sample)
@@ -86,3 +82,7 @@ float PickSample::calculateR(float sample)
 {
   return 0;
 }
+
+//first i should know how many times 0 is in the sample
+//i could make 2 buffers
+//i'm not sure if i can resize the buffer

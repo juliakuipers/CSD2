@@ -3,7 +3,7 @@
 
 int main()
 {
-  PickSample ps;
+  PickSample ps(440,44100);
   ps.calculateM(-0.3);
   // WriteToFile writeFile("output.csv",true);
   // std::cout << "hi \n";
