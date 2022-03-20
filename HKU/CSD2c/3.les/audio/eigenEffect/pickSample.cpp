@@ -21,24 +21,28 @@ PickSample::~PickSample()
 float PickSample::calculateM(float sample)
 {
   sample += 1;
+  cout << "PickSample::calculateM - sample =" << sample <<"\n ";
   float s = scale(sample,0,2.1,0,v.size());
+  cout << "PickSample::calculateM - s =" << s <<"\n ";
+  cout << "PickSample::calculateM - v.size() =" << v.size() <<"\n ";
   int intS = (int) s;
+  cout << "PickSample::calculateM - intS =" << intS <<"\n ";
   float y = interpolate(s,intS,intS+1,v[intS],v[intS+1]);
-  cout << "PickSample::calculateM - y =" << y <<"\n ";
+  cout << "PickSample::calculateM - y =" << y <<"\n \n";
   return y;
 }
 
 float PickSample::scale(float sample, float x1From, float x2From, float x1To, float x2To)
 {
-  // cout << "PickSample::scale - sample =" << sample <<"\n ";
+  cout << "PickSample::scale - sample =" << sample <<"\n ";
   float xFromDistance = x2From - x1From;
-  // cout << "PickSample::scale - xFromDistance =" << xFromDistance <<"\n ";
+  cout << "PickSample::scale - xFromDistance =" << xFromDistance <<"\n ";
   float sampleScaled = sample/xFromDistance;
-  // cout << "PickSample::scale - sampleScaled =" << sampleScaled <<"\n ";
+  cout << "PickSample::scale - sampleScaled =" << sampleScaled <<"\n ";
   float xToDistance = x2To - x1To;
-  // cout << "PickSample::scale - xToDistance =" << xToDistance <<"\n ";
+  cout << "PickSample::scale - xToDistance =" << xToDistance <<"\n ";
   float x = (sampleScaled * xToDistance) + x1To;
-  // cout << "PickSample::scale - x =" << x <<"\n \n";
+  cout << "PickSample::scale - x =" << x <<"\n \n";
   return x;
 }
 
@@ -63,6 +67,7 @@ void PickSample::fillBuffer()
   {
     float currentSample = audioFile.samples[channel][i];
     if(currentSample > 0.009 || currentSample < 0.009) {v.push_back(currentSample);}
+    // if(currentSample > 0.009 || currentSample < 0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
     // wtf->write(std::to_string(currentSample) + "\n");
   }
