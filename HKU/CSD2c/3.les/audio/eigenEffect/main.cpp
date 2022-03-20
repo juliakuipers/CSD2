@@ -5,13 +5,13 @@ using namespace std;
 int main()
 {
   PickSample ps(440,44100);
-  float k = 0.0;
+  float k = -1.0;
   for(int i = 0; i < 100; i++)
   {
     float xi = k/100;
     // cout << "main - xi = " << xi << endl;
     ps.calculateM(xi);
-    k += 1;
+    k += 2;
   }
   // WriteToFile writeFile("output.csv",true);
   // std::cout << "hi \n";

@@ -89,8 +89,8 @@ void PickSample::fillBuffer()
     // cout << "PickSample::fillBuffer - v.i* =" << *i <<"\n \n ";
     // cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
     // v.push_back(scale(*j, front, back, -1, 1));
-    float s = scale(*j, front, back, -1, 1);
-    // if(s<1 || s> -1) {v.push_back(s);}
+    // float s = scale(*j, front, back, -1, 1);
+    // v.push_back(s);
     // cout << "PickSample::fillBuffer - s =" << s <<"\n \n ";
     // v.push_back(*j);
     // cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
