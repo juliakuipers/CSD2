@@ -1,10 +1,16 @@
 #include <iostream>
 #include "pickSample.h"
+using namespace std;
 
 int main()
 {
   PickSample ps(440,44100);
-  // ps.calculateM(-0.3);
+  for(int i = 0; i < 100; i++)
+  {
+    float xi = i/100;
+    cout << "main - xi = " << xi << endl;
+    ps.calculateM(xi);
+  }
   // WriteToFile writeFile("output.csv",true);
   // std::cout << "hi \n";
   // audioFile.load ("../eigenEffect/samples/OH.wav");
