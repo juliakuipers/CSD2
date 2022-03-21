@@ -57,7 +57,7 @@ void PickSample::fillBuffer()
   audioFile.load ("../eigenEffect/samples/OH.wav");
   //load wav
   audioFile.printSummary();
-  //print info on the wav
+  //print info about the wav
   numSamples = audioFile.getNumSamplesPerChannel();
   //store how many samples the wav has in numSamples
   cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
@@ -72,37 +72,43 @@ void PickSample::fillBuffer()
     float currentSample = audioFile.samples[channel][i];
     //stores the current sample from the wav in currentSample
     if(currentSample > 0.009 || currentSample < 0.009) {v.push_back(currentSample);}
-    //removes the x..9 numbers before storing the samples in the vector, since those make for a very boring waveshape
+    //removes the x..9 numbers before storing the samples in the vector, since those make for a very boring waveshaper
     // if(currentSample > 0.009 || currentSample < 0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
     // wtf->write(std::to_string(currentSample) + "\n");
   }
 
   sort(v.begin(), v.end());
-  //sorts the vector
+  //sorts the vector from low to high
   float front = v.front();
   //stores the current first value of the vector which is the lowest
   float back = v.back();
   //stores the current last value of the vector which is the highest
-  for (auto j = v.begin(); j != v.end(); ++j)
-  //walks through the vector from end to beginning, so i can remove the first element and add a new one
+  cout << "PickSample::fillBuffer - *v.rbegin() & *v.rend() = " << *v.rbegin() << " & " << *v.rend()<< fixed <<"\n ";
+  cout << "PickSample::fillBuffer - *v.begin() & *v.end() = " << *v.begin() << " & " << *v.end()<< fixed <<"\n ";
+  cout << "PickSample::fillBuffer - v.back() & v.front() = " << v.back() << " & " << v.front() << fixed <<"\n ";
+  cout << "PickSample::fillBuffer - *v.cbegin() & *v.cend() = " << *v.cbegin() << " & " << *v.cend()<< fixed <<"\n ";
+  for (auto j = v.rbegin(); j != v.rend(); ++j)
+  //walks through the vector from begin to end, so i can remove the first element and add a new one to the end of the vector
+  //for (auto j = v.rbegin(); j != v.rend(); ++j)
   //the problem right now might be that j sends the first element of the vector to be scaled, but it should send the last since the first element gets deleted
   {
 
     v.erase(v.begin());
     //erases the first element of the vector because
     // float begin = *v.begin();
+    // cout << "PickSample::fillBuffer - *v.rbegin() & *v.rend() = " << *v.rbegin() << " & " << *v.rend() <<"\n ";
     // float end = *v.end();
-    cout << "PickSample::fillBuffer - front & back =" << front << " & " << back <<"\n ";
+    // cout << "PickSample::fillBuffer - front & back =" << front << " & " << back <<"\n ";
     // cout << "PickSample::fillBuffer - begin =" << begin <<"\n ";
     // cout << "PickSample::fillBuffer - j =" << j <<"\n ";
     // cout << "PickSample::fillBuffer - back = " << back <<"\n";
     // cout << "PickSample::fillBuffer - v.i* =" << *i <<"\n \n ";
-    cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
+    // cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
     // v.push_back(scale(*j, front, back, -1, 1));
     float s = scale(*j, front, back, 0, 2.1);
     //scales the current element from the sample [highest,lowest] to [1,-1], for better waveshaping. does not work yet
-    cout << "PickSample::fillBuffer - s =" << s <<"\n \n ";
+    // cout << "PickSample::fillBuffer - s =" << s <<"\n \n ";
     v.push_back(s);
     //stores the newly scaled sample in the back of the vector
     // cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
