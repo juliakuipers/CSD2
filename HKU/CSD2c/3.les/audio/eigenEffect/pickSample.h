@@ -24,7 +24,7 @@ protected:
 private:
   vector<float> v;
   int numSamples = 0;
-  // float* buffer = nullptr;
+  float* buffer = nullptr;
   int vectorSize;
   int bufSize = 0;
   void fillBuffer();
