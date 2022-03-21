@@ -1,5 +1,8 @@
 #include "pickSample.h"
 AudioFile<float> audioFile;
+//iterator
+#include <iterator>
+
 
 PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
 {
@@ -22,9 +25,9 @@ float PickSample::calculateM(float sample)
 {
   sample += 1;
   cout << "PickSample::calculateM - sample =" << sample <<"\n ";
-  float s = scale(sample,0,2.1,0,v.size());
+  float s = scale(sample,0,2.1,0,vectorSize);
   cout << "PickSample::calculateM - s =" << s <<"\n ";
-  cout << "PickSample::calculateM - v.size() =" << v.size() <<"\n ";
+  cout << "PickSample::calculateM - v.size() =" << vectorSize <<"\n ";
   int intS = (int) s;
   cout << "PickSample::calculateM - intS =" << intS <<"\n ";
   float y = interpolate(s,intS,intS+1,v[intS],v[intS+1]);
@@ -54,14 +57,15 @@ float PickSample::interpolate(float sample, float x1, float x2, float y1, float 
 
 void PickSample::fillBuffer()
 {
-  audioFile.load ("../eigenEffect/samples/OH.wav");
+  audioFile.load ("../eigenEffect/samples/CLAP.wav");
   //load wav
   audioFile.printSummary();
   //print info about the wav
   numSamples = audioFile.getNumSamplesPerChannel();
   //store how many samples the wav has in numSamples
-  cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
   numSamples -= 1;
+  cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
+
   //numSamples -= 1 else the buffer exeeds how many samples the wav has
   int channel = 0;
   audioFile.setBitDepth(24);
@@ -71,9 +75,9 @@ void PickSample::fillBuffer()
   {
     float currentSample = audioFile.samples[channel][i];
     //stores the current sample from the wav in currentSample
-    if(currentSample > 0.009 || currentSample < 0.009) {v.push_back(currentSample);}
+    if(currentSample > 0.009 || currentSample < -0.009) {v.push_back(currentSample);}
     //removes the x..9 numbers before storing the samples in the vector, since those make for a very boring waveshaper
-    // if(currentSample > 0.009 || currentSample < 0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
+    if(currentSample > 0.009 || currentSample < -0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
     // wtf->write(std::to_string(currentSample) + "\n");
   }
@@ -88,7 +92,7 @@ void PickSample::fillBuffer()
   cout << "PickSample::fillBuffer - *v.begin() & *v.end() = " << *v.begin() << " & " << *v.end()<< fixed <<"\n ";
   cout << "PickSample::fillBuffer - v.back() & v.front() = " << v.back() << " & " << v.front() << fixed <<"\n ";
   cout << "PickSample::fillBuffer - *v.cbegin() & *v.cend() = " << *v.cbegin() << " & " << *v.cend()<< fixed <<"\n ";
-  for (auto j = v.rbegin(); j != v.rend(); ++j)
+  for (auto j = v.begin(); j != v.end(); ++j)
   //walks through the vector from begin to end, so i can remove the first element and add a new one to the end of the vector
   //for (auto j = v.rbegin(); j != v.rend(); ++j)
   //the problem right now might be that j sends the first element of the vector to be scaled, but it should send the last since the first element gets deleted
@@ -106,16 +110,19 @@ void PickSample::fillBuffer()
     // cout << "PickSample::fillBuffer - v.i* =" << *i <<"\n \n ";
     // cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
     // v.push_back(scale(*j, front, back, -1, 1));
-    float s = scale(*j, front, back, 0, 2.1);
+    // float s = scale(*j, front, back, 0, 2.1);
     //scales the current element from the sample [highest,lowest] to [1,-1], for better waveshaping. does not work yet
     // cout << "PickSample::fillBuffer - s =" << s <<"\n \n ";
-    v.push_back(s);
+    // v.push_back(s);
     //stores the newly scaled sample in the back of the vector
     // cout << "PickSample::fillBuffer - v.j* =" << *j <<"\n \n ";
-    // wtf->write(std::to_string(s) + "\n");
+    wtf->write(std::to_string(*j) + "\n");
   }
+  vectorSize = v.size();
   cout << "PickSample::fillBuffer - v.size() = " << v.size() << endl;
-
+  //maybe make a buffer to fill instead of a vector in the for loop above and scale the size so it fits a buffer of bv 512
+  //list
+  //set
   // for(int j = 0; )
 
 }
