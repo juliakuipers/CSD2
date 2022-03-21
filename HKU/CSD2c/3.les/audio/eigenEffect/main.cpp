@@ -10,7 +10,7 @@ int main()
   {
     float xi = k/100;
     // cout << "main - xi = " << xi << endl;
-    ps.calculateM(xi);
+    // ps.calculateM(xi);
     k += 2;
   }
   // WriteToFile writeFile("output.csv",true);
