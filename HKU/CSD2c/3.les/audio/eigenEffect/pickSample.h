@@ -24,8 +24,9 @@ protected:
 
 private:
   vector<float> v;
-  vector<int>::iterator rmDuplicatenumbers;
-  //need to round the floating point numbers in order for this to work 
+  vector<float> averageNumber;
+  //need to round the floating point numbers in order for this to work
+  void sampleAverage();
   int numSamples = 0;
   float* buffer = nullptr;
   int vectorSize;
