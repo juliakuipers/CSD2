@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <vector>
 using namespace std;
+#include <iterator>
 
 class PickSample //: public Effect
 {
@@ -23,6 +24,8 @@ protected:
 
 private:
   vector<float> v;
+  vector<int>::iterator rmDuplicatenumbers;
+  //need to round the floating point numbers in order for this to work 
   int numSamples = 0;
   float* buffer = nullptr;
   int vectorSize;

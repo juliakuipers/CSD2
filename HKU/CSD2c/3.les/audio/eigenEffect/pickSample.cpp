@@ -1,7 +1,7 @@
 #include "pickSample.h"
 AudioFile<float> audioFile;
 //iterator
-// #include <iterator>
+
 
 
 PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
@@ -59,7 +59,7 @@ float PickSample::interpolate(float sample, float x1, float x2, float y1, float 
 
 void PickSample::fillBuffer()
 {
-  audioFile.load ("../eigenEffect/samples/SNARE.wav");
+  audioFile.load ("../eigenEffect/samples/PAD.wav");
   //load wav
   audioFile.printSummary();
   //print info about the wav
@@ -67,18 +67,15 @@ void PickSample::fillBuffer()
   //store how many samples the wav has in numSamples
   numSamples -= 1;
   cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
-
   //numSamples -= 1 else the buffer exeeds how many samples the wav has
   int channel = 0;
   audioFile.setBitDepth(24);
-  // cout << "PickSample::fillBuffer - numSamples = " << numSamples <<endl;
-  int cs = 0;
   for(int i = 0; i < numSamples; i++)
   //fill vector with samples from wav
   {
     float currentSample = audioFile.samples[channel][i];
     //stores the current sample from the wav in currentSample
-    if(currentSample > 0.009 || currentSample < -0.009) {v.push_back(currentSample);}
+    if(currentSample > 0.25 || currentSample < -0.25) {v.push_back(currentSample);}
     //removes the x..9 numbers before storing the samples in the vector, since a having a lot of x.00 numbers make for a very boring waveshaper
     // if(currentSample > 0.009 || currentSample < -0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
@@ -90,13 +87,13 @@ void PickSample::fillBuffer()
   float front = v.front();
   //stores the current first value of the vector which is the lowest
   float back = v.back();
-  // for(int i < )
   //stores the current last value of the vector which is the highest
-  cout << "PickSample::fillBuffer - *v.rbegin() & *v.rend() = " << *v.rbegin() << " & " << *v.rend()<< fixed <<"\n ";
-  cout << "PickSample::fillBuffer - *v.begin() & *v.end() = " << *v.begin() << " & " << *v.end()<< fixed <<"\n ";
-  cout << "PickSample::fillBuffer - v.back() & v.front() = " << v.back() << " & " << v.front() << fixed <<"\n ";
-  cout << "PickSample::fillBuffer - *v.cbegin() & *v.cend() = " << *v.cbegin() << " & " << *v.cend()<< fixed <<"\n ";
+  // cout << "PickSample::fillBuffer - *v.rbegin() & *v.rend() = " << *v.rbegin() << " & " << *v.rend()<< fixed <<"\n ";
+  // cout << "PickSample::fillBuffer - *v.begin() & *v.end() = " << *v.begin() << " & " << *v.end()<< fixed <<"\n ";
+  // cout << "PickSample::fillBuffer - v.back() & v.front() = " << v.back() << " & " << v.front() << fixed <<"\n ";
+  // cout << "PickSample::fillBuffer - *v.cbegin() & *v.cend() = " << *v.cbegin() << " & " << *v.cend()<< fixed <<"\n ";
   vectorSize = v.size();
+  //size of vector
   cout << "PickSample::fillBuffer - vectorSize = " << vectorSize << endl;
   delete buffer;
   buffer = nullptr;
