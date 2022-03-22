@@ -83,6 +83,17 @@ void PickSample::fillBuffer()
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
     // wtf->write(std::to_string(currentSample) + "\n");
   }
+
+  // while(true)
+  // {
+  //   for(int l = 0; l < numSamples; l++)
+  //   {
+  //     if(currentSample > l-0.1 || currentSample < l){
+  //       cout << " currentSample is within range  [l-0.1,l]  = [" << l-0.1 << ", " << l << "]" << endl;
+  //     }
+  //
+  //   }
+  // }
   sort(v.begin(), v.end());
   //sorts the vector from low to high
   float countLow = -1.0;
