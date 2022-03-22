@@ -26,7 +26,7 @@ private:
   vector<float> v;
   vector<float> averageNumber;
   //need to round the floating point numbers in order for this to work
-  float floatCount = 0.9;
+  float floatCount = -1.0;
   void sampleAverage();
   int numSamples = 0;
   float* buffer = nullptr;

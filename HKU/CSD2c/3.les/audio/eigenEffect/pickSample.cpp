@@ -71,48 +71,37 @@ void PickSample::fillBuffer()
   //numSamples -= 1 else the buffer exeeds how many samples the wav has
   int channel = 0;
   audioFile.setBitDepth(24);
-  for(int i = 0; i < numSamples; i++)
+  // for(int i = 0; i < numSamples; i++)
   //fill vector with samples from wav
-  {
-    float currentSample = audioFile.samples[channel][i];
+  // {
     //stores the current sample from the wav in currentSample
-    if(currentSample > 0.09 || currentSample < -0.09) {v.push_back(currentSample);}
+    // if(currentSample > 0.09 || currentSample < -0.09) {v.push_back(currentSample);}
     // v.push_back(currentSample);
     //removes the x..9 numbers before storing the samples in the vector, since a having a lot of x.00 numbers make for a very boring waveshaper
     // if(currentSample > 0.009 || currentSample < -0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
     // wtf->write(std::to_string(currentSample) + "\n");
-  }
-
-  // while(true)
-  // {
-  //   for(int l = 0; l < numSamples; l++)
-  //   {
-  //     if(currentSample > l-0.1 || currentSample < l){
-  //       cout << " currentSample is within range  [l-0.1,l]  = [" << l-0.1 << ", " << l << "]" << endl;
-  //     }
-  //
-  //   }
   // }
-  sort(v.begin(), v.end());
-  //sorts the vector from low to high
-  float countLow = -1.0;
-  float countHigh = -0.9;
-  vectorSize = v.size();
-  for(int k = 0; k < vectorSize; k++)
+  while(true)
   {
-    averageNumber.push_back(v[k]);
-    if(v[k] > countLow && v[k] < countHigh)
+    for(int l = 0; l < numSamples; l++)
+    //walks through the number of samples
     {
+      float currentSample = audioFile.samples[channel][l];
+      if(currentSample > floatCount || currentSample < floatCount-0.1)
+      {
+        cout << "currentSample is within range  [floatCount + 0.1, floatCount]  = [" << floatCount+0.1 << ", " << floatCount << "]" << endl;
+        cout << "currentSample is at number = " << currentSample << endl;
+        v.push_back(currentSample);
+      }
       sampleAverage();
-      countLow += 0.1;
-      countHigh += 0.1;
-      averageNumber.clear();
-      cout << averageNumber[k] << endl;
-    } //with this i am trying to get the average number of every .x number in the array does not work yet
+    }
+    if(floatCount >= 1){break;}
   }
-  sampleAverage();
-  vectorSize = v.size();
+  sort(averageNumber.begin(), averageNumber.end());
+  //sorts the vector from low to high
+  // sampleAverage();
+  vectorSize = averageNumber.size();
   //size of vector
   cout << "PickSample::fillBuffer - vectorSize = " << vectorSize << endl;
   delete buffer;
@@ -122,7 +111,7 @@ void PickSample::fillBuffer()
   for(int i = 0; i< vectorSize; i++)
   {
     // float s = scale(v[i],begin,end,-1,1);
-    buffer[i] = v[i];
+    buffer[i] = averageNumber[i];
     wtf->write(std::to_string(buffer[i]) + "\n");
   }
   //list
@@ -133,7 +122,11 @@ void PickSample::sampleAverage()
 {
   float sum  = accumulate(v.begin(),v.end(),0.0f);
   float average = sum/v.size();
+  //puts the average of every .x number sample in a new vector 
   cout << "PickSample::sampleAverage - v.size(), sum, average = " << v.size() << ", " << sum << ", " << average << endl;
+  averageNumber.push_back(average);
+  floatCount += 0.1;
+  v.clear();
 }
 
 
