@@ -13,8 +13,11 @@ public:
   PickSample(float freq, float samplerate);
   ~PickSample();
 
-  void changeSample();
-  void resizeBuffer();
+  void changeSample(); //pick a sample
+  void resizeBuffer(); //resize the buffer based on which samples get removed from the wav file input
+  void getAverageSamplePerWav(); //get an average per .x sample
+  void getAllSamplesWav(); //get all samples from wav
+
   float calculateM(float sample);
   float calculateR(float sample);
   float calculateL(float sample);
@@ -26,7 +29,7 @@ private:
   vector<float> v;
   vector<float> averageNumber;
   //need to round the floating point numbers in order for this to work
-  float floatCount = -1.0;
+  float floatCount = -1;
   void sampleAverage();
   int numSamples = 0;
   float* buffer = nullptr;

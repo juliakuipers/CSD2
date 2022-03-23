@@ -1,6 +1,7 @@
 #include "pickSample.h"
 AudioFile<float> audioFile;
 #include <numeric>
+#include "math.h"
 
 PickSample::PickSample(float freq, float samplerate) //: Effect(freq,samplerate)
 {
@@ -59,7 +60,7 @@ float PickSample::interpolate(float sample, float x1, float x2, float y1, float 
 
 void PickSample::fillBuffer()
 {
-  audioFile.load ("../eigenEffect/samples/OH.wav");
+  audioFile.load ("../eigenEffect/samples/SUB.wav");
   // audioFile.setAudioBufferSize (1, 512);
   //load wav
   audioFile.printSummary();
@@ -74,8 +75,9 @@ void PickSample::fillBuffer()
   // for(int i = 0; i < numSamples; i++)
   //fill vector with samples from wav
   // {
+    // float currentSample = audioFile.samples[channel][i];
     //stores the current sample from the wav in currentSample
-    // if(currentSample > 0.09 || currentSample < -0.09) {v.push_back(currentSample);}
+    // if(currentSample > 0.009 || currentSample < -0.009) {v.push_back(currentSample);}
     // v.push_back(currentSample);
     //removes the x..9 numbers before storing the samples in the vector, since a having a lot of x.00 numbers make for a very boring waveshaper
     // if(currentSample > 0.009 || currentSample < -0.009) {cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";}
@@ -85,22 +87,22 @@ void PickSample::fillBuffer()
   while(true)
   {
     for(int l = 0; l < numSamples; l++)
-    //walks through the number of samples
+  //   //walks through the number of samples
     {
       float currentSample = audioFile.samples[channel][l];
-      if(currentSample > floatCount || currentSample < floatCount-0.1)
+      if(currentSample < floatCount +0.1 && currentSample > floatCount)
       {
-        cout << "currentSample is within range  [floatCount + 0.1, floatCount]  = [" << floatCount+0.1 << ", " << floatCount << "]" << endl;
-        cout << "currentSample is at number = " << currentSample << endl;
+        // cout << "if(currentSample < floatCount+0.1 || currentSample > floatCount) " << "if(" << currentSample <<" < "<< floatCount+0.1 << " || " << currentSample << " > " << floatCount << endl;
+        // cout << "currentSample is within range  [floatCount, floatCount-0.1]  = [" << floatCount+0.1 << ", " << floatCount << "]" << endl;
+        cout << "currentSample is at number = " << currentSample << "\n\n";
         v.push_back(currentSample);
       }
-      sampleAverage();
     }
-    if(floatCount >= 1){break;}
+    if(floatCount <= 1){sampleAverage();}
+    else {break;}
   }
-  sort(averageNumber.begin(), averageNumber.end());
+  sort(v.begin(), v.end());
   //sorts the vector from low to high
-  // sampleAverage();
   vectorSize = averageNumber.size();
   //size of vector
   cout << "PickSample::fillBuffer - vectorSize = " << vectorSize << endl;
@@ -120,12 +122,14 @@ void PickSample::fillBuffer()
 
 void PickSample::sampleAverage()
 {
+  float k = 1;
+  float normalizeFactor = 1.0f / atan(k);
   float sum  = accumulate(v.begin(),v.end(),0.0f);
   float average = sum/v.size();
-  //puts the average of every .x number sample in a new vector 
-  cout << "PickSample::sampleAverage - v.size(), sum, average = " << v.size() << ", " << sum << ", " << average << endl;
-  averageNumber.push_back(average);
-  floatCount += 0.1;
+  //puts the average of every .x number sample in a new vector
+  cout << "PickSample::sampleAverage - v.size(), sum, average = " << v.size() << ", " << sum << ", " << average << "\n\n";
+  averageNumber.push_back(normalizeFactor * atan(k * average));
+  floatCount += 0.05;
   v.clear();
 }
 
