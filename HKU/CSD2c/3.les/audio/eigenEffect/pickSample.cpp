@@ -93,7 +93,7 @@ void PickSample::fillBuffer()
       if(currentSample < floatCount +0.1 && currentSample > floatCount)
       {
         // cout << "if(currentSample < floatCount+0.1 || currentSample > floatCount) " << "if(" << currentSample <<" < "<< floatCount+0.1 << " || " << currentSample << " > " << floatCount << endl;
-        // cout << "currentSample is within range  [floatCount, floatCount-0.1]  = [" << floatCount+0.1 << ", " << floatCount << "]" << endl;
+        cout << "currentSample is within range  [floatCount, floatCount-0.1]  = [" << floatCount+0.1 << ", " << floatCount << "]" << endl;
         cout << "currentSample is at number = " << currentSample << "\n\n";
         v.push_back(currentSample);
       }
@@ -103,6 +103,8 @@ void PickSample::fillBuffer()
   }
   sort(v.begin(), v.end());
   //sorts the vector from low to high
+  float begin = v.front();
+  float end = v.back();
   vectorSize = averageNumber.size();
   //size of vector
   cout << "PickSample::fillBuffer - vectorSize = " << vectorSize << endl;
@@ -114,6 +116,8 @@ void PickSample::fillBuffer()
   {
     // float s = scale(v[i],begin,end,-1,1);
     buffer[i] = averageNumber[i];
+    // float s  = scale(buffer[i],begin + 1,end + 1,0, 2) -1;
+    // cout << s << "\n\n\n";
     wtf->write(std::to_string(buffer[i]) + "\n");
   }
   //list
@@ -128,8 +132,9 @@ void PickSample::sampleAverage()
   float average = sum/v.size();
   //puts the average of every .x number sample in a new vector
   cout << "PickSample::sampleAverage - v.size(), sum, average = " << v.size() << ", " << sum << ", " << average << "\n\n";
-  averageNumber.push_back(normalizeFactor * atan(k * average));
-  floatCount += 0.05;
+  // averageNumber.push_back(normalizeFactor * atan(k * average));
+  averageNumber.push_back(average);
+  floatCount += 0.02;
   v.clear();
 }
 

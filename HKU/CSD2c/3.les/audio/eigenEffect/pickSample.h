@@ -15,8 +15,8 @@ public:
 
   void changeSample(); //pick a sample
   void resizeBuffer(); //resize the buffer based on which samples get removed from the wav file input
-  void getAverageSamplePerWav(); //get an average per .x sample
-  void getAllSamplesWav(); //get all samples from wav
+  void getAverageSample(); //get an average number per .x sample
+  void getAllSamples(); //get all samples from wav
 
   float calculateM(float sample);
   float calculateR(float sample);
