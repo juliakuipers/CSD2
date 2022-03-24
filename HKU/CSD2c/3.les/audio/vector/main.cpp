@@ -1,11 +1,12 @@
 #include <vector>
 #include <iostream>
 #include <numeric>
+#include <random>
 using namespace std;
 
 int main()
 {
-  int numSamples = 20;
+  int numSamples = 10;
   vector<float> v;
   float floatCount = -1.0;
   vector<float> averageNumber;
