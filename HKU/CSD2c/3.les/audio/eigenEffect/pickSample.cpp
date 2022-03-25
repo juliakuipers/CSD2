@@ -70,8 +70,8 @@ void PickSample::fillBuffer()
   numSamples -= 1;
   cout << "PickSample::Constructor - numSamples = " << numSamples <<endl;
   //numSamples -= 1 else the buffer exeeds how many samples the wav has
-  int channel = 0;
   audioFile.setBitDepth(24);
+  int channel = 0;
   // for(int i = 0; i < numSamples; i++)
   //fill vector with samples from wav
   // {
@@ -84,6 +84,7 @@ void PickSample::fillBuffer()
     // cout << "PickSample::fillBuffer - currentSample =" << currentSample <<"\n ";
     // wtf->write(std::to_string(currentSample) + "\n");
   // }
+  int channel = 0;
   while(true)
   {
     for(int l = 0; l < numSamples; l++)
