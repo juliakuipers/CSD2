@@ -1,4 +1,4 @@
-for this to run you need to have a path from one of the sketches to the openFrameWorks base folder
+for this to run you need to have a path from the sketch thats being used to the openFrameWorks base folder
 
 When running this code, sometimes you can get the unexpected "resource fork, Finder information, or similar detritus not allowed" error message.
 
