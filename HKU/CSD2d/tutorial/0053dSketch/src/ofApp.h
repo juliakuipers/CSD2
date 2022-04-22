@@ -16,5 +16,10 @@ class ofApp : public ofBaseApp{
         float xPlaneSpeed;
         float yPlane;
         float yPlaneSpeed;
+        float planeWidth = ofGetWidth();
+        float planeWidthSpeed = 2.5;
+        float planeHeight = ofGetHeight();
+        float planeHeightSpeed = 5.5;
+        
 		
 };

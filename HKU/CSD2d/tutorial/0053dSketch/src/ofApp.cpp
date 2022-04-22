@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-ofApp::ofApp() : xPlane(0), xPlaneSpeed(0.02), yPlane(0),yPlaneSpeed(0.2){}
+ofApp::ofApp() : xPlane(ofGetWidth()/2), xPlaneSpeed(0.02), yPlane(ofGetHeight()/2),yPlaneSpeed(0.2){}
 
 ofApp::~ofApp(){}
 
@@ -17,13 +17,16 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofNoFill();
-    ofDrawPlane(xPlane, yPlane, ofGetWidth()/2, ofGetHeight()/2);
-    xPlane =+ xPlaneSpeed;
-    yPlane =+ yPlaneSpeed;
+    ofDrawCylinder(xPlane, yPlane ,planeWidth, planeHeight);
+    xPlane += xPlaneSpeed;
+    yPlane += yPlaneSpeed;
+    planeWidth += planeWidthSpeed;
+    planeHeight += planeHeightSpeed;
     
     if(xPlane > ofGetWidth()){xPlane == 0;}
     if(yPlane > ofGetHeight()){yPlane == 0;}
     
-    std::cout << "xPlane = " << xPlane << std::endl;
-    std::cout << "yPlane = " << yPlane << std::endl;
+    if(planeWidth >= ofGetWidth()) {planeWidthSpeed == 0;}
+    if(planeHeight >= ofGetHeight()) {planeHeightSpeed == 0;}
+    
 }
