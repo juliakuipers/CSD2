@@ -28,6 +28,7 @@ void ofApp::draw(){
         // Sets the background to a circular gradient
     }
     //float time = ofGetElapsedTimef(); // get a continouis value
+    //ofResetElapsedTimeCounter() //reset time counter
     ofEnableAlphaBlending();    // turn on alpha blending
     ofSetColor(175,238,238,50);
     //ofSetColor(175); // greyscale 
