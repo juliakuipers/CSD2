@@ -28,20 +28,20 @@ static void processAudio()
     for (unsigned int i = 0; i < chunksize; i++)
     {
       // // LEFT CHANNEL
-      outBuf[2 * i] = mir.playWAV(); // effect code here
+      outBuf[2 * i] = mir.playRWAV(); // effect code here
 
       // RIGHT CHANNEL
-      outBuf[2 * i + 1] = mir.playWAV(); // effect code here
+      outBuf[2 * i + 1] = mir.playLWAV(); // effect code here
 
     }
     jack.writeSamples(outBuf, chunksize * 2);
   } while (running);
-}
+} //justin's code
 
 int main(int argc, char **argv)
 {
 
-  jack.setNumberOfInputChannels(1);
+  jack.setNumberOfInputChannels(2);
   jack.setNumberOfOutputChannels(2);
 
   // init the jack, use program name as JACK client name

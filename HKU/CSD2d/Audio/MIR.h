@@ -9,11 +9,14 @@ public:
   MIR();
   ~MIR();
 
-  float playWAV();
+  float playRWAV();
+  float playLWAV();
 
 private:
   void audioBuffer();
-  float* buffer = nullptr;
+  float* bufferR = nullptr;
+  float* bufferL = nullptr;
   int numSamples;
+  int sampleCount;
 
 };
