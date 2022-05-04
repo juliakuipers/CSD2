@@ -9,12 +9,12 @@ class ofApp : public ofBaseApp{
     
     ofApp();
     ~ofApp();
-    
-		void update();
+
 		void draw();
     
 		void keyReleased(int key);
         void fillAudioBuffer();
+        ofSoundPlayer   mySound;
     
     private:
         float* buffer = nullptr;
