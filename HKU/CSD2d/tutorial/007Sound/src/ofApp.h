@@ -19,5 +19,6 @@ class ofApp : public ofBaseApp{
     private:
         float* buffer = nullptr;
         int numSamples;
+        int bandsAmount; 
     
 };
