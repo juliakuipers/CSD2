@@ -12,9 +12,7 @@ class ofApp : public ofBaseApp{
 
 		void draw();
     
-		void keyReleased(int key);
-        void fillAudioBuffer();
-        ofSoundPlayer   mySound;
+        ofSoundPlayer mySound;
     
     private:
         float* buffer = nullptr;
