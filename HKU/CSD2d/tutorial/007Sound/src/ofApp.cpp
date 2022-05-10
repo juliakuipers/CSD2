@@ -3,6 +3,7 @@
 ofApp::ofApp() : bandsAmount(25), time(0.0), tick(0){
     mySound.load("timev2.wav");
     mySound.play();
+    ofBackground(255,182,193);
 }
 
 ofApp::~ofApp(){
@@ -15,24 +16,19 @@ void ofApp::draw(){
         float getDing = ofGetWidth() / bandsAmount * (i+1);
         float result = ofLerp(1, ofGetHeight(), fft[i]);
         ofDrawLine(getDing,0,getDing,result*20);
+        volume = mySound.getVolume();
+        // std::cout << "volume = " << volume << std::endl;
     }
-    time  = ofGetElapsedTimef(); //work whit true and false
+    time  = ofGetElapsedTimef(); //work with true and false
     if(time > 34){
-      std::cout << "cue-point " << std::endl;
+      // continue;
     }
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetRectMode(OF_RECTMODE_CENTER);
-    ofNoFill();
-    ofSetLineWidth(1);
-//    ofDrawRectangle(0, 0, 500, 500);
-    for(int i = 0; i < bandsAmount; i++){
-        ofRotateDeg(tick+=bpmTick(126.5,1));
-        // std::cout << "time = " << time << std::endl;
-        ofScale(0.9);
-        ofDrawRectangle(0, 0, 500, 500);
-        ofDrawTriangle(ofGetWidth()*0.2, ofGetHeight()*0.2, ofGetWidth()*0.8, ofGetHeight()*0.2, ofGetWidth()/2, ofGetHeight()*0.8);
-    }
+    drawRotatingShapes();
+    ofRotateDeg(ofGetElapsedTimef());
+    ofDrawLine(0,0,300,200);
 }
+
+
 
 //bpm 126.5
 
@@ -40,12 +36,26 @@ int ofApp::bpmTick(float bpm, float note){
   time = ofGetElapsedTimeMillis();
   float ms = (60000/bpm) * note; //if note is 1 it results in a quarter note
   if(time >= ms){
-    std::cout << "ms = " << ms << std::endl;
-    std::cout << "time = " << time << std::endl;
     ofResetElapsedTimeCounter();
-    std::cout << "time has passed " << std::endl;
     return 1;
-  } else{
+  }else {
     return 0;
   }
+}
+
+void ofApp::drawRotatingShapes(){
+  bool clockrotate = true;
+  while(clockrotate){
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+    ofSetRectMode(OF_RECTMODE_CENTER);
+    ofNoFill();
+    ofSetLineWidth(1);
+    for(int i = 0; i < bandsAmount; i++){
+        ofRotateDeg(tick+=bpmTick(126.5,1));
+        ofScale(0.9);
+        ofDrawRectangle(0, 0, 500, 500);
+        ofDrawTriangle(ofGetWidth()*0.2, ofGetHeight()*0.2, ofGetWidth()*0.8, ofGetHeight()*0.2, ofGetWidth()/2, ofGetHeight()*0.8);
+      }
+    }
+    clockrotate = false;
 }

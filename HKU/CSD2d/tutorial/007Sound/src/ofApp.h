@@ -11,14 +11,19 @@ class ofApp : public ofBaseApp{
 
 		void draw();
 		int bpmTick(float bpm, float note);
+		void rotatingRects();
+		void rotatingTriangles();
+		void rotatingCircles();
+		void drawRotatingShapes();
 
-        ofSoundPlayer mySound;
+    ofSoundPlayer mySound;
 
     private:
         int bandsAmount;
 				float cue [2] = {0.0,34.0};
 				float time;
 				int tick;
+				float volume;
 
 };
 
