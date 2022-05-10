@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-ofApp::ofApp() : bandsAmount(25), time(0.0){
+ofApp::ofApp() : bandsAmount(25), time(0.0), tick(0){
     mySound.load("timev2.wav");
     mySound.play();
 }
@@ -26,7 +26,8 @@ void ofApp::draw(){
     ofSetLineWidth(1);
 //    ofDrawRectangle(0, 0, 500, 500);
     for(int i = 0; i < bandsAmount; i++){
-        ofRotateDeg(mySound.getPositionMS()/1000);
+        ofRotateDeg(tick+=bpmTick(126.5,1));
+        // std::cout << "time = " << time << std::endl;
         ofScale(0.9);
         ofDrawRectangle(0, 0, 500, 500);
         ofDrawTriangle(ofGetWidth()*0.2, ofGetHeight()*0.2, ofGetWidth()*0.8, ofGetHeight()*0.2, ofGetWidth()/2, ofGetHeight()*0.8);
@@ -35,8 +36,16 @@ void ofApp::draw(){
 
 //bpm 126.5
 
-int ofRunApp::bpmTick(float bpm, int note){
+int ofApp::bpmTick(float bpm, float note){
   time = ofGetElapsedTimeMillis();
-  float ms = 60,000/bpm;
-  //60,000 / 100 bpm = 600ms
+  float ms = (60000/bpm) * note; //if note is 1 it results in a quarter note
+  if(time >= ms){
+    std::cout << "ms = " << ms << std::endl;
+    std::cout << "time = " << time << std::endl;
+    ofResetElapsedTimeCounter();
+    std::cout << "time has passed " << std::endl;
+    return 1;
+  } else{
+    return 0;
+  }
 }

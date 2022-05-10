@@ -10,7 +10,7 @@ class ofApp : public ofBaseApp{
     ~ofApp();
 
 		void draw();
-		int bpmTick(float bpm, int note);
+		int bpmTick(float bpm, float note);
 
         ofSoundPlayer mySound;
 
@@ -18,6 +18,7 @@ class ofApp : public ofBaseApp{
         int bandsAmount;
 				float cue [2] = {0.0,34.0};
 				float time;
+				int tick;
 
 };
 
