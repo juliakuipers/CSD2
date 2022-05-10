@@ -17,3 +17,7 @@ According to Apple:
 Note that browsing files within a bundle with Finder's Show Package Contents command can cause Finder info to be added to those files.
 
 source: https://www.tweaking4all.com/forum/delphi-lazarus-free-pascal/macos-resource-fork-finder-information-or-similar-detritus-not-allowed/
+
+To run in atom
+
+Go to the designated folder (bv 007Sound) and execute make, the .cpp and .h files are in src. To open them in atom type atom ofApp.* main.cpp. Then to run the app type open bin/007Sound.app. 
