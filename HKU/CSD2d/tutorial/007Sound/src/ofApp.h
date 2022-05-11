@@ -15,6 +15,7 @@ class ofApp : public ofBaseApp{
 		void rotatingTriangles();
 		void rotatingCircles();
 		void drawRotatingShapes();
+		void clockLine();
 
     ofSoundPlayer mySound;
 
@@ -24,6 +25,7 @@ class ofApp : public ofBaseApp{
 				float time;
 				int tick;
 				float volume;
+				float increment;
 
 };
 

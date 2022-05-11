@@ -1,9 +1,11 @@
 #include "ofApp.h"
 
-ofApp::ofApp() : bandsAmount(25), time(0.0), tick(0){
+ofApp::ofApp() : bandsAmount(35), time(0.0), tick(0), increment(0){
     mySound.load("timev2.wav");
     mySound.play();
-    ofBackground(255,182,193);
+    ofColor colorOne(255,182,193);
+    ofColor colorTwo(0, 0, 0);
+    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
 }
 
 ofApp::~ofApp(){
@@ -24,8 +26,7 @@ void ofApp::draw(){
       // continue;
     }
     drawRotatingShapes();
-    ofRotateDeg(ofGetElapsedTimef());
-    ofDrawLine(0,0,300,200);
+    clockLine();
 }
 
 
@@ -35,8 +36,8 @@ void ofApp::draw(){
 int ofApp::bpmTick(float bpm, float note){
   time = ofGetElapsedTimeMillis();
   float ms = (60000/bpm) * note; //if note is 1 it results in a quarter note
-  if(time >= ms){
-    ofResetElapsedTimeCounter();
+  if(time >= increment){
+    increment += ms;
     return 1;
   }else {
     return 0;
@@ -44,18 +45,27 @@ int ofApp::bpmTick(float bpm, float note){
 }
 
 void ofApp::drawRotatingShapes(){
-  bool clockrotate = true;
-  while(clockrotate){
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetRectMode(OF_RECTMODE_CENTER);
-    ofNoFill();
-    ofSetLineWidth(1);
-    for(int i = 0; i < bandsAmount; i++){
-        ofRotateDeg(tick+=bpmTick(126.5,1));
-        ofScale(0.9);
-        ofDrawRectangle(0, 0, 500, 500);
-        ofDrawTriangle(ofGetWidth()*0.2, ofGetHeight()*0.2, ofGetWidth()*0.8, ofGetHeight()*0.2, ofGetWidth()/2, ofGetHeight()*0.8);
-      }
-    }
-    clockrotate = false;
+  ofPushMatrix();
+  ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+  ofSetRectMode(OF_RECTMODE_CENTER);
+  ofNoFill();
+  ofSetLineWidth(1);
+  for(int i = 0; i < bandsAmount; i++){
+      ofRotateDeg((tick+=bpmTick(126.5,1))*-1);
+      ofScale(0.85);
+      ofDrawRectangle(0, 0, 500, 500);
+      ofDrawTriangle(ofGetWidth()*0.2, ofGetHeight()*0.2, ofGetWidth()*0.8, ofGetHeight()*0.2, ofGetWidth()/2, ofGetHeight()*0.8);
+  }
+  ofPopMatrix();
+}
+
+void ofApp::clockLine(){
+  ofPushMatrix();
+  ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+  ofSetLineWidth(5);
+  ofRotateDeg(ofGetElapsedTimeMillis()/8);
+  ofDrawLine(0,0,ofGetWidth()/4,ofGetHeight()/4);
+  ofRotateDeg(ofGetElapsedTimeMillis()/4);
+  ofDrawLine(0,0,ofGetWidth()/6,ofGetHeight()/6);
+  ofPopMatrix();
 }
