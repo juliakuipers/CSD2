@@ -17,11 +17,16 @@ class ofApp : public ofBaseApp{
 		void drawRotatingShapes();
 		void clockLine();
 		void growingCircle();
+		void peakDetection();
+		void sexyCircle(float x, float y, float rad, float energy);
+		void fft();
 
     ofSoundPlayer mySound;
 		ofImage myImg;
 
     private:
+				float height;
+				float width;
         int bandsAmount;
 				float cue [2] = {0.0,34.0};
 				float time;

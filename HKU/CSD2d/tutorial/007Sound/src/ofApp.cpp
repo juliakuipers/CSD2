@@ -1,37 +1,27 @@
 #include "ofApp.h"
 
-ofApp::ofApp() : bandsAmount(35), time(0.0), tick(0), increment(0), grow(0){
+ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0){
     mySound.load("timev2.wav");
     mySound.play();
-    myImg.load("clock2.png");
-    // myImg.draw(ofGetWidth()/2, ofGetHeight()/2);
-    // ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    ofBackground(0);
 }
 
 ofApp::~ofApp(){
 }
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofColor colorTwo(255,182,193);
-    ofColor colorOne(137, 207, 240);
-    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_CIRCULAR);
     float * fft = ofSoundGetSpectrum(bandsAmount);
-
+    sexyCircle(width/2,height/2,300,500);
     for(int i = 0; i < bandsAmount; i ++){
-        float getDing = ofGetWidth() / bandsAmount * (i+1);
-        float result = ofLerp(1, ofGetHeight(), fft[i]);
+        float getDing = width / bandsAmount * (i+1);
+        float result = ofLerp(1, height, fft[i]);
         ofDrawLine(getDing,0,getDing,result*20);
-        volume = mySound.getVolume();
-        // std::cout << "volume = " << volume << std::endl;
+
     }
-    time  = ofGetElapsedTimef(); //work with true and false
-    if(time > 34){
-      // continue;
-    }
-    growingCircle();
-    drawRotatingShapes();
-    ofSetColor(255);
-    clockLine();
+    // growingCircle();
+    // drawRotatingShapes();
+    // ofSetColor(255);
+    // clockLine();
 }
 
 
@@ -51,7 +41,7 @@ int ofApp::bpmTick(float bpm, float note){
 
 void ofApp::drawRotatingShapes(){
   ofPushMatrix();
-  ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+  ofTranslate(width/2, height/2);
   ofSetRectMode(OF_RECTMODE_CENTER);
   ofNoFill();
   ofSetLineWidth(2);
@@ -59,39 +49,69 @@ void ofApp::drawRotatingShapes(){
       ofSetColor(0);
       ofRotateDeg((tick+=bpmTick(126.5,1))*-1);
       ofScale(0.85);
-      ofDrawRectangle(0, 0, ofGetHeight(),ofGetHeight());
-      // ofDrawTriangle(ofGetWidth()*0.2, ofGetHeight()*0.2, ofGetWidth()*0.8, ofGetHeight()*0.2, ofGetWidth()/2, ofGetHeight()*0.8);
+      ofDrawRectangle(0, 0, height,height);
+      // ofDrawTriangle(width*0.2, height*0.2, width*0.8, height*0.2, width/2, height*0.8);
   }
   ofPopMatrix();
 }
 
 void ofApp::clockLine(){
   ofPushMatrix();
-  ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+  ofTranslate(width/2, height/2);
   ofSetLineWidth(5);
   ofRotateDeg(ofGetElapsedTimeMillis()/8);
-  ofDrawLine(0,0,ofGetWidth()/4,ofGetHeight()/4);
+  ofDrawLine(0,0,width/4,height/4);
   ofRotateDeg(ofGetElapsedTimeMillis()/4);
-  ofDrawLine(0,0,ofGetWidth()/6,ofGetHeight()/6);
-  ofFill();
+  ofDrawLine(0,0,width/6,height/6);
+  // ofFill();
   ofDrawCircle(0,0,3,3);
-  ofNoFill();
+  // ofNoFill();
   ofPopMatrix();
 }
 
 void ofApp::growingCircle(){
   ofPushMatrix();
-  ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+  ofTranslate(width/2, height/2);
+  ofNoFill();
   for(int i = 0; i < bandsAmount; i++){
       ofScale(0.85);
-      for(int x = 0; x < ofGetWidth(); x+=100){
-        ofSetColor(64,224,208);
+      for(int x = 0; x < width; x+=100){
+        ofSetColor(255);
         ofSetLineWidth(1);
-        // ofDrawCircle(ofGetWidth()/2,ofGetHeight()/2,x+grow*-1);
+        ofRotateDeg(ofGetElapsedTimef()/4);
+        // ofDrawCircle(width/2,height/2,x);
         ofDrawCircle(0,0,x+grow*-1);
       }
       grow+=0.01;
-      if(grow>ofGetWidth()){grow=ofGetWidth()/2;}
+      if(grow>width){grow*=-1;}
     }
     ofPopMatrix();
 }
+
+void ofApp::peakDetection(){
+
+}
+
+void ofApp::sexyCircle(float x, float y, float rad,float energy){
+  int time = ofGetElapsedTimef()*2;
+  energy-=time;
+  // std::cout << "energy = " << energy << std::endl;
+  // std::cout << "time = " << time << std::endl;
+  ofLerp(5,499,energy);
+  ofNoFill();
+  ofSetLineWidth(1);
+  ofDrawCircle(x,y,rad,rad);
+  if(rad > 5){
+    rad *= 0.75f;
+    sexyCircle(x + rad/2,y,rad/2,energy);
+    sexyCircle(x - rad/2,y,rad/2,energy);
+    sexyCircle(x,y + rad/2,rad/2,energy);
+    sexyCircle(x,y - rad/2,rad/2,energy);
+  }
+}
+
+void ofApp::fft(){
+  float * fft = ofSoundGetSpectrum(bandsAmount);
+}
+
+//rms ms
