@@ -10,6 +10,8 @@ class ofApp : public ofBaseApp{
     ~ofApp();
 
 		void draw();
+		void update();
+
 		int bpmTick(float bpm, float note);
 		void rotatingRects();
 		void rotatingTriangles();
@@ -19,11 +21,10 @@ class ofApp : public ofBaseApp{
 		void growingCircle();
 		void peakDetection();
 		void sexyCircle(float x, float y, float rad);
-		void fft();
 		void cantor(float x, float y, float length);
+		void reactivePolyLine();
 
     ofSoundPlayer mySound;
-		ofImage myImg;
 
     private:
 				float height;
@@ -35,5 +36,8 @@ class ofApp : public ofBaseApp{
 				float volume;
 				float increment;
 				float grow;
+				float *fft;
+				float *soundSpectrum;
+				int bands;
 
 };

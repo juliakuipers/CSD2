@@ -1,20 +1,38 @@
 #include "ofApp.h"
 
-ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0){
+ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512){
     mySound.load("timev2.wav");
     mySound.play();
     ofBackground(0);
+
+    fft = new float[512];
+    for (int i = 0; i < 512; i++) {
+      fft[i] = 0;
+    }
 }
 
 ofApp::~ofApp(){
+}
+
+void ofApp::update(){
+  ofSoundUpdate();
+
+  soundSpectrum = ofSoundGetSpectrum(bands);
+  for (int i = 0; i < bands; i++) {
+    fft[i] *= 0.9;
+    if (fft[i] < soundSpectrum[i]) {
+      fft[i] = soundSpectrum[i];
+    }
+  }
 }
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofPushMatrix();
     ofTranslate(width/2, height/2);
-    sexyCircle(0,0,400);
+    // sexyCircle(0,0,400);
     ofPopMatrix();
     ofSetLineWidth(1);
+    reactivePolyLine();
     // cantor(20,10,width-20);
     // growingCircle();
     // drawRotatingShapes();
@@ -103,16 +121,6 @@ void ofApp::sexyCircle(float x, float y, float rad){
   }
 }
 
-void ofApp::fft(){
-  float * fft = ofSoundGetSpectrum(bandsAmount);
-  for(int i = 0; i < bandsAmount; i ++){
-      float getDing = width / bandsAmount * (i+1);
-      float result = ofLerp(1, height, fft[i]);
-      ofDrawLine(getDing,0,getDing,result*20);
-
-  }
-}
-
 void ofApp::cantor(float x, float y, float length){
   if(length > 2){
     y+=20;
@@ -120,6 +128,17 @@ void ofApp::cantor(float x, float y, float length){
     cantor(x,y,length/3);
     cantor(x+length*2/3,y,length/3);
   }
+}
+
+void ofApp::reactivePolyLine(){
+    ofTranslate(256, 192);
+    for (int i = 0; i < bands; i+=16) {
+      ofPolyline polyline;
+      for (int j = 0; j < bands; j++) {
+        polyline.addVertex(j, i - fft[j] * 100.0);
+      }
+      polyline.draw();
+    }
 }
 
 //rms ms
