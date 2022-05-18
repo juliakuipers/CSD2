@@ -10,14 +10,12 @@ ofApp::~ofApp(){
 }
 //--------------------------------------------------------------
 void ofApp::draw(){
-    float * fft = ofSoundGetSpectrum(bandsAmount);
-    sexyCircle(width/2,height/2,300,500);
-    for(int i = 0; i < bandsAmount; i ++){
-        float getDing = width / bandsAmount * (i+1);
-        float result = ofLerp(1, height, fft[i]);
-        ofDrawLine(getDing,0,getDing,result*20);
-
-    }
+    ofPushMatrix();
+    ofTranslate(width/2, height/2);
+    sexyCircle(0,0,400);
+    ofPopMatrix();
+    ofSetLineWidth(1);
+    // cantor(20,10,width-20);
     // growingCircle();
     // drawRotatingShapes();
     // ofSetColor(255);
@@ -92,26 +90,36 @@ void ofApp::peakDetection(){
 
 }
 
-void ofApp::sexyCircle(float x, float y, float rad,float energy){
-  int time = ofGetElapsedTimef()*2;
-  energy-=time;
-  // std::cout << "energy = " << energy << std::endl;
-  // std::cout << "time = " << time << std::endl;
-  ofLerp(5,499,energy);
+void ofApp::sexyCircle(float x, float y, float rad){
   ofNoFill();
   ofSetLineWidth(1);
-  ofDrawCircle(x,y,rad,rad);
-  if(rad > 5){
+  ofDrawRectangle(x,y,rad,rad);
+  if(rad > 4){
     rad *= 0.75f;
-    sexyCircle(x + rad/2,y,rad/2,energy);
-    sexyCircle(x - rad/2,y,rad/2,energy);
-    sexyCircle(x,y + rad/2,rad/2,energy);
-    sexyCircle(x,y - rad/2,rad/2,energy);
+    sexyCircle(x + rad/2,y,rad/2);
+    sexyCircle(x - rad/2,y,rad/2);
+    sexyCircle(x,y + rad/2,rad/2);
+    sexyCircle(x,y - rad/2,rad/2);
   }
 }
 
 void ofApp::fft(){
   float * fft = ofSoundGetSpectrum(bandsAmount);
+  for(int i = 0; i < bandsAmount; i ++){
+      float getDing = width / bandsAmount * (i+1);
+      float result = ofLerp(1, height, fft[i]);
+      ofDrawLine(getDing,0,getDing,result*20);
+
+  }
+}
+
+void ofApp::cantor(float x, float y, float length){
+  if(length > 2){
+    y+=20;
+    ofDrawLine(x,y,x+length,y);
+    cantor(x,y,length/3);
+    cantor(x+length*2/3,y,length/3);
+  }
 }
 
 //rms ms

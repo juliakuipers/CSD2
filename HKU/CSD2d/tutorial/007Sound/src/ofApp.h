@@ -18,8 +18,9 @@ class ofApp : public ofBaseApp{
 		void clockLine();
 		void growingCircle();
 		void peakDetection();
-		void sexyCircle(float x, float y, float rad, float energy);
+		void sexyCircle(float x, float y, float rad);
 		void fft();
+		void cantor(float x, float y, float length);
 
     ofSoundPlayer mySound;
 		ofImage myImg;
