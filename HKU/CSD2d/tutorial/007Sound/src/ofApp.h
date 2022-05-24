@@ -23,6 +23,7 @@ class ofApp : public ofBaseApp{
 		void sexyCircle(float x, float y, float rad);
 		void cantor(float x, float y, float length);
 		void reactivePolyLine();
+		void polyCircle();
 
     ofSoundPlayer mySound;
 

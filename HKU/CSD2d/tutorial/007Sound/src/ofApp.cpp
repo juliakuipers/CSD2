@@ -29,10 +29,12 @@ void ofApp::update(){
 void ofApp::draw(){
     ofPushMatrix();
     ofTranslate(width/2, height/2);
+    ofSetRectMode(OF_RECTMODE_CENTER);
     // sexyCircle(0,0,400);
     ofPopMatrix();
     ofSetLineWidth(1);
     reactivePolyLine();
+    // polyCircle();
     // cantor(20,10,width-20);
     // growingCircle();
     // drawRotatingShapes();
@@ -111,7 +113,7 @@ void ofApp::peakDetection(){
 void ofApp::sexyCircle(float x, float y, float rad){
   ofNoFill();
   ofSetLineWidth(1);
-  ofDrawRectangle(x,y,rad,rad);
+  ofDrawCircle(x,y,rad,rad);
   if(rad > 4){
     rad *= 0.75f;
     sexyCircle(x + rad/2,y,rad/2);
@@ -132,13 +134,30 @@ void ofApp::cantor(float x, float y, float length){
 
 void ofApp::reactivePolyLine(){
     ofTranslate(256, 192);
-    for (int i = 0; i < bands; i+=16) {
+    for (int i = 0; i < 1; i+=width/2) {
       ofPolyline polyline;
       for (int j = 0; j < bands; j++) {
-        polyline.addVertex(j, i - fft[j] * 100.0);
+        polyline.addVertex(j, i - fft[j] * 400.0);
       }
       polyline.draw();
     }
+}
+
+void ofApp::polyCircle(){
+  ofPolyline polyline1, polyline2, polyline3, polyline4;
+  ofPoint point1(width/2,height/2);
+  float step = bands/360;
+  // draw an circle with a diameter of 100 in blue
+  for(int i = 0; i < bands; i++){
+    polyline1.arc(point1,fft[i]*300,fft[i]*800,step*i,step*(i+1));
+    // polyline2.arc(point1,fft[i]*300,fft[i]*500,180,360);
+  }
+  polyline1.draw();
+      // polyline3.arc(point1,fft[i]*300,fft[i]*500,180,270);
+      // polyline4.arc(point1,fft[i]*300,fft[i]*500,270,360);
+  // polyline2.draw();
+  // polyline3.draw();
+  // polyline4.draw();
 }
 
 //rms ms
