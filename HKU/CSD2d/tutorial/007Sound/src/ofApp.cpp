@@ -1,12 +1,12 @@
 #include "ofApp.h"
 
-ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512){
+ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512),radiusIncrement(400){
     mySound.load("timev2.wav");
     mySound.play();
     ofBackground(0);
 
-    fft = new float[512];
-    for (int i = 0; i < 512; i++) {
+    fft = new float[bands];
+    for (int i = 0; i < bands; i++) {
       fft[i] = 0;
     }
 }
@@ -16,10 +16,9 @@ ofApp::~ofApp(){
 
 void ofApp::update(){
   ofSoundUpdate();
-
   soundSpectrum = ofSoundGetSpectrum(bands);
   for (int i = 0; i < bands; i++) {
-    fft[i] *= 0.9;
+    fft[i] *= 0.9; //decay
     if (fft[i] < soundSpectrum[i]) {
       fft[i] = soundSpectrum[i];
     }
@@ -31,9 +30,11 @@ void ofApp::draw(){
     ofTranslate(width/2, height/2);
     ofSetRectMode(OF_RECTMODE_CENTER);
     // sexyCircle(0,0,400);
+    //array width/2, result/2, result/2 ect
     ofPopMatrix();
     ofSetLineWidth(1);
-    reactivePolyLine();
+    formFract();
+    // reactivePolyLine();
     // polyCircle();
     // cantor(20,10,width-20);
     // growingCircle();
@@ -114,8 +115,10 @@ void ofApp::sexyCircle(float x, float y, float rad){
   ofNoFill();
   ofSetLineWidth(1);
   ofDrawCircle(x,y,rad,rad);
-  if(rad > 4){
-    rad *= 0.75f;
+  std::cout << "rad = " << rad << std::endl;
+  std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
+  if(rad > radiusIncrement && rad > 2){
+    // rad *= 0.75f;
     sexyCircle(x + rad/2,y,rad/2);
     sexyCircle(x - rad/2,y,rad/2);
     sexyCircle(x,y + rad/2,rad/2);
@@ -146,18 +149,22 @@ void ofApp::reactivePolyLine(){
 void ofApp::polyCircle(){
   ofPolyline polyline1, polyline2, polyline3, polyline4;
   ofPoint point1(width/2,height/2);
-  float step = bands/360;
+  float step = 360/bands;
+  ofSetColor(0,0,255);
+  ofFill();
   // draw an circle with a diameter of 100 in blue
   for(int i = 0; i < bands; i++){
-    polyline1.arc(point1,fft[i]*300,fft[i]*800,step*i,step*(i+1));
-    // polyline2.arc(point1,fft[i]*300,fft[i]*500,180,360);
+    polyline1.arc(point1,fft[i]*10000,fft[i]*10000,step*i,step*(i+1));
   }
   polyline1.draw();
-      // polyline3.arc(point1,fft[i]*300,fft[i]*500,180,270);
-      // polyline4.arc(point1,fft[i]*300,fft[i]*500,270,360);
-  // polyline2.draw();
-  // polyline3.draw();
-  // polyline4.draw();
 }
+
+void ofApp::formFract(){
+  //7*0.75 = 1.11.... 7 is dus de max aan increment voor fractals.
+  for (int j = 0; j < bands; j++) {
+    radiusIncrement = ofLerp(1,7,fft[j]);
+    std::cout << radiusIncrement << std::endl;
+  }
+} //0 tot 0.5 naar 1 tot 7
 
 //rms ms

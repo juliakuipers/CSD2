@@ -24,6 +24,7 @@ class ofApp : public ofBaseApp{
 		void cantor(float x, float y, float length);
 		void reactivePolyLine();
 		void polyCircle();
+		void formFract();
 
     ofSoundPlayer mySound;
 
@@ -40,5 +41,6 @@ class ofApp : public ofBaseApp{
 				float *fft;
 				float *soundSpectrum;
 				int bands;
+				float radiusIncrement;
 
 };
