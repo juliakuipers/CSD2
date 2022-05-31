@@ -42,5 +42,6 @@ class ofApp : public ofBaseApp{
 				float *soundSpectrum;
 				int bands;
 				float radiusIncrement;
+				int energy;
 
 };

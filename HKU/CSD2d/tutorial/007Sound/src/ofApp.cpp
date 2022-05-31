@@ -1,6 +1,7 @@
 #include "ofApp.h"
+#include <cmath>
 
-ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512),radiusIncrement(400){
+ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512),radiusIncrement(400),energy(0){
     mySound.load("timev2.wav");
     mySound.play();
     ofBackground(0);
@@ -16,20 +17,28 @@ ofApp::~ofApp(){
 
 void ofApp::update(){
   ofSoundUpdate();
+  float dit = 0.0f;
   soundSpectrum = ofSoundGetSpectrum(bands);
   for (int i = 0; i < bands; i++) {
     fft[i] *= 0.9; //decay
     if (fft[i] < soundSpectrum[i]) {
       fft[i] = soundSpectrum[i];
+      dit +=soundSpectrum[i];
     }
   }
+  energy = 0 + dit;
+  if(energy > 7){energy = 7;}
+  radiusIncrement = pow(0.75,energy) *width/2;
+  std::cout << "energy = " << energy << std::endl;
+  std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
 }
-//--------------------------------------------------------------
+
+
 void ofApp::draw(){
     ofPushMatrix();
     ofTranslate(width/2, height/2);
     ofSetRectMode(OF_RECTMODE_CENTER);
-    // sexyCircle(0,0,400);
+    sexyCircle(0,0,width/2);
     //array width/2, result/2, result/2 ect
     ofPopMatrix();
     ofSetLineWidth(1);
@@ -115,10 +124,9 @@ void ofApp::sexyCircle(float x, float y, float rad){
   ofNoFill();
   ofSetLineWidth(1);
   ofDrawCircle(x,y,rad,rad);
-  std::cout << "rad = " << rad << std::endl;
-  std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
+  // std::cout << "rad = " << rad << std::endl;
+  // std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
   if(rad > radiusIncrement && rad > 2){
-    // rad *= 0.75f;
     sexyCircle(x + rad/2,y,rad/2);
     sexyCircle(x - rad/2,y,rad/2);
     sexyCircle(x,y + rad/2,rad/2);
@@ -163,7 +171,7 @@ void ofApp::formFract(){
   //7*0.75 = 1.11.... 7 is dus de max aan increment voor fractals.
   for (int j = 0; j < bands; j++) {
     radiusIncrement = ofLerp(1,7,fft[j]);
-    std::cout << radiusIncrement << std::endl;
+    // std::cout << radiusIncrement << std::endl;
   }
 } //0 tot 0.5 naar 1 tot 7
 
