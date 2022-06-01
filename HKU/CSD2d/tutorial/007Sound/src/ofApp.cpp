@@ -38,16 +38,15 @@ void ofApp::draw(){
     ofPushMatrix();
     ofTranslate(width/2, height/2);
     ofSetRectMode(OF_RECTMODE_CENTER);
-    sexyCircle(0,0,width/2);
+    // sexyCircle(0,0,width/2);
     //array width/2, result/2, result/2 ect
     ofPopMatrix();
     ofSetLineWidth(1);
-    formFract();
     // reactivePolyLine();
     // polyCircle();
     // cantor(20,10,width-20);
     // growingCircle();
-    // drawRotatingShapes();
+    drawRotatingShapes();
     // ofSetColor(255);
     // clockLine();
 }
@@ -72,13 +71,15 @@ void ofApp::drawRotatingShapes(){
   ofTranslate(width/2, height/2);
   ofSetRectMode(OF_RECTMODE_CENTER);
   ofNoFill();
-  ofSetLineWidth(2);
+  ofSetLineWidth(1);
   for(int i = 0; i < bandsAmount; i++){
-      ofSetColor(0);
-      ofRotateDeg((tick+=bpmTick(126.5,1))*-1);
+      ofSetColor(255);
+      // ofRotateDeg((tick+=bpmTick(126.5,1))*-1);
+      ofRotateDeg(ofGetElapsedTimef());
       ofScale(0.85);
       ofDrawRectangle(0, 0, height,height);
-      // ofDrawTriangle(width*0.2, height*0.2, width*0.8, height*0.2, width/2, height*0.8);
+      // ofDrawCircle(width*0.2, height*0.2,width*0.2);
+      ofDrawTriangle(width*0.2, height*0.2, width*0.8, height*0.2, width/2, height*0.8);
   }
   ofPopMatrix();
 }
@@ -135,8 +136,9 @@ void ofApp::sexyCircle(float x, float y, float rad){
 }
 
 void ofApp::cantor(float x, float y, float length){
+  // ofStroke
   if(length > 2){
-    y+=20;
+    y+=100;
     ofDrawLine(x,y,x+length,y);
     cantor(x,y,length/3);
     cantor(x+length*2/3,y,length/3);
@@ -167,12 +169,5 @@ void ofApp::polyCircle(){
   polyline1.draw();
 }
 
-void ofApp::formFract(){
-  //7*0.75 = 1.11.... 7 is dus de max aan increment voor fractals.
-  for (int j = 0; j < bands; j++) {
-    radiusIncrement = ofLerp(1,7,fft[j]);
-    // std::cout << radiusIncrement << std::endl;
-  }
-} //0 tot 0.5 naar 1 tot 7
 
 //rms ms
