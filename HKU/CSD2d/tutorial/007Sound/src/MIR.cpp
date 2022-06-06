@@ -3,15 +3,15 @@
 AudioFile<float> audioFile;
 
 MIR::MIR() :
-bandsAmount(512), increment(0), time(0), energy(0)
+increment(0), time(0), energy(0)
 {
   mySound.load("timev2.wav");
   audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
   mySound.play();
   audioFile.printSummary();
 
-  fft = new float[bandsAmount];
-  for (int i = 0; i < bandsAmount; i++) {
+  fft = new float[512];
+  for (int i = 0; i < 512; i++) {
     fft[i] = 0;
   }
 }
@@ -33,32 +33,25 @@ int MIR::bpmTick(float bpm, float note){
   }
 }
 
-float MIR::fillFftArray(){
+float MIR::fillFftArray(int bandsAmount, int i){
   fftSum = 0.0f;
   soundSpectrum = ofSoundGetSpectrum(bandsAmount);
-  for (int i = 0; i < bandsAmount; i++) {
-    fft[i] *= 0.9; //decay
-    if (fft[i] < soundSpectrum[i]) {
-      fft[i] = soundSpectrum[i];
-      fftSum += soundSpectrum[i];
-      return fft[i];
-    }
-  }
+  fftSum += soundSpectrum[i];
+  return soundSpectrum[i];
 }
 
 void MIR::getAudioSample(){
   int channel = 0;
   int numSamples = audioFile.getNumSamplesPerChannel();
-
   for (int i = 0; i < numSamples; i++)
   {
-     double currentSample = audioFile.samples[channel][i];
+     float sample = audioFile.samples[channel][i];
      std::cout << "currentSample = " << currentSample << std::fixed << std::endl;
-  }
-  //return sample
+  } //heb ik hier een buffer voor nodig????
+  return sample
 }
 
-float MIR::getEnergy(){
+float MIR::getFFTEnergy(){
   energy = 0 + fftSum;
   if(energy > 7){energy = 7;}
   float radiusIncrement = pow(0.75,energy) *ofGetWidth()/2;

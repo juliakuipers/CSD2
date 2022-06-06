@@ -39,4 +39,6 @@ class ofApp : public ofBaseApp{
 				int mid;
 				int high;
 
+				float *fft;
+
 };

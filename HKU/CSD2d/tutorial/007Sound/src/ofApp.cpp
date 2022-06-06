@@ -2,17 +2,22 @@
 #include <cmath>
 
 
-ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), tick(0), grow(0),bands(512),radiusIncrement(400){
+ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), tick(0), grow(0),bands(1),radiusIncrement(400){
     ofBackground(0);
+    fft = new float[512];
+    for (int i = 0; i < 512; i++) {
+      fft[i] = 0;
+    }
 }
 
-ofApp::~ofApp(){
-}
+ofApp::~ofApp(){}
 
 void ofApp::update(){
   mir.updateMIR();
-  float fourier = mir.fillFftArray();
-  std::cout << "fourier = " << fourier << std::endl;
+  for(int i = 0; i < bands; i ++){
+    fft[i] = mir.fillFftArray(bands,i);
+  }
+
   //for fft the best thing i can do is fill an array here with info from MIR class
   // mir.getAudioSample();
 }
@@ -83,6 +88,7 @@ void ofApp::growingCircle(){
 }
 
 void ofApp::reactivePolyLine(){
+  bands = 512;
     ofTranslate(256, 192);
     for (int i = 0; i < 1; i+=width/2) {
       ofPolyline polyline;
@@ -94,7 +100,8 @@ void ofApp::reactivePolyLine(){
 }
 
 void ofApp::polyCircle(){
-  ofPolyline polyline1, polyline2, polyline3, polyline4;
+  bands = 6;
+  ofPolyline polyline1;
   ofPoint point1(width/2,height/2);
   float step = 360/bands;
   ofSetColor(0,0,255);
