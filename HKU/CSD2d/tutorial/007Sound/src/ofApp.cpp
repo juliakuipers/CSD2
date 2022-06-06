@@ -1,10 +1,14 @@
 #include "ofApp.h"
 #include <cmath>
 
+AudioFile<double> audioFile;
+
 ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512),radiusIncrement(400),energy(0){
     mySound.load("timev2.wav");
+    audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
     mySound.play();
     ofBackground(0);
+    audioFile.printSummary();
 
     fft = new float[bands];
     for (int i = 0; i < bands; i++) {
@@ -26,11 +30,19 @@ void ofApp::update(){
       dit +=soundSpectrum[i];
     }
   }
+  int channel = 0;
+  int numSamples = audioFile.getNumSamplesPerChannel();
+
+  for (int i = 0; i < numSamples; i++)
+  {
+     double currentSample = audioFile.samples[channel][i];
+     std::cout << "currentSample = " << currentSample << std::fixed << std::endl;
+  }
   energy = 0 + dit;
   if(energy > 7){energy = 7;}
   radiusIncrement = pow(0.75,energy) *width/2;
-  std::cout << "energy = " << energy << std::endl;
-  std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
+  // std::cout << "energy = " << energy << std::endl;
+  // std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
 }
 
 

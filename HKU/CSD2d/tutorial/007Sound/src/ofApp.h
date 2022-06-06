@@ -1,4 +1,5 @@
 #pragma once
+#include "AudioFile.h"
 
 #include "ofMain.h"
 
