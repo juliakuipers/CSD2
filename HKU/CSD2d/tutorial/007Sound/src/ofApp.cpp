@@ -1,50 +1,36 @@
 #include "ofApp.h"
 #include <cmath>
 
-AudioFile<double> audioFile;
 
-ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), bandsAmount(35), time(0.0), tick(0), increment(0), grow(0),bands(512),radiusIncrement(400),energy(0){
-    mySound.load("timev2.wav");
-    audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
-    mySound.play();
+ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), tick(0), grow(0),bands(512),radiusIncrement(400){
     ofBackground(0);
-    audioFile.printSummary();
-
-    fft = new float[bands];
-    for (int i = 0; i < bands; i++) {
-      fft[i] = 0;
-    }
 }
 
 ofApp::~ofApp(){
 }
 
 void ofApp::update(){
-  ofSoundUpdate();
-  float dit = 0.0f;
-  soundSpectrum = ofSoundGetSpectrum(bands);
-  for (int i = 0; i < bands; i++) {
-    fft[i] *= 0.9; //decay
-    if (fft[i] < soundSpectrum[i]) {
-      fft[i] = soundSpectrum[i];
-      dit +=soundSpectrum[i];
-    }
-  }
-  int channel = 0;
-  int numSamples = audioFile.getNumSamplesPerChannel();
-
-  for (int i = 0; i < numSamples; i++)
-  {
-     double currentSample = audioFile.samples[channel][i];
-     std::cout << "currentSample = " << currentSample << std::fixed << std::endl;
-  }
-  energy = 0 + dit;
-  if(energy > 7){energy = 7;}
-  radiusIncrement = pow(0.75,energy) *width/2;
+  mir.updateMIR();
+  // MIR.fillFftArray();
+  // MIR.getAudioSample();
   // std::cout << "energy = " << energy << std::endl;
   // std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
 }
 
+// void ofApp::fillFftArray(){
+//   float fftSum = 0.0f;
+//   soundSpectrum = ofSoundGetSpectrum(bands);
+//   for (int i = 0; i < bands; i++) {
+//     fft[i] *= 0.9; //decay
+//     if (fft[i] < soundSpectrum[i]) {
+//       fft[i] = soundSpectrum[i];
+//       fftSum +=soundSpectrum[i];
+//     }
+//   }
+//   energy = 0 + fftSum;
+//   if(energy > 7){energy = 7;}
+//   radiusIncrement = pow(0.75,energy) *width/2;
+// }
 
 void ofApp::draw(){
     ofPushMatrix();
@@ -55,6 +41,7 @@ void ofApp::draw(){
     ofPopMatrix();
     ofSetLineWidth(1);
     // reactivePolyLine();
+    // fractal.circles(0,0,width/2);
     // polyCircle();
     // cantor(20,10,width-20);
     // growingCircle();
@@ -67,27 +54,16 @@ void ofApp::draw(){
 
 //bpm 126.5
 
-int ofApp::bpmTick(float bpm, float note){
-  time = ofGetElapsedTimeMillis();
-  float ms = (60000/bpm) * note; //if note is 1 it results in a quarter note
-  if(time >= increment){
-    increment += ms;
-    return 1;
-  }else {
-    return 0;
-  }
-}
-
 void ofApp::drawRotatingShapes(){
   ofPushMatrix();
   ofTranslate(width/2, height/2);
   ofSetRectMode(OF_RECTMODE_CENTER);
   ofNoFill();
   ofSetLineWidth(1);
-  for(int i = 0; i < bandsAmount; i++){
+  for(int i = 0; i < 35; i++){
       ofSetColor(255);
-      // ofRotateDeg((tick+=bpmTick(126.5,1))*-1);
-      ofRotateDeg(ofGetElapsedTimef());
+      ofRotateDeg((tick+=mir.bpmTick(126.5,1))*-1);
+      // ofRotateDeg(ofGetElapsedTimef());
       ofScale(0.85);
       ofDrawRectangle(0, 0, height,height);
       // ofDrawCircle(width*0.2, height*0.2,width*0.2);
@@ -114,7 +90,7 @@ void ofApp::growingCircle(){
   ofPushMatrix();
   ofTranslate(width/2, height/2);
   ofNoFill();
-  for(int i = 0; i < bandsAmount; i++){
+  for(int i = 0; i < 35; i++){
       ofScale(0.85);
       for(int x = 0; x < width; x+=100){
         ofSetColor(255);
@@ -127,34 +103,6 @@ void ofApp::growingCircle(){
       if(grow>width){grow*=-1;}
     }
     ofPopMatrix();
-}
-
-void ofApp::peakDetection(){
-
-}
-
-void ofApp::sexyCircle(float x, float y, float rad){
-  ofNoFill();
-  ofSetLineWidth(1);
-  ofDrawCircle(x,y,rad,rad);
-  // std::cout << "rad = " << rad << std::endl;
-  // std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
-  if(rad > radiusIncrement && rad > 2){
-    sexyCircle(x + rad/2,y,rad/2);
-    sexyCircle(x - rad/2,y,rad/2);
-    sexyCircle(x,y + rad/2,rad/2);
-    sexyCircle(x,y - rad/2,rad/2);
-  }
-}
-
-void ofApp::cantor(float x, float y, float length){
-  // ofStroke
-  if(length > 2){
-    y+=100;
-    ofDrawLine(x,y,x+length,y);
-    cantor(x,y,length/3);
-    cantor(x+length*2/3,y,length/3);
-  }
 }
 
 void ofApp::reactivePolyLine(){
