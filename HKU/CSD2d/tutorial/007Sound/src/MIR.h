@@ -27,5 +27,7 @@ class MIR{
     float time;
     float energy;
     float fftSum;
+    int AFnumSamples;
+    float *sampleArray;
 
 };

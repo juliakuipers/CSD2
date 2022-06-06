@@ -3,17 +3,19 @@
 AudioFile<float> audioFile;
 
 MIR::MIR() :
-increment(0), time(0), energy(0)
+increment(0), time(0), energy(0), AFnumSamples(audioFile.getNumSamplesPerChannel())
 {
   mySound.load("timev2.wav");
   audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
   mySound.play();
   audioFile.printSummary();
 
+  sampleArray = new float[AFnumSamples];
   fft = new float[512];
   for (int i = 0; i < 512; i++) {
     fft[i] = 0;
   }
+  getAudioSample();
 }
 
 MIR::~MIR(){}
@@ -42,13 +44,14 @@ float MIR::fillFftArray(int bandsAmount, int i){
 
 void MIR::getAudioSample(){
   int channel = 0;
-  int numSamples = audioFile.getNumSamplesPerChannel();
-  for (int i = 0; i < numSamples; i++)
+  for (int i = 0; i < AFnumSamples; i++)
   {
-     float sample = audioFile.samples[channel][i];
-     std::cout << "currentSample = " << currentSample << std::fixed << std::endl;
-  } //heb ik hier een buffer voor nodig????
-  return sample
+     sampleArray[i] = audioFile.samples[channel][i];
+  } //i need a buffer if i want to use rms
+  std::cout << "MIR::getAudioSample() : buffer is filled " << std::endl;
+  // num samples per channel / samplerate = length in seconds
+  //length in seconds * samplerate = num samples per channel
+  //if 1 sec has passed 1 times the samplerate should have been read from num sampler per channel
 }
 
 float MIR::getFFTEnergy(){
