@@ -33,7 +33,7 @@ int MIR::bpmTick(float bpm, float note){
   }
 }
 
-void MIR::fillFftArray(){
+float MIR::fillFftArray(){
   fftSum = 0.0f;
   soundSpectrum = ofSoundGetSpectrum(bandsAmount);
   for (int i = 0; i < bandsAmount; i++) {
@@ -41,6 +41,7 @@ void MIR::fillFftArray(){
     if (fft[i] < soundSpectrum[i]) {
       fft[i] = soundSpectrum[i];
       fftSum += soundSpectrum[i];
+      return fft[i];
     }
   }
 }

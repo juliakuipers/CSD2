@@ -33,8 +33,6 @@ class ofApp : public ofBaseApp{
 				int tick;
 				float volume;
 				float grow;
-				float *fft;
-				float *soundSpectrum;
 				int bands;
 				float radiusIncrement;
 				int low;

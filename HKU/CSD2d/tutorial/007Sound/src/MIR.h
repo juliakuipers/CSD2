@@ -12,7 +12,7 @@ class MIR{
     void updateMIR();
 
     int bpmTick(float bpm, float note);
-    void fillFftArray();
+    float fillFftArray();
     void getAudioSample();
     float getEnergy();
 

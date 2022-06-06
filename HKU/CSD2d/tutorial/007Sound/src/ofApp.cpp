@@ -11,39 +11,16 @@ ofApp::~ofApp(){
 
 void ofApp::update(){
   mir.updateMIR();
-  // MIR.fillFftArray();
-  // MIR.getAudioSample();
-  // std::cout << "energy = " << energy << std::endl;
-  // std::cout << "radiusIncrement = " << radiusIncrement << std::endl;
+  float fourier = mir.fillFftArray();
+  std::cout << "fourier = " << fourier << std::endl;
+  //for fft the best thing i can do is fill an array here with info from MIR class
+  // mir.getAudioSample();
 }
 
-// void ofApp::fillFftArray(){
-//   float fftSum = 0.0f;
-//   soundSpectrum = ofSoundGetSpectrum(bands);
-//   for (int i = 0; i < bands; i++) {
-//     fft[i] *= 0.9; //decay
-//     if (fft[i] < soundSpectrum[i]) {
-//       fft[i] = soundSpectrum[i];
-//       fftSum +=soundSpectrum[i];
-//     }
-//   }
-//   energy = 0 + fftSum;
-//   if(energy > 7){energy = 7;}
-//   radiusIncrement = pow(0.75,energy) *width/2;
-// }
-
 void ofApp::draw(){
-    ofPushMatrix();
-    ofTranslate(width/2, height/2);
-    ofSetRectMode(OF_RECTMODE_CENTER);
-    // sexyCircle(0,0,width/2);
-    //array width/2, result/2, result/2 ect
-    ofPopMatrix();
-    ofSetLineWidth(1);
     // reactivePolyLine();
     // fractal.circles(0,0,width/2);
     // polyCircle();
-    // cantor(20,10,width-20);
     // growingCircle();
     drawRotatingShapes();
     // ofSetColor(255);
