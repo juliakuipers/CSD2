@@ -17,9 +17,7 @@ void ofApp::update(){
   for(int i = 0; i < bands; i ++){
     fft[i] = mir.fillFftArray(bands,i);
   }
-  float curSamp = mir.getCurrentSample();
-  std::cout << "ofApp::update() : curSamp = " << curSamp << std::endl;
-  // mir.getAudioSample();
+  std::cout << "ofApp::update() : mir.onsetDetection() = " << mir.onsetDetection() << std::endl;
 }
 
 void ofApp::draw(){

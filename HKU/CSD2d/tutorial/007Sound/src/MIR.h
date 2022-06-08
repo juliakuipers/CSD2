@@ -16,6 +16,7 @@ class MIR{
     void getAudioSample();
     float getFFTEnergy();
     float getCurrentSample();
+    float onsetDetection();
 
     ofSoundPlayer mySound;
 

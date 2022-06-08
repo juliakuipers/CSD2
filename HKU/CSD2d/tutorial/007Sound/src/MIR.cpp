@@ -66,12 +66,15 @@ float MIR::getFFTEnergy(){
 
 float MIR::getCurrentSample(){
   float mySoundPosition = mySound.getPosition(); //Returns the current position as a percent 0.0-1.0
-  std::cout << "MIR::getCurrentSample() : mySoundPosition = " << mySoundPosition << std::endl;
   int posInNumSamples = mySoundPosition / 100 * AFnumSamples;
-  std::cout << "MIR::getCurrentSample() : posInNumSamples = " << posInNumSamples << std::endl;
-  std::cout << "MIR::getCurrentSample() : AFnumSamples = " << AFnumSamples << std::endl;
   return sampleArray[posInNumSamples];
-    //dus positie is gelijk aan dit nummer sample
-    //maybe scale soundpos (which goes from [0,1] to numsamples)
+}
 
+float MIR::onsetDetection(){
+  //calculate a peakAmount while filling the buffer
+  //bool????
+  float sample = getCurrentSample();
+  float peakAmount = 0.1;
+  if(sample >= peakAmount){return 1;}
+  else{return 0;}
 }
