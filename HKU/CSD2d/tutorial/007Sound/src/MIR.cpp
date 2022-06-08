@@ -3,12 +3,14 @@
 AudioFile<float> audioFile;
 
 MIR::MIR() :
-increment(0), time(0), energy(0), AFnumSamples(audioFile.getNumSamplesPerChannel())
+increment(0), time(0), energy(0), AFnumSamples(0)
 {
   mySound.load("timev2.wav");
   audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
   mySound.play();
   audioFile.printSummary();
+  AFnumSamples = audioFile.getNumSamplesPerChannel();
+  // mySound.getPosition(); //Returns the current position as a percent 0.0-1.0
 
   sampleArray = new float[AFnumSamples];
   fft = new float[512];
@@ -58,5 +60,18 @@ float MIR::getFFTEnergy(){
   energy = 0 + fftSum;
   if(energy > 7){energy = 7;}
   float radiusIncrement = pow(0.75,energy) *ofGetWidth()/2;
-  return energy;
+  // std::cout << "MIR::getFFTEnergy : fftSum = " << fftSum << std::endl;
+  return radiusIncrement;
+}
+
+float MIR::getCurrentSample(){
+  float mySoundPosition = mySound.getPosition(); //Returns the current position as a percent 0.0-1.0
+  std::cout << "MIR::getCurrentSample() : mySoundPosition = " << mySoundPosition << std::endl;
+  int posInNumSamples = mySoundPosition / 100 * AFnumSamples;
+  std::cout << "MIR::getCurrentSample() : posInNumSamples = " << posInNumSamples << std::endl;
+  std::cout << "MIR::getCurrentSample() : AFnumSamples = " << AFnumSamples << std::endl;
+  return sampleArray[posInNumSamples];
+    //dus positie is gelijk aan dit nummer sample
+    //maybe scale soundpos (which goes from [0,1] to numsamples)
+
 }

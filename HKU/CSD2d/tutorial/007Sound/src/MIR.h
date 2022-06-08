@@ -15,6 +15,7 @@ class MIR{
     float fillFftArray(int bandsAmount, int i);
     void getAudioSample();
     float getFFTEnergy();
+    float getCurrentSample();
 
     ofSoundPlayer mySound;
 
@@ -23,11 +24,11 @@ class MIR{
     // int bandsAmount;
     float *fft;
     float *soundSpectrum;
+    float *sampleArray;
     float increment;
     float time;
     float energy;
     float fftSum;
     int AFnumSamples;
-    float *sampleArray;
 
 };

@@ -17,8 +17,8 @@ void ofApp::update(){
   for(int i = 0; i < bands; i ++){
     fft[i] = mir.fillFftArray(bands,i);
   }
-
-  //for fft the best thing i can do is fill an array here with info from MIR class
+  float curSamp = mir.getCurrentSample();
+  std::cout << "ofApp::update() : curSamp = " << curSamp << std::endl;
   // mir.getAudioSample();
 }
 
@@ -27,7 +27,7 @@ void ofApp::draw(){
     // fractal.circles(0,0,width/2);
     // polyCircle();
     // growingCircle();
-    drawRotatingShapes();
+    // drawRotatingShapes();
     // ofSetColor(255);
     // clockLine();
 }

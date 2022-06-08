@@ -9,7 +9,7 @@ void Fractals::circles(float x, float y, float rad){
   ofSetLineWidth(1);
   ofDrawCircle(x,y,rad,rad);
   // if(rad > radiusIncrement && rad > 2){
-  if(rad > 2){
+  if(rad > 20){
     circles(x + rad/2,y,rad/2);
     circles(x - rad/2,y,rad/2);
     circles(x,y + rad/2,rad/2);
