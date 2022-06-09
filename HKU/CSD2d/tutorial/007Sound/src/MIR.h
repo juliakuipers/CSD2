@@ -30,6 +30,6 @@ class MIR{
     float energy;
     float fftSum;
     int AFnumSamples;
-    bool peaked;
+
 
 };

@@ -3,7 +3,7 @@
 AudioFile<float> audioFile;
 
 MIR::MIR() :
-increment(0), time(0), energy(0), AFnumSamples(0), peaked(false)
+increment(0), time(0), energy(0), AFnumSamples(0)
 {
   mySound.load("timev2.wav");
   audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");

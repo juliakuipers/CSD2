@@ -15,29 +15,28 @@ class ofApp : public ofBaseApp{
 		void draw();
 		void update();
 
-		void fillFftArray();
-
 		void drawRotatingShapes();
 		void clockLine();
 		void growingCircle();
 		void reactivePolyLine();
 		void polyCircle();
+		void generativeLines();
 
 		Fractals fractal;
 		MIR mir;
+		ofPolyline lijntje;
 
     private:
+
 				float height;
 				float width;
-				float cue [2] = {0.0,34.0};
-				int tick;
-				float volume;
 				float grow;
-				int bands;
 				float radiusIncrement;
-				int low;
-				int mid;
-				int high;
+
+				int bands;
+				int tick;
+
+				bool peaked;
 
 				float *fft;
 

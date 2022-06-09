@@ -2,7 +2,8 @@
 #include <cmath>
 
 
-ofApp::ofApp() : height(ofGetHeight()), width(ofGetWidth()), tick(0), grow(0),bands(1),radiusIncrement(400){
+ofApp::ofApp() :
+height(ofGetHeight()), width(ofGetWidth()), grow(0),radiusIncrement(400), bands(1), tick(0), peaked(false){
     ofBackground(0);
     fft = new float[512];
     for (int i = 0; i < 512; i++) {
@@ -17,7 +18,8 @@ void ofApp::update(){
   for(int i = 0; i < bands; i ++){
     fft[i] = mir.fillFftArray(bands,i);
   }
-  std::cout << "ofApp::update() : mir.onsetDetection() = " << mir.onsetDetection() << std::endl;
+  (mir.onsetDetection() == 1) ? peaked = true : peaked = false;
+  //code van justin
 }
 
 //dust generator
@@ -30,8 +32,7 @@ void ofApp::draw(){
     // drawRotatingShapes();
     // ofSetColor(255);
     // clockLine();
-
-    ofDrawCircle(width/2,height/2,(mir.getCurrentSample()+2)*100);
+    generativeLines();
 }
 
 
@@ -115,5 +116,13 @@ void ofApp::polyCircle(){
   polyline1.draw();
 }
 
-
-//rms ms
+void ofApp::generativeLines(){
+  lijntje.draw();
+  if(peaked == true){
+    lijntje.addVertex(ofRandom(width),ofRandom(height));
+    std::cout << "ofApp::generativeLines() : peaked == true" << std::endl;
+    for(int i = 0; i < 100; i ++){
+      // ofDrawLine(ofRandom(width),ofRandom(height),ofRandom(width),ofRandom(height));
+    }
+  }
+}
