@@ -20,6 +20,8 @@ void ofApp::update(){
   std::cout << "ofApp::update() : mir.onsetDetection() = " << mir.onsetDetection() << std::endl;
 }
 
+//dust generator
+
 void ofApp::draw(){
     // reactivePolyLine();
     // fractal.circles(0,0,width/2);
@@ -28,6 +30,8 @@ void ofApp::draw(){
     // drawRotatingShapes();
     // ofSetColor(255);
     // clockLine();
+
+    ofDrawCircle(width/2,height/2,(mir.getCurrentSample()+2)*100);
 }
 
 

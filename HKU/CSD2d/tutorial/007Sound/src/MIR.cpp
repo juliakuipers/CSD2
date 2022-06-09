@@ -3,7 +3,7 @@
 AudioFile<float> audioFile;
 
 MIR::MIR() :
-increment(0), time(0), energy(0), AFnumSamples(0)
+increment(0), time(0), energy(0), AFnumSamples(0), peaked(false)
 {
   mySound.load("timev2.wav");
   audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
@@ -66,13 +66,13 @@ float MIR::getFFTEnergy(){
 
 float MIR::getCurrentSample(){
   float mySoundPosition = mySound.getPosition(); //Returns the current position as a percent 0.0-1.0
-  int posInNumSamples = mySoundPosition / 100 * AFnumSamples;
+  int posInNumSamples = mySoundPosition * AFnumSamples;
   return sampleArray[posInNumSamples];
 }
 
 float MIR::onsetDetection(){
   //calculate a peakAmount while filling the buffer
-  //bool????
+  //work with a bool
   float sample = getCurrentSample();
   float peakAmount = 0.1;
   if(sample >= peakAmount){return 1;}

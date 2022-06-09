@@ -22,7 +22,6 @@ class MIR{
 
   private:
 
-    // int bandsAmount;
     float *fft;
     float *soundSpectrum;
     float *sampleArray;
@@ -31,5 +30,6 @@ class MIR{
     float energy;
     float fftSum;
     int AFnumSamples;
+    bool peaked;
 
 };
