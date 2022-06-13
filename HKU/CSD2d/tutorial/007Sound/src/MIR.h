@@ -25,10 +25,13 @@ class MIR{
     float *fft;
     float *soundSpectrum;
     float *sampleArray;
+
     float increment;
     float time;
     float energy;
     float fftSum;
+    float mySoundPosition;
+
     int AFnumSamples;
 
 

@@ -21,6 +21,7 @@ class ofApp : public ofBaseApp{
 		void reactivePolyLine();
 		void polyCircle();
 		void generativeLines();
+		void reactiveCircleFractal();
 
 		Fractals fractal;
 		MIR mir;

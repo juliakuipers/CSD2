@@ -25,14 +25,16 @@ void ofApp::update(){
 //dust generator
 
 void ofApp::draw(){
-    // reactivePolyLine();
-    // fractal.circles(0,0,width/2);
+    reactivePolyLine();
+    // fractal.circles(width/2,height/2,width/2,0);
+    // std::cout << "ofApp::draw() : mir.getCurrentSample() = " << mir.getCurrentSample() << std::endl;
     // polyCircle();
     // growingCircle();
     // drawRotatingShapes();
     // ofSetColor(255);
     // clockLine();
-    generativeLines();
+
+    // generativeLines();
 }
 
 
@@ -93,7 +95,7 @@ void ofApp::growingCircle(){
 void ofApp::reactivePolyLine(){
   bands = 512;
     ofTranslate(256, 192);
-    for (int i = 0; i < 1; i+=width/2) {
+    for (int i = 0; i < bands; i+=16) {
       ofPolyline polyline;
       for (int j = 0; j < bands; j++) {
         polyline.addVertex(j, i - fft[j] * 400.0);
@@ -126,3 +128,11 @@ void ofApp::generativeLines(){
     }
   }
 }
+
+// void ofApp:reactiveCircleFractal(){
+//   if(peaked == true && energy < 7){
+//     energy +=1;
+//     radiusIncrement = pow(0.75,energy) *ofGetWidth()/2;
+//   } else {energy = 0;}
+// }
+//bloom = HDR & blur

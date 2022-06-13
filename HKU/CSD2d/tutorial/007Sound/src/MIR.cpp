@@ -3,7 +3,7 @@
 AudioFile<float> audioFile;
 
 MIR::MIR() :
-increment(0), time(0), energy(0), AFnumSamples(0)
+increment(0), time(0), energy(0), mySoundPosition(0), AFnumSamples(0)
 {
   mySound.load("timev2.wav");
   audioFile.load ("/Users/Julia/Documents/Atom/HKU/CSD2d/tutorial/007Sound/bin/data/timev2.wav");
@@ -24,6 +24,7 @@ MIR::~MIR(){}
 
 void MIR::updateMIR(){
   ofSoundUpdate();
+  mySoundPosition = mySound.getPosition();
 }
 
 int MIR::bpmTick(float bpm, float note){
@@ -60,12 +61,12 @@ float MIR::getFFTEnergy(){
   energy = 0 + fftSum;
   if(energy > 7){energy = 7;}
   float radiusIncrement = pow(0.75,energy) *ofGetWidth()/2;
+  //                                        //*ofGetWidth()/2 omdat dat de radius is die ik meegeef aan fractal.circles() 
   // std::cout << "MIR::getFFTEnergy : fftSum = " << fftSum << std::endl;
   return radiusIncrement;
 }
 
 float MIR::getCurrentSample(){
-  float mySoundPosition = mySound.getPosition(); //Returns the current position as a percent 0.0-1.0
   int posInNumSamples = mySoundPosition * AFnumSamples;
   return sampleArray[posInNumSamples];
 }
