@@ -23,6 +23,8 @@ class ofApp : public ofBaseApp{
 		void generativeLines();
 		void reactiveCircleFractal();
 
+		void keyPressed(int key);
+
 		Fractals fractal;
 		MIR mir;
 		ofPolyline lijntje;

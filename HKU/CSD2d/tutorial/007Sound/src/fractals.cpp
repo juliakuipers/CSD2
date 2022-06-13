@@ -25,3 +25,5 @@ void Fractals::cantor(float x, float y, float length){
     cantor(x+length*2/3,y,length/3);
   }
 }
+
+//src https://natureofcode.com/book/chapter-8-fractals/

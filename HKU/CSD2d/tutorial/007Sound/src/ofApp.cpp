@@ -8,7 +8,7 @@ height(ofGetHeight()), width(ofGetWidth()), grow(0),radiusIncrement(400), bands(
     fft = new float[512];
     for (int i = 0; i < 512; i++) {
       fft[i] = 0;
-    }
+    } //make an empty buffer
 }
 
 ofApp::~ofApp(){}
@@ -17,6 +17,7 @@ void ofApp::update(){
   mir.updateMIR();
   for(int i = 0; i < bands; i ++){
     fft[i] = mir.fillFftArray(bands,i);
+    //fill a buffer with fft information
   }
   (mir.onsetDetection() == 1) ? peaked = true : peaked = false;
   //code van justin
@@ -25,9 +26,8 @@ void ofApp::update(){
 //dust generator
 
 void ofApp::draw(){
-    reactivePolyLine();
-    // fractal.circles(width/2,height/2,width/2,0);
-    // std::cout << "ofApp::draw() : mir.getCurrentSample() = " << mir.getCurrentSample() << std::endl;
+    // reactivePolyLine();
+    fractal.circles(width/2,height/2,width/2,0);
     // polyCircle();
     // growingCircle();
     // drawRotatingShapes();
@@ -49,14 +49,15 @@ void ofApp::drawRotatingShapes(){
   ofSetLineWidth(1);
   for(int i = 0; i < 35; i++){
       ofSetColor(255);
-      ofRotateDeg((tick+=mir.bpmTick(126.5,1))*-1);
-      // ofRotateDeg(ofGetElapsedTimef());
-      ofScale(0.85);
-      ofDrawRectangle(0, 0, height,height);
-      // ofDrawCircle(width*0.2, height*0.2,width*0.2);
+      // ofRotateDeg((tick+=mir.bpmTick(126.5,1))*-1);
+      ofRotateDeg(ofGetElapsedTimef());
+      ofScale(0.95);
+      // ofDrawRectangle(0, 0, height,height);
+      // ofDrawCircle(width*0.3, height*0.3,width*0.3);
       ofDrawTriangle(width*0.2, height*0.2, width*0.8, height*0.2, width/2, height*0.8);
   }
   ofPopMatrix();
+  //src https://github.com/lewislepton/openFrameworksTutorialSeries/blob/master/072_rectangleLoop/src/ofApp.cpp
 }
 
 void ofApp::clockLine(){
@@ -68,7 +69,7 @@ void ofApp::clockLine(){
   ofRotateDeg(ofGetElapsedTimeMillis()/4);
   ofDrawLine(0,0,width/6,height/6);
   // ofFill();
-  ofDrawCircle(0,0,3,3);
+  // ofDrawCircle(0,0,3,3);
   // ofNoFill();
   ofPopMatrix();
 }
@@ -94,6 +95,7 @@ void ofApp::growingCircle(){
 
 void ofApp::reactivePolyLine(){
   bands = 512;
+  //select the amount of bands wanted for fft
     ofTranslate(256, 192);
     for (int i = 0; i < bands; i+=16) {
       ofPolyline polyline;
@@ -101,7 +103,8 @@ void ofApp::reactivePolyLine(){
         polyline.addVertex(j, i - fft[j] * 400.0);
       }
       polyline.draw();
-    }
+    } //src https://github.com/lewislepton/openFrameworksTutorialSeries/blob/master/048_audioReactivePolyline/src/ofApp.cpp
+    //draw a sound spectrum with a poly line (a line to which vertexis can be added) andd fft
 }
 
 void ofApp::polyCircle(){
@@ -109,23 +112,24 @@ void ofApp::polyCircle(){
   ofPolyline polyline1;
   ofPoint point1(width/2,height/2);
   float step = 360/bands;
-  ofSetColor(0,0,255);
   ofFill();
-  // draw an circle with a diameter of 100 in blue
   for(int i = 0; i < bands; i++){
     polyline1.arc(point1,fft[i]*10000,fft[i]*10000,step*i,step*(i+1));
   }
   polyline1.draw();
+  //audioreactive circle divided in 6 equal parts (circular spectrum)
 }
 
 void ofApp::generativeLines(){
+  // ofColor whiteHDR(255, 255, 255,100);
+  ofSetColor(255,255,255,100);
   lijntje.draw();
   if(peaked == true){
     lijntje.addVertex(ofRandom(width),ofRandom(height));
-    std::cout << "ofApp::generativeLines() : peaked == true" << std::endl;
+    //draw a new line everytime peaked == true
     for(int i = 0; i < 100; i ++){
       // ofDrawLine(ofRandom(width),ofRandom(height),ofRandom(width),ofRandom(height));
-    }
+    } //src https://www.youtube.com/watch?v=S4KMORhoFMk
   }
 }
 
@@ -136,3 +140,8 @@ void ofApp::generativeLines(){
 //   } else {energy = 0;}
 // }
 //bloom = HDR & blur
+
+void ofApp::keyPressed(int key){
+  if (key == 't'){
+  }
+}
