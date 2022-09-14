@@ -26,6 +26,7 @@ void FastNoise::calcNextSample() {
     }
     if(bufferIndex >= bufferSize) {
       bufferIndex = 0;
+      std::cout << "FastNoise::calcNextSample() refilling buffer" << '\n';
       fillNoiseBuffer();
       //seed needs to be changed
     }
