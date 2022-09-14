@@ -3,31 +3,34 @@
 #include <iostream>
 
 FastNoise::FastNoise(float frequency,float samplerate) :
-  Oscillator(frequency, samplerate), bufferSize(128*128), bufferIndex(0){
+  Oscillator(frequency, samplerate), bufferSize((samplerate*samplerate)/2), bufferIndex(0){
     setNoise('p');
     noise = FastNoiseLite(1337);
-    noiseData = new float [bufferSize];
-    fillNoiseBuffer();
+    noiseDataX = new float [bufferSize];
+    noiseDataY = new float [bufferSize];
+    fillNoiseBuffers();
     //check samplerate om vector uit te lezen
     //noise.SetSeed(i);
 }
 
 FastNoise::~FastNoise() {
-  delete [] noiseData;
-  noiseData = nullptr;
+  delete [] noiseDataX;
+  delete [] noiseDataY;
+  noiseDataX = nullptr;
+  noiseDataY = nullptr;
 }
 
 void FastNoise::calcNextSample() {
     //nieuwe vector met noise zodra de andere is uitgelezen
-    //nieuwe seed
     if(bufferIndex < bufferSize){
-      sample = noiseData[bufferIndex];
+      sample = noiseDataX[bufferIndex];
+      sample = noiseDataY[bufferIndex];
       bufferIndex++;
     }
     if(bufferIndex >= bufferSize) {
       bufferIndex = 0;
       std::cout << "FastNoise::calcNextSample() refilling buffer" << '\n';
-      fillNoiseBuffer();
+      fillNoiseBuffers();
       //seed needs to be changed
     }
     //to calc next sample: sample =
@@ -42,14 +45,21 @@ void FastNoise::setNoise(char noiseType) {
     }
 }
 
-void FastNoise::fillNoiseBuffer() {
-    int index = 0;
-    for (int y = 0; y < 128; y++)
+void FastNoise::fillNoiseBuffers(){
+  //nieuwe seed
+  int index = 0;
+  for (int y = 0; y < 128; y++)
+  {
+    for (int x = 0; x < 128; x ++)
     {
-        for (int x = 0; x < 128; x++)
-        {
-            noiseData[index++] = noise.GetNoise((float)x, (float)y);
-        }
+      if((x & 1) == 0){
+        std::cout << "FastNoise::fillNoiseBuffer() noiseDataX[" << index << "] = " << noiseDataX[index] << '\n';
+        noiseDataX[index++] = noise.GetNoise((float)x, (float)y);
+      } else {
+        std::cout << "FastNoise::fillNoiseBuffer() noiseDataY[" << index << "] = " << noiseDataY[index] << '\n';
+        noiseDataY[index++] = noise.GetNoise((float)x, (float)y);
+      }
     }
-    std::cout << "FastNoise::fillNoiseBuffer() buffer = filled" << '\n';
+  }
+  std::cout << "FastNoise::fillNoiseBuffer() buffer = filled" << '\n';
 }
