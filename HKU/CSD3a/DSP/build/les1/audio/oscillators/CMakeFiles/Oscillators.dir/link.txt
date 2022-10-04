@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libOscillators.a CMakeFiles/Oscillators.dir/1dFastNoise.cpp.o CMakeFiles/Oscillators.dir/oscillator.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libOscillators.a

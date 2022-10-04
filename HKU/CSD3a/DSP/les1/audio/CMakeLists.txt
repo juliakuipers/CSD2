@@ -1,0 +1,4 @@
+add_subdirectory(allPassFilter)
+add_subdirectory(circularBuffer)
+add_subdirectory(oscillators)
+add_subdirectory(fakeStereo)
