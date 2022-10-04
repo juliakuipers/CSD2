@@ -176,6 +176,9 @@ les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/allPassFilter/libAllPassF
 les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/circularBuffer/libCircularBuffer.a
 les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/oscillators/libOscillators.a
 les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/fakeStereo/libFakeStereo.a
+les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/allPassFilter/libAllPassFilter.a
+les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/fakeStereo/libFakeStereo.a
+les1/FastNoiseLite_artefacts/FastNoiseLite: les1/audio/circularBuffer/libCircularBuffer.a
 les1/FastNoiseLite_artefacts/FastNoiseLite: les1/CMakeFiles/FastNoiseLite.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable FastNoiseLite_artefacts/FastNoiseLite"
 	cd /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/les1 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/FastNoiseLite.dir/link.txt --verbose=$(VERBOSE)

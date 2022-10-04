@@ -6834,14 +6834,14 @@ les1/CMakeFiles/FastNoiseLite.dir/main.cpp.o: ../les1/main.cpp \
   ../JUCE/modules/juce_core/memory/juce_Reservoir.h \
   ../JUCE/modules/juce_core/files/juce_AndroidDocument.h \
   ../JUCE/modules/juce_core/streams/juce_AndroidDocumentInputSource.h \
+  ../les1/audio/fakeStereo/fakeStereo.h \
   ../les1/audio/allPassFilter/allPassFilter.h \
-  ../les1/audio/circularBuffer/CircularBuffer.h \
-  ../les1/audio/fakeStereo/fakeStereo.h
+  ../les1/audio/circularBuffer/CircularBuffer.h
 
-
-../les1/audio/fakeStereo/fakeStereo.h:
 
 ../les1/audio/circularBuffer/CircularBuffer.h:
+
+../les1/audio/fakeStereo/fakeStereo.h:
 
 ../les1/audio/oscillators/FastNoiseLite.h:
 

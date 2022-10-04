@@ -12,6 +12,11 @@ AllPassFilter::~AllPassFilter() {
   circ2 = nullptr;
 }
 
+float AllPassFilter::allPass(float input_){
+  output = kamFilterFIR(kamFilterIIR(input_));
+  return output;
+}
+
 float AllPassFilter::kamFilterFIR(float input)
 {
   //circBuffer???
@@ -24,6 +29,5 @@ float AllPassFilter::kamFilterIIR(float input)
 {
   circ2->write(input);
   output = input - circ2->read();
-  // delay2 = output*-0.9;
   return output;
 }

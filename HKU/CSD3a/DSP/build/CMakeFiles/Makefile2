@@ -286,7 +286,6 @@ JUCE/modules/juce_audio_plugin_client/CMakeFiles/juce_lv2_helper.dir/clean:
 # Target rules for target les1/CMakeFiles/FastNoiseLite.dir
 
 # All Build rule for target.
-les1/CMakeFiles/FastNoiseLite.dir/all: les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/all
 les1/CMakeFiles/FastNoiseLite.dir/all: les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/all
 les1/CMakeFiles/FastNoiseLite.dir/all: les1/audio/circularBuffer/CMakeFiles/CircularBuffer.dir/all
 les1/CMakeFiles/FastNoiseLite.dir/all: les1/audio/oscillators/CMakeFiles/Oscillators.dir/all
@@ -316,7 +315,6 @@ les1/CMakeFiles/FastNoiseLite.dir/clean:
 
 # All Build rule for target.
 les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/all: les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/all
-les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/all: les1/audio/circularBuffer/CMakeFiles/CircularBuffer.dir/all
 	$(MAKE) $(MAKESILENT) -f les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/build.make les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/depend
 	$(MAKE) $(MAKESILENT) -f les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/build.make les1/audio/allPassFilter/CMakeFiles/AllPassFilter.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/CMakeFiles --progress-num=1,2 "Built target AllPassFilter"
@@ -394,7 +392,7 @@ les1/audio/oscillators/CMakeFiles/Oscillators.dir/clean:
 # Target rules for target les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir
 
 # All Build rule for target.
-les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/all:
+les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/all: les1/audio/circularBuffer/CMakeFiles/CircularBuffer.dir/all
 	$(MAKE) $(MAKESILENT) -f les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/build.make les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/depend
 	$(MAKE) $(MAKESILENT) -f les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/build.make les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/CMakeFiles --progress-num=5,6 "Built target FakeStereo"
@@ -402,7 +400,7 @@ les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/all:
 
 # Build rule for subdir invocation for target.
 les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/build/CMakeFiles 0
 .PHONY : les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/rule

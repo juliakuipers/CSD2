@@ -14,7 +14,7 @@ public:
   float returnStereo(float input_);
 
 private:
-  // AllPassFilter* apf = nullptr;
+  AllPassFilter* apf = nullptr;
   int channel;
 
 };

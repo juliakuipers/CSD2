@@ -89,6 +89,7 @@ target_link_libraries(FastNoiseLite
         AllPassFilter
         CircularBuffer
         Oscillators
+        FakeStereo
 
     PUBLIC
         juce::juce_recommended_config_flags

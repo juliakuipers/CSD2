@@ -9,10 +9,12 @@ public:
   AllPassFilter();
   ~AllPassFilter();
 
-  float kamFilterFIR(float input);
-  float kamFilterIIR(float input);
+  float allPass(float input_);
 
 private:
+
+  float kamFilterFIR(float input);
+  float kamFilterIIR(float input);
 
   float delay1;
   float delay2;

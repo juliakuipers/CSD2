@@ -117,7 +117,7 @@
 #include <1dFastNoise.h>
 #include "juce_audio.h"
 #include <juce_core/juce_core.h>
-#include <allPassFilter.h>
+// #include <allPassFilter.h>
 #include <fakeStereo.h>
 
 struct Callback : AudioCallback{
@@ -139,8 +139,8 @@ struct Callback : AudioCallback{
 //    Noise noi{0};
     FastNoise noise{440,48000};
     FastNoise noise2{440,48000};
-    AllPassFilter apf;
-    AllPassFilter apf2;
+    // AllPassFilter apf;
+    // AllPassFilter apf2;
 
 };
 
@@ -151,7 +151,7 @@ int main(int argc, char* argv[]){
     AudioBackend audioBackend;
 
     double Fs = 44100;
-    AllPassFilter apf;
+    // AllPassFilter apf;
 
     // auto Juliapf = AllPassFilter(Fs);
     // auto Julaapf = AllPassFilter(Fs);
@@ -162,16 +162,16 @@ int main(int argc, char* argv[]){
     audioBackend.registerCallback(&callback);
     audioBackend.openDefaultIODevice(2, 2);
 
-    for(int i = -3; i < 13; i ++){
-      int a = 0;
-      if(i == 0){ a = 1;}
-      int output  = apf.kamFilterIIR(apf.kamFilterFIR(a));
-      // std::cout << "main() i =      " << i << '\n';
-      // std::cout << "main() input =  " << a << '\n';
-      // std::cout << "main() output = " << output << '\n';
-      std::cout << "main() :i:input:output" << '\n';
-      std::cout << "       : " << i << " : " << a <<" : "<< output << '\n';
-    }
+    // for(int i = -3; i < 13; i ++){
+    //   int a = 0;
+    //   if(i == 0){ a = 1;}
+    //   int output  = apf.kamFilterIIR(apf.kamFilterFIR(a));
+    //   // std::cout << "main() i =      " << i << '\n';
+    //   // std::cout << "main() input =  " << a << '\n';
+    //   // std::cout << "main() output = " << output << '\n';
+    //   std::cout << "main() :i:input:output" << '\n';
+    //   std::cout << "       : " << i << " : " << a <<" : "<< output << '\n';
+    // }
     FakeStereo fs(1);
 
 

@@ -393,6 +393,6 @@ les1/CMakeFiles/FastNoiseLite.dir/main.cpp.o: \
   /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/JUCE/modules/juce_core/memory/juce_Reservoir.h \
   /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/JUCE/modules/juce_core/files/juce_AndroidDocument.h \
   /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/JUCE/modules/juce_core/streams/juce_AndroidDocumentInputSource.h \
+  /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/fakeStereo/fakeStereo.h \
   /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/allPassFilter/allPassFilter.h \
-  /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/circularBuffer/CircularBuffer.h \
-  /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/fakeStereo/fakeStereo.h
+  /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/circularBuffer/CircularBuffer.h

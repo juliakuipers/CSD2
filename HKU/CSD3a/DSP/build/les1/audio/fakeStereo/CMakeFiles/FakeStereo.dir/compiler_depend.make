@@ -231,8 +231,12 @@ les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/fakeStereo.cpp.o: ../les1/audio/
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_nl_item.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference
+  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
+  ../les1/audio/allPassFilter/allPassFilter.h \
+  ../les1/audio/circularBuffer/CircularBuffer.h
 
+
+../les1/audio/circularBuffer/CircularBuffer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset:
 
@@ -479,6 +483,8 @@ les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/fakeStereo.cpp.o: ../les1/audio/
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_uint64_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/i386/_limits.h:
+
+../les1/audio/allPassFilter/allPassFilter.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/version:
 

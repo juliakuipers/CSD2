@@ -233,4 +233,6 @@ les1/audio/fakeStereo/CMakeFiles/FakeStereo.dir/fakeStereo.cpp.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bsd_locale_defaults.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/bitset
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference
+ /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/allPassFilter/allPassFilter.h
+ /Users/Julia/Documents/Atom/HKU/CSD3a/DSP/les1/audio/circularBuffer/CircularBuffer.h
 
