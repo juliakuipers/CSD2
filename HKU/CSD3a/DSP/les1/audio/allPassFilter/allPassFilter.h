@@ -11,6 +11,8 @@ public:
 
   float allPass(float input_);
 
+  void setDelayTime(float time);
+
 private:
 
   float kamFilterFIR(float input);

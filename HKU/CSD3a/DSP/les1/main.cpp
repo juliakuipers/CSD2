@@ -161,18 +161,23 @@ int main(int argc, char* argv[]){
 
     audioBackend.registerCallback(&callback);
     audioBackend.openDefaultIODevice(2, 2);
-
-    // for(int i = -3; i < 13; i ++){
-    //   int a = 0;
-    //   if(i == 0){ a = 1;}
-    //   int output  = apf.kamFilterIIR(apf.kamFilterFIR(a));
-    //   // std::cout << "main() i =      " << i << '\n';
-    //   // std::cout << "main() input =  " << a << '\n';
-    //   // std::cout << "main() output = " << output << '\n';
-    //   std::cout << "main() :i:input:output" << '\n';
-    //   std::cout << "       : " << i << " : " << a <<" : "<< output << '\n';
-    // }
     FakeStereo fs(1);
+
+    for(int i = -3; i < 13; i ++){
+      int a;
+      if(i == 0)
+      {
+        a = 1;
+      } else {
+        a = 0;
+      }
+      int output  = fs.returnStereo(a,0);
+      // std::cout << "main() i =      " << i << '\n';
+      // std::cout << "main() input =  " << a << '\n';
+      // std::cout << "main() output = " << output << '\n';
+      std::cout << "main() :i:input:output" << '\n';
+      std::cout << "       : " << i << " : " << a <<" : "<< output << '\n';
+    }
 
 
 

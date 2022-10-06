@@ -8,14 +8,16 @@ public:
   FakeStereo(int channel_);
   ~FakeStereo();
   //should dynamically allocate apf since the circbuffer needs to be deleted
-  void modDelay();
+  void modDelay(int channel_, float time);
   //use switch function for modDelay
   //modulate delay in ms?
-  float returnStereo(float input_);
+  float returnStereo(float input_, int channel_);
 
 private:
-  AllPassFilter* apf = nullptr;
+  AllPassFilter* apf1;// = nullptr;
+  AllPassFilter* apf2;// = nullptr;
   int channel;
+  float output;
 
 };
 
